@@ -1,0 +1,55 @@
+package collector
+
+import (
+	"path/filepath"
+	"strings"
+)
+
+type dirStat struct {
+	FileCount          int
+	EvidenceCount      int
+	Extensions         map[string]int
+	EvidenceByCategory map[string]int
+	EvidenceByFilename map[string]int
+}
+
+func newDirStat() *dirStat {
+	return &dirStat{
+		Extensions:         make(map[string]int),
+		EvidenceByCategory: make(map[string]int),
+		EvidenceByFilename: make(map[string]int),
+	}
+}
+
+func directoryStatsFor(stats map[string]*dirStat, relPath string) *dirStat {
+	dir := filepath.Dir(relPath)
+	if dir == "." {
+		dir = "_root"
+	}
+
+	entry, ok := stats[dir]
+	if !ok {
+		entry = newDirStat()
+		stats[dir] = entry
+	}
+	return entry
+}
+
+func (s *dirStat) updateWithFile(extension string) {
+	s.FileCount++
+	s.Extensions[extension]++
+}
+
+func (s *dirStat) updateWithEvidence(item EvidenceItem) {
+	s.EvidenceCount++
+	s.EvidenceByCategory[item.Category]++
+	s.EvidenceByFilename[item.Filename]++
+}
+
+func topLevelDirectoryForRelativePath(relPath string) string {
+	parts := strings.Split(filepath.ToSlash(relPath), "/")
+	if len(parts) == 0 || parts[0] == "" || len(parts) == 1 {
+		return "_root"
+	}
+	return parts[0]
+}

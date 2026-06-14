@@ -1,0 +1,399 @@
+{
+  "Root": "D:\\tuataras-finance-backend",
+  "TotalFiles": 108,
+  "Evidence": [
+    {
+      "Filename": "description",
+      "AbsolutePath": "D:\\tuataras-finance-backend\\.git\\description",
+      "RelativePath": ".git\\description",
+      "Category": "package manager"
+    },
+    {
+      "Filename": ".github/workflows",
+      "AbsolutePath": "D:\\tuataras-finance-backend\\.github\\workflows",
+      "RelativePath": ".github\\workflows",
+      "Category": "ci/cd"
+    },
+    {
+      "Filename": "Dockerfile",
+      "AbsolutePath": "D:\\tuataras-finance-backend\\Dockerfile",
+      "RelativePath": "Dockerfile",
+      "Category": "container"
+    },
+    {
+      "Filename": "Jenkinsfile",
+      "AbsolutePath": "D:\\tuataras-finance-backend\\ci\\Jenkinsfile",
+      "RelativePath": "ci\\Jenkinsfile",
+      "Category": "ci/cd"
+    },
+    {
+      "Filename": "go.mod",
+      "AbsolutePath": "D:\\tuataras-finance-backend\\go.mod",
+      "RelativePath": "go.mod",
+      "Category": "package manager"
+    },
+    {
+      "Filename": "go.sum",
+      "AbsolutePath": "D:\\tuataras-finance-backend\\go.sum",
+      "RelativePath": "go.sum",
+      "Category": "package manager"
+    }
+  ],
+  "TopologySummary": {
+    "TotalEvidenceItems": 6,
+    "EvidenceCountByCategory": {
+      "ci/cd": 2,
+      "container": 1,
+      "package manager": 3
+    },
+    "EvidenceCountByFilename": {
+      ".github/workflows": 1,
+      "Dockerfile": 1,
+      "Jenkinsfile": 1,
+      "description": 1,
+      "go.mod": 1,
+      "go.sum": 1
+    },
+    "RootEvidenceCount": 3,
+    "NestedEvidenceCount": 3
+  },
+  "ClusterSummary": {
+    "Clusters": {
+      ".git": {
+        "ClusterName": ".git",
+        "EvidenceItemCount": 1,
+        "EvidenceCountByCategory": {
+          "package manager": 1
+        },
+        "EvidenceCountByFilename": {
+          "description": 1
+        }
+      },
+      ".github": {
+        "ClusterName": ".github",
+        "EvidenceItemCount": 1,
+        "EvidenceCountByCategory": {
+          "ci/cd": 1
+        },
+        "EvidenceCountByFilename": {
+          ".github/workflows": 1
+        }
+      },
+      "_root": {
+        "ClusterName": "_root",
+        "EvidenceItemCount": 3,
+        "EvidenceCountByCategory": {
+          "container": 1,
+          "package manager": 2
+        },
+        "EvidenceCountByFilename": {
+          "Dockerfile": 1,
+          "go.mod": 1,
+          "go.sum": 1
+        }
+      },
+      "ci": {
+        "ClusterName": "ci",
+        "EvidenceItemCount": 1,
+        "EvidenceCountByCategory": {
+          "ci/cd": 1
+        },
+        "EvidenceCountByFilename": {
+          "Jenkinsfile": 1
+        }
+      }
+    }
+  },
+  "CensusSummary": {
+    "Directories": {
+      ".git": {
+        "DirectoryName": ".git",
+        "TotalFiles": 56,
+        "EvidenceItemCount": 1
+      },
+      ".github": {
+        "DirectoryName": ".github",
+        "TotalFiles": 1,
+        "EvidenceItemCount": 1
+      },
+      "_root": {
+        "DirectoryName": "_root",
+        "TotalFiles": 8,
+        "EvidenceItemCount": 3
+      },
+      "ci": {
+        "DirectoryName": "ci",
+        "TotalFiles": 1,
+        "EvidenceItemCount": 1
+      },
+      "cmd": {
+        "DirectoryName": "cmd",
+        "TotalFiles": 1,
+        "EvidenceItemCount": 0
+      },
+      "docs": {
+        "DirectoryName": "docs",
+        "TotalFiles": 3,
+        "EvidenceItemCount": 0
+      },
+      "internal": {
+        "DirectoryName": "internal",
+        "TotalFiles": 23,
+        "EvidenceItemCount": 0
+      },
+      "migrations": {
+        "DirectoryName": "migrations",
+        "TotalFiles": 1,
+        "EvidenceItemCount": 0
+      },
+      "scripts": {
+        "DirectoryName": "scripts",
+        "TotalFiles": 1,
+        "EvidenceItemCount": 0
+      },
+      "tests": {
+        "DirectoryName": "tests",
+        "TotalFiles": 13,
+        "EvidenceItemCount": 0
+      }
+    },
+    "TotalDirectories": 10
+  },
+  "ExtensionSummary": {
+    "ByExtension": {
+      "": 42,
+      ".dockerignore": 1,
+      ".env": 1,
+      ".gitignore": 1,
+      ".go": 38,
+      ".idx": 1,
+      ".json": 1,
+      ".md": 1,
+      ".mod": 1,
+      ".pack": 1,
+      ".rev": 1,
+      ".sample": 14,
+      ".sh": 1,
+      ".sql": 1,
+      ".sum": 1,
+      ".yaml": 1,
+      ".yml": 1
+    },
+    "ByCluster": {
+      ".git": {
+        "": 39,
+        ".idx": 1,
+        ".pack": 1,
+        ".rev": 1,
+        ".sample": 14
+      },
+      ".github": {
+        ".yml": 1
+      },
+      "_root": {
+        "": 2,
+        ".dockerignore": 1,
+        ".env": 1,
+        ".gitignore": 1,
+        ".md": 1,
+        ".mod": 1,
+        ".sum": 1
+      },
+      "ci": {
+        "": 1
+      },
+      "cmd": {
+        ".go": 1
+      },
+      "docs": {
+        ".go": 1,
+        ".json": 1,
+        ".yaml": 1
+      },
+      "internal": {
+        ".go": 23
+      },
+      "migrations": {
+        ".sql": 1
+      },
+      "scripts": {
+        ".sh": 1
+      },
+      "tests": {
+        ".go": 13
+      }
+    }
+  },
+  "ModuleSummary": {
+    "TotalModules": 4,
+    "Modules": [
+      {
+        "Path": "_root",
+        "FileCount": 8,
+        "EvidenceCount": 3,
+        "DominantExtensions": [
+          "",
+          ".md",
+          ".mod"
+        ],
+        "EvidenceByCategory": {
+          "container": 1,
+          "package manager": 2
+        },
+        "EvidenceByFilename": {
+          "Dockerfile": 1,
+          "go.mod": 1,
+          "go.sum": 1
+        },
+        "Score": 0
+      },
+      {
+        "Path": ".git",
+        "FileCount": 8,
+        "EvidenceCount": 1,
+        "DominantExtensions": [
+          ""
+        ],
+        "EvidenceByCategory": {
+          "package manager": 1
+        },
+        "EvidenceByFilename": {
+          "description": 1
+        },
+        "Score": 0
+      },
+      {
+        "Path": "ci",
+        "FileCount": 1,
+        "EvidenceCount": 1,
+        "DominantExtensions": [
+          ""
+        ],
+        "EvidenceByCategory": {
+          "ci/cd": 1
+        },
+        "EvidenceByFilename": {
+          "Jenkinsfile": 1
+        },
+        "Score": 0
+      },
+      {
+        "Path": ".github",
+        "FileCount": 0,
+        "EvidenceCount": 1,
+        "DominantExtensions": [],
+        "EvidenceByCategory": {
+          "ci/cd": 1
+        },
+        "EvidenceByFilename": {
+          ".github/workflows": 1
+        },
+        "Score": 0
+      }
+    ]
+  },
+  "CompressedModuleSummary": {
+    "TotalCandidates": 4,
+    "RetainedCandidates": 4,
+    "CompressionRatio": 1,
+    "Modules": [
+      {
+        "Path": ".git",
+        "FileCount": 8,
+        "EvidenceCount": 1,
+        "DominantExtensions": [
+          ""
+        ],
+        "EvidenceByCategory": {
+          "package manager": 1
+        },
+        "EvidenceByFilename": {
+          "description": 1
+        },
+        "Score": 718
+      },
+      {
+        "Path": "_root",
+        "FileCount": 8,
+        "EvidenceCount": 3,
+        "DominantExtensions": [
+          "",
+          ".md",
+          ".mod"
+        ],
+        "EvidenceByCategory": {
+          "container": 1,
+          "package manager": 2
+        },
+        "EvidenceByFilename": {
+          "Dockerfile": 1,
+          "go.mod": 1,
+          "go.sum": 1
+        },
+        "Score": 678
+      },
+      {
+        "Path": "ci",
+        "FileCount": 1,
+        "EvidenceCount": 1,
+        "DominantExtensions": [
+          ""
+        ],
+        "EvidenceByCategory": {
+          "ci/cd": 1
+        },
+        "EvidenceByFilename": {
+          "Jenkinsfile": 1
+        },
+        "Score": 201
+      },
+      {
+        "Path": ".github",
+        "FileCount": 0,
+        "EvidenceCount": 1,
+        "DominantExtensions": [],
+        "EvidenceByCategory": {
+          "ci/cd": 1
+        },
+        "EvidenceByFilename": {
+          ".github/workflows": 1
+        },
+        "Score": 200
+      }
+    ]
+  },
+  "HierarchySummary": {
+    "TotalRegions": 4,
+    "TotalSubsystems": 0,
+    "Regions": [
+      {
+        "Path": ".git",
+        "FileCount": 8,
+        "EvidenceCount": 1,
+        "Score": 718,
+        "Children": []
+      },
+      {
+        "Path": "_root",
+        "FileCount": 8,
+        "EvidenceCount": 3,
+        "Score": 678,
+        "Children": []
+      },
+      {
+        "Path": "ci",
+        "FileCount": 1,
+        "EvidenceCount": 1,
+        "Score": 201,
+        "Children": []
+      },
+      {
+        "Path": ".github",
+        "FileCount": 0,
+        "EvidenceCount": 1,
+        "Score": 200,
+        "Children": []
+      }
+    ]
+  }
+}

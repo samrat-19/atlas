@@ -1,0 +1,123 @@
+Root path: D:\tuataras-finance-backend
+Total file count: 108
+
+Evidence Found:
+- go.mod (package manager)
+- go.sum (package manager)
+- description (package manager)
+- .github/workflows (ci/cd)
+- Dockerfile (container)
+- Jenkinsfile (ci/cd)
+
+Evidence counts by category:
+- package manager: 3
+- ci/cd: 2
+- container: 1
+
+Evidence counts by filename:
+- description: 1
+- .github/workflows: 1
+- Dockerfile: 1
+- Jenkinsfile: 1
+- go.mod: 1
+- go.sum: 1
+
+Root-level evidence count: 3
+Nested evidence count: 3
+
+Top Clusters:
+- _root (3 evidence files)
+  category breakdown:
+  - package manager: 2
+  - container: 1
+- .git (1 evidence files)
+  category breakdown:
+  - package manager: 1
+- .github (1 evidence files)
+  category breakdown:
+  - ci/cd: 1
+- ci (1 evidence files)
+  category breakdown:
+  - ci/cd: 1
+
+Top Directories:
+- .git (56 files, 1 evidence)
+- internal (23 files, 0 evidence)
+- tests (13 files, 0 evidence)
+- _root (8 files, 3 evidence)
+- docs (3 files, 0 evidence)
+- .github (1 files, 1 evidence)
+- scripts (1 files, 0 evidence)
+- ci (1 files, 1 evidence)
+- cmd (1 files, 0 evidence)
+- migrations (1 files, 0 evidence)
+
+Top Extensions:
+- (no ext): 42 files
+- .go: 38 files
+- .sample: 14 files
+- .dockerignore: 1 files
+- .sql: 1 files
+- .sh: 1 files
+- .idx: 1 files
+- .rev: 1 files
+- .md: 1 files
+- .gitignore: 1 files
+
+Top Extensions Per Cluster:
+.git:
+  - (no ext): 39
+  - .sample: 14
+  - .idx: 1
+  - .pack: 1
+  - .rev: 1
+.github:
+  - .yml: 1
+_root:
+  - (no ext): 2
+  - .sum: 1
+  - .dockerignore: 1
+  - .env: 1
+  - .gitignore: 1
+ci:
+  - (no ext): 1
+
+Repository Hierarchy:
+.git
+files: 8
+evidence: 1
+
+_root
+files: 8
+evidence: 3
+
+ci
+files: 1
+evidence: 1
+
+.github
+files: 0
+evidence: 1
+
+
+Candidate Modules Found: 4
+Retained Modules: 4
+Compression Ratio: 1.00
+
+Major Modules:
+- .git
+  score: 718
+  files: 8
+  evidence: 1
+- _root
+  score: 678
+  files: 8
+  evidence: 3
+- ci
+  score: 201
+  files: 1
+  evidence: 1
+- .github
+  score: 200
+  files: 0
+  evidence: 1
