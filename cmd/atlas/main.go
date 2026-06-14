@@ -1,9 +1,14 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"os"
+	"path/filepath"
 	"sort"
+	"strings"
+	"time"
 
 	"atlas/internal/collector"
 )
@@ -34,20 +39,42 @@ func main() {
 		os.Exit(2)
 	}
 
-	// Print the results. Using `fmt.Printf` for simple, human-readable output.
-	fmt.Println("Root path:", res.Root)
-	fmt.Println("Total file count:", res.TotalFiles)
-	printEvidenceSummary(res)
+	// Build the textual report into a buffer, print to stdout, and save to output dir.
+	var b strings.Builder
+	fmt.Fprintf(&b, "Root path: %s\n", res.Root)
+	fmt.Fprintf(&b, "Total file count: %d\n", res.TotalFiles)
+	printEvidenceSummary(res, &b)
+
+	report := b.String()
+	// print to stdout
+	fmt.Print(report)
+
+	// write to output file
+	outDir := "output"
+	if err := os.MkdirAll(outDir, 0755); err == nil {
+		// sanitize root for filename
+		name := strings.ReplaceAll(res.Root, string(os.PathSeparator), "_")
+		name = strings.ReplaceAll(name, ":", "")
+		timestamp := time.Now().Format("20060102T150405")
+		fname := fmt.Sprintf("%s-%s.txt", name, timestamp)
+		outPath := filepath.Join(outDir, fname)
+		_ = os.WriteFile(outPath, []byte(report), 0644)
+		// also write a JSON and an HTML report (standalone) next to the text file
+		if jb, err := json.MarshalIndent(res, "", "  "); err == nil {
+			// write JSON only (no HTML report)
+			_ = os.WriteFile(filepath.Join(outDir, fmt.Sprintf("%s-%s.json", name, timestamp)), jb, 0644)
+		}
+	}
 }
 
-func printEvidenceSummary(res collector.Result) {
-	fmt.Println()
+func printEvidenceSummary(res collector.Result, w io.Writer) {
+	fmt.Fprintln(w)
 	if len(res.Evidence) == 0 {
-		fmt.Println("Evidence Found: none")
+		fmt.Fprintln(w, "Evidence Found: none")
 		return
 	}
 
-	fmt.Println("Evidence Found:")
+	fmt.Fprintln(w, "Evidence Found:")
 	seen := make(map[string]string)
 	for _, e := range res.Evidence {
 		if _, ok := seen[e.Filename]; !ok {
@@ -55,38 +82,94 @@ func printEvidenceSummary(res collector.Result) {
 		}
 	}
 	for fn, cat := range seen {
-		fmt.Printf("- %s (%s)\n", fn, cat)
+		fmt.Fprintf(w, "- %s (%s)\n", fn, cat)
 	}
 
-	fmt.Println()
-	fmt.Println("Evidence counts by category:")
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, "Evidence counts by category:")
 	for category, count := range res.TopologySummary.EvidenceCountByCategory {
-		fmt.Printf("- %s: %d\n", category, count)
+		fmt.Fprintf(w, "- %s: %d\n", category, count)
 	}
 
-	fmt.Println()
-	fmt.Println("Evidence counts by filename:")
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, "Evidence counts by filename:")
 	for filename, count := range res.TopologySummary.EvidenceCountByFilename {
-		fmt.Printf("- %s: %d\n", filename, count)
+		fmt.Fprintf(w, "- %s: %d\n", filename, count)
 	}
 
-	fmt.Println()
-	fmt.Printf("Root-level evidence count: %d\n", res.TopologySummary.RootEvidenceCount)
-	fmt.Printf("Nested evidence count: %d\n", res.TopologySummary.NestedEvidenceCount)
+	fmt.Fprintln(w)
+	fmt.Fprintf(w, "Root-level evidence count: %d\n", res.TopologySummary.RootEvidenceCount)
+	fmt.Fprintf(w, "Nested evidence count: %d\n", res.TopologySummary.NestedEvidenceCount)
 
-	fmt.Println()
-	printTopClusters(res.ClusterSummary)
+	fmt.Fprintln(w)
+	printTopClusters(res.ClusterSummary, w)
 
-	fmt.Println()
-	printTopDirectories(res.CensusSummary)
+	fmt.Fprintln(w)
+	printTopDirectories(res.CensusSummary, w)
 
-	fmt.Println()
-	printTopExtensions(res.ExtensionSummary, res.ClusterSummary)
+	fmt.Fprintln(w)
+	printTopExtensions(res.ExtensionSummary, res.ClusterSummary, w)
+
+	fmt.Fprintln(w)
+	printRepositoryHierarchy(res.HierarchySummary, w)
+
+	fmt.Fprintln(w)
+	printMajorModules(res.CompressedModuleSummary, w)
 }
 
-func printTopExtensions(exts collector.ExtensionSummary, clusters collector.ClusterSummary) {
+func printRepositoryHierarchy(hs collector.HierarchySummary, w io.Writer) {
+	fmt.Fprintln(w, "Repository Hierarchy:")
+	if len(hs.Regions) == 0 {
+		fmt.Fprintln(w, "none")
+		return
+	}
+
+	for _, region := range hs.Regions {
+		fmt.Fprintf(w, "%s\n", region.Path)
+		fmt.Fprintf(w, "files: %d\n", region.FileCount)
+		if region.EvidenceCount > 0 {
+			fmt.Fprintf(w, "evidence: %d\n", region.EvidenceCount)
+		}
+		if len(region.Children) > 0 {
+			fmt.Fprintln(w, "subsystems:")
+			for _, sub := range region.Children {
+				fmt.Fprintf(w, "- %s\n", strings.TrimPrefix(sub.Path, region.Path+"/"))
+				if len(sub.Children) > 0 {
+					fmt.Fprintln(w, "  components:")
+					for _, comp := range sub.Children {
+						fmt.Fprintf(w, "  - %s\n", strings.TrimPrefix(comp.Path, sub.Path+"/"))
+					}
+				}
+			}
+		}
+		fmt.Fprintln(w)
+	}
+}
+
+func printMajorModules(cm collector.CompressedModuleSummary, w io.Writer) {
+	if cm.TotalCandidates == 0 {
+		fmt.Fprintln(w, "Candidate Modules Found: 0")
+		return
+	}
+	fmt.Fprintf(w, "Candidate Modules Found: %d\n", cm.TotalCandidates)
+	fmt.Fprintf(w, "Retained Modules: %d\n", cm.RetainedCandidates)
+	fmt.Fprintf(w, "Compression Ratio: %.2f\n", cm.CompressionRatio)
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, "Major Modules:")
+	// sort retained modules by score desc
+	s := cm.Modules
+	sort.Slice(s, func(i, j int) bool { return s[i].Score > s[j].Score })
+	for _, m := range s {
+		fmt.Fprintf(w, "- %s\n", m.Path)
+		fmt.Fprintf(w, "  score: %d\n", m.Score)
+		fmt.Fprintf(w, "  files: %d\n", m.FileCount)
+		fmt.Fprintf(w, "  evidence: %d\n", m.EvidenceCount)
+	}
+}
+
+func printTopExtensions(exts collector.ExtensionSummary, clusters collector.ClusterSummary, w io.Writer) {
 	if len(exts.ByExtension) == 0 {
-		fmt.Println("Top Extensions: none")
+		fmt.Fprintln(w, "Top Extensions: none")
 		return
 	}
 
@@ -101,7 +184,7 @@ func printTopExtensions(exts collector.ExtensionSummary, clusters collector.Clus
 	}
 	sort.Slice(pairs, func(i, j int) bool { return pairs[i].Count > pairs[j].Count })
 
-	fmt.Println("Top Extensions:")
+	fmt.Fprintln(w, "Top Extensions:")
 	for i, p := range pairs {
 		if i >= 10 {
 			break
@@ -110,12 +193,12 @@ func printTopExtensions(exts collector.ExtensionSummary, clusters collector.Clus
 		if label == "" {
 			label = "(no ext)"
 		}
-		fmt.Printf("- %s: %d files\n", label, p.Count)
+		fmt.Fprintf(w, "- %s: %d files\n", label, p.Count)
 	}
 
 	// Per-cluster top extensions
-	fmt.Println()
-	fmt.Println("Top Extensions Per Cluster:")
+	fmt.Fprintln(w)
+	fmt.Fprintln(w, "Top Extensions Per Cluster:")
 	// iterate clusters in deterministic order
 	names := make([]string, 0, len(clusters.Clusters))
 	for name := range clusters.Clusters {
@@ -123,10 +206,10 @@ func printTopExtensions(exts collector.ExtensionSummary, clusters collector.Clus
 	}
 	sort.Strings(names)
 	for _, name := range names {
-		fmt.Printf("%s:\n", name)
+		fmt.Fprintf(w, "%s:\n", name)
 		m := exts.ByCluster[name]
 		if len(m) == 0 {
-			fmt.Println("  none")
+			fmt.Fprintln(w, "  none")
 			continue
 		}
 		// sort
@@ -143,14 +226,14 @@ func printTopExtensions(exts collector.ExtensionSummary, clusters collector.Clus
 			if label == "" {
 				label = "(no ext)"
 			}
-			fmt.Printf("  - %s: %d\n", label, p.Count)
+			fmt.Fprintf(w, "  - %s: %d\n", label, p.Count)
 		}
 	}
 }
 
-func printTopDirectories(census collector.CensusSummary) {
+func printTopDirectories(census collector.CensusSummary, w io.Writer) {
 	if len(census.Directories) == 0 {
-		fmt.Println("Top Directories: none")
+		fmt.Fprintln(w, "Top Directories: none")
 		return
 	}
 
@@ -163,18 +246,18 @@ func printTopDirectories(census collector.CensusSummary) {
 		return directories[i].TotalFiles > directories[j].TotalFiles
 	})
 
-	fmt.Println("Top Directories:")
+	fmt.Fprintln(w, "Top Directories:")
 	for i, dir := range directories {
 		if i >= 10 {
 			break
 		}
-		fmt.Printf("- %s (%d files, %d evidence)\n", dir.DirectoryName, dir.TotalFiles, dir.EvidenceItemCount)
+		fmt.Fprintf(w, "- %s (%d files, %d evidence)\n", dir.DirectoryName, dir.TotalFiles, dir.EvidenceItemCount)
 	}
 }
 
-func printTopClusters(clusterSummary collector.ClusterSummary) {
+func printTopClusters(clusterSummary collector.ClusterSummary, w io.Writer) {
 	if len(clusterSummary.Clusters) == 0 {
-		fmt.Println("Top Clusters: none")
+		fmt.Fprintln(w, "Top Clusters: none")
 		return
 	}
 
@@ -187,15 +270,15 @@ func printTopClusters(clusterSummary collector.ClusterSummary) {
 		return clusters[i].EvidenceItemCount > clusters[j].EvidenceItemCount
 	})
 
-	fmt.Println("Top Clusters:")
+	fmt.Fprintln(w, "Top Clusters:")
 	for i, cluster := range clusters {
 		if i >= 10 {
 			break
 		}
-		fmt.Printf("- %s (%d evidence files)\n", cluster.ClusterName, cluster.EvidenceItemCount)
-		fmt.Println("  category breakdown:")
+		fmt.Fprintf(w, "- %s (%d evidence files)\n", cluster.ClusterName, cluster.EvidenceItemCount)
+		fmt.Fprintln(w, "  category breakdown:")
 		for category, count := range cluster.EvidenceCountByCategory {
-			fmt.Printf("  - %s: %d\n", category, count)
+			fmt.Fprintf(w, "  - %s: %d\n", category, count)
 		}
 	}
 }

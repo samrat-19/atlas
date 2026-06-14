@@ -191,3 +191,42 @@ func TestCollectCensusSummary(t *testing.T) {
 		t.Fatalf("expected _root evidence 1, got %d", root.EvidenceItemCount)
 	}
 }
+
+func TestBuildHierarchyFromRetainedModules(t *testing.T) {
+	mods := []ModuleCandidate{
+		{Path: "java", FileCount: 100, EvidenceCount: 5, Score: 1200},
+		{Path: "java/src", FileCount: 40, EvidenceCount: 2, Score: 800},
+		{Path: "java/src/org/openqa/selenium/grid", FileCount: 20, EvidenceCount: 1, Score: 300},
+		{Path: "javascript", FileCount: 60, EvidenceCount: 3, Score: 900},
+		{Path: "javascript/selenium-webdriver", FileCount: 25, EvidenceCount: 1, Score: 500},
+	}
+
+	hs := buildHierarchy(mods)
+	t.Logf("hierarchy=%#v", hs)
+	if hs.TotalRegions != 2 {
+		t.Fatalf("expected 2 regions, got %d", hs.TotalRegions)
+	}
+	if hs.TotalSubsystems != 3 {
+		t.Fatalf("expected 3 subsystems, got %d", hs.TotalSubsystems)
+	}
+
+	javaRegion := hs.Regions[0]
+	if javaRegion.Path != "java" {
+		t.Fatalf("expected first region java, got %s", javaRegion.Path)
+	}
+	if javaRegion.FileCount < 100 {
+		t.Fatalf("expected java file count at least 100, got %d", javaRegion.FileCount)
+	}
+	if len(javaRegion.Children) != 1 {
+		t.Fatalf("expected java to have 1 child, got %d", len(javaRegion.Children))
+	}
+	if javaRegion.Children[0].Path != "java/src" {
+		t.Fatalf("expected java child java/src, got %s", javaRegion.Children[0].Path)
+	}
+	if len(javaRegion.Children[0].Children) != 1 {
+		t.Fatalf("expected java/src to have 1 child, got %d", len(javaRegion.Children[0].Children))
+	}
+	if javaRegion.Children[0].Children[0].Path != "java/src/org/openqa/selenium/grid" {
+		t.Fatalf("expected nested component path, got %s", javaRegion.Children[0].Children[0].Path)
+	}
+}

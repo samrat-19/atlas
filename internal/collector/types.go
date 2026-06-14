@@ -25,6 +25,12 @@ type Result struct {
 
 	// ExtensionSummary contains aggregated file extension counts.
 	ExtensionSummary ExtensionSummary
+	// ModuleSummary contains discovered module candidates.
+	ModuleSummary ModuleSummary
+	// CompressedModuleSummary contains a pruned set of high-value modules.
+	CompressedModuleSummary CompressedModuleSummary
+	// HierarchySummary contains a repository hierarchy view built from retained modules.
+	HierarchySummary HierarchySummary
 }
 
 // EvidenceItem describes a single discovered evidence entry.
@@ -92,4 +98,48 @@ type ExtensionSummary struct {
 
 	// ByCluster maps cluster name -> (extension -> count).
 	ByCluster map[string]map[string]int
+}
+
+// RegionNode represents a node in the repository hierarchy view.
+type RegionNode struct {
+	Path          string
+	FileCount     int
+	EvidenceCount int
+	Score         int
+	Children      []*RegionNode
+}
+
+// HierarchySummary contains a repository hierarchy built from retained modules.
+type HierarchySummary struct {
+	TotalRegions    int
+	TotalSubsystems int
+	Regions         []*RegionNode
+}
+
+// ModuleCandidate represents a directory that looks like an independent module
+// or subsystem based on structure, file counts, evidence density, and
+// extension fingerprints.
+type ModuleCandidate struct {
+	Path               string
+	FileCount          int
+	EvidenceCount      int
+	DominantExtensions []string
+	EvidenceByCategory map[string]int
+	EvidenceByFilename map[string]int
+	Score              int
+}
+
+// ModuleSummary aggregates discovered module candidates.
+type ModuleSummary struct {
+	TotalModules int
+	Modules      []ModuleCandidate
+}
+
+// CompressedModuleSummary represents a pruned set of high-value module
+// candidates after compression and scoring.
+type CompressedModuleSummary struct {
+	TotalCandidates    int
+	RetainedCandidates int
+	CompressionRatio   float64 // retained/total
+	Modules            []ModuleCandidate
 }
