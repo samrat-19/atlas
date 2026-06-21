@@ -1,0 +1,4711 @@
+Root path: <ROOT>
+Total file count: 36420
+
+Evidence Found:
+- .github/workflows (ci/cd)
+- BUILD (build system)
+- BUILD.bazel (build system)
+- CMakeLists.txt (build system)
+- Dockerfile (container)
+- Makefile (build system)
+- WORKSPACE (build system)
+- build (build system)
+- build.gradle (build system)
+- requirements.txt (package manager)
+- settings.gradle (build system)
+- setup.py (package manager)
+
+Evidence counts by category:
+- build system: 1377
+- ci/cd: 3
+- container: 5
+- package manager: 7
+
+Evidence counts by filename:
+- .github/workflows: 3
+- BUILD: 1235
+- BUILD.bazel: 90
+- CMakeLists.txt: 38
+- Dockerfile: 5
+- Makefile: 1
+- WORKSPACE: 3
+- build: 2
+- build.gradle: 5
+- requirements.txt: 3
+- settings.gradle: 3
+- setup.py: 4
+
+Root-level evidence count: 2
+Nested evidence count: 1390
+
+Top Clusters:
+- tensorflow (868 evidence files)
+  category breakdown:
+  - build system: 862
+  - container: 2
+  - package manager: 4
+- third_party (517 evidence files)
+  category breakdown:
+  - build system: 512
+  - ci/cd: 2
+  - package manager: 3
+- ci (4 evidence files)
+  category breakdown:
+  - build system: 1
+  - container: 3
+- _root (2 evidence files)
+  category breakdown:
+  - build system: 2
+- .github (1 evidence files)
+  category breakdown:
+  - ci/cd: 1
+
+Top Directories:
+- tensorflow (27134 files, 868 evidence)
+- third_party (9147 files, 517 evidence)
+- ci (82 files, 4 evidence)
+- _root (30 files, 2 evidence)
+- .github (25 files, 1 evidence)
+- .gemini (1 files, 0 evidence)
+- tools (1 files, 0 evidence)
+
+Top Extensions:
+- .cc: 10652 files
+- .pbtxt: 7820 files
+- .h: 6341 files
+- .py: 3161 files
+- (no ext): 1592 files
+- .mlir: 1454 files
+- .md: 1222 files
+- .hlo: 381 files
+- .bzl: 360 files
+- .proto: 341 files
+
+Top Extensions Per Cluster:
+.github:
+  - .yml: 19
+  - .md: 4
+  - .js: 1
+  - .yaml: 1
+_root:
+  - (no ext): 6
+  - .md: 6
+  - .txt: 5
+  - .build: 2
+  - .bazel: 1
+ci:
+  - (no ext): 30
+  - .sh: 24
+  - .txt: 15
+  - .md: 5
+  - .bats: 2
+tensorflow:
+  - .pbtxt: 7808
+  - .cc: 6801
+  - .h: 3862
+  - .py: 3067
+  - (no ext): 1125
+third_party:
+  - .cc: 3851
+  - .h: 2479
+  - .mlir: 433
+  - (no ext): 431
+  - .hlo: 381
+
+Repository Hierarchy:
+tensorflow
+files: 1536
+evidence: 61
+subsystems:
+- tensorflow\core
+  components:
+  - tensorflow\core\api_def
+  - tensorflow\core\ops
+  - tensorflow\core\kernels
+  - tensorflow\core\common_runtime
+  - tensorflow\core\framework
+  - tensorflow\core\example
+  - tensorflow\core\util
+  - tensorflow\core\platform
+  - tensorflow\core\tpu
+  - tensorflow\core\ir
+  - tensorflow\core\data
+  - tensorflow\core\distributed_runtime
+  - tensorflow\core\graph
+  - tensorflow\core\tfrt
+  - tensorflow\core\protobuf
+  - tensorflow\core\profiler
+  - tensorflow\core\grappler
+  - tensorflow\core\lib\io
+  - tensorflow\core\debug
+  - tensorflow\core\lib\core
+  - tensorflow\core\lib\monitoring
+  - tensorflow\core\lib\gtl
+  - tensorflow\core\lib\strings
+  - tensorflow\core\runtime_fallback
+  - tensorflow\core\function\trace_type
+  - tensorflow\core\summary
+  - tensorflow\core\lib\gif
+  - tensorflow\core\config
+  - tensorflow\core\lib\jpeg
+  - tensorflow\core\lib\jxl
+  - tensorflow\core\lib\bmp
+  - tensorflow\core\lib\random
+  - tensorflow\core\function\polymorphism
+  - tensorflow\core\function\runtime_client
+  - tensorflow\core\transforms
+  - tensorflow\core\function\capture
+  - tensorflow\core\nccl
+  - tensorflow\core\lib\png
+  - tensorflow\core\public
+  - tensorflow\core\activity_watcher
+  - tensorflow\core\function\testing
+  - tensorflow\core\lib\db
+  - tensorflow\core\lib\webp
+  - tensorflow\core\lib\psnr
+  - tensorflow\core\lib\ssim
+  - tensorflow\core\lib\wav
+  - tensorflow\core\function\integration_test
+  - tensorflow\core\function\transform
+  - tensorflow\core\lib\hash
+  - tensorflow\core\lib\bfloat16
+  - tensorflow\core\lib\histogram
+  - tensorflow\core\lib\llvm_rtti
+  - tensorflow\core\lib\math
+  - tensorflow\core\user_ops
+- tensorflow\lite
+  components:
+  - tensorflow\lite\kernels
+  - tensorflow\lite\tools
+  - tensorflow\lite\c
+  - tensorflow\lite\examples\label_image
+  - tensorflow\lite\java
+  - tensorflow\lite\profiling
+  - tensorflow\lite\examples\minimal
+  - tensorflow\lite\delegates
+  - tensorflow\lite\experimental\acceleration\mini_benchmark
+  - tensorflow\lite\testing
+  - tensorflow\lite\experimental\microfrontend
+  - tensorflow\lite\toco
+  - tensorflow\lite\python
+  - tensorflow\lite\experimental\ml_adjacent
+  - tensorflow\lite\experimental\shlo
+  - tensorflow\lite\core
+  - tensorflow\lite\acceleration\configuration
+  - tensorflow\lite\experimental\acceleration\compatibility
+  - tensorflow\lite\experimental\resource
+  - tensorflow\lite\experimental\acceleration\configuration
+  - tensorflow\lite\nnapi
+  - tensorflow\lite\experimental\genai
+  - tensorflow\lite\schema
+  - tensorflow\lite\async
+  - tensorflow\lite\examples\experimental_new_converter
+  - tensorflow\lite\types
+  - tensorflow\lite\examples\python
+  - tensorflow\lite\g3doc\tools
+  - tensorflow\lite\tutorials
+  - tensorflow\lite\internal
+  - tensorflow\lite\lib_package
+  - tensorflow\lite\stablehlo\schema
+  - tensorflow\lite\testdata\src
+  - tensorflow\lite\g3doc\models
+  - tensorflow\lite\g3doc\images
+- tensorflow\tools\android\test
+  components:
+  - tensorflow\tools\android\test\assets
+- tensorflow\tools\api\golden
+  components:
+  - tensorflow\tools\api\golden\v2
+  - tensorflow\tools\api\golden\v1
+- tensorflow\security\advisory
+- tensorflow\python
+  components:
+  - tensorflow\python\ops
+  - tensorflow\python\tpu
+  - tensorflow\python\distribute
+  - tensorflow\python\training
+  - tensorflow\python\eager
+  - tensorflow\python\saved_model
+  - tensorflow\python\debug
+  - tensorflow\python\autograph
+  - tensorflow\python\compiler
+  - tensorflow\python\tools
+  - tensorflow\python\checkpoint
+  - tensorflow\python\keras
+  - tensorflow\python\lib
+  - tensorflow\python\trackable
+  - tensorflow\python\profiler
+  - tensorflow\python\kernel_tests
+  - tensorflow\python\feature_column
+  - tensorflow\python\summary
+  - tensorflow\python\data
+  - tensorflow\python\layers
+  - tensorflow\python\types
+  - tensorflow\python\compat
+  - tensorflow\python\util\protobuf
+  - tensorflow\python\dlpack
+  - tensorflow\python\module
+  - tensorflow\python\user_ops
+- tensorflow\compiler\mlir
+  components:
+  - tensorflow\compiler\mlir\tensorflow
+  - tensorflow\compiler\mlir\lite
+  - tensorflow\compiler\mlir\quantization\tensorflow
+  - tensorflow\compiler\mlir\quantization\stablehlo
+  - tensorflow\compiler\mlir\tf2xla
+  - tensorflow\compiler\mlir\tfrt
+  - tensorflow\compiler\mlir\tools
+  - tensorflow\compiler\mlir\tosa\tests
+  - tensorflow\compiler\mlir\quantization\common
+  - tensorflow\compiler\mlir\python
+  - tensorflow\compiler\mlir\utils
+  - tensorflow\compiler\mlir\tensorflow_to_stablehlo
+  - tensorflow\compiler\mlir\tfr
+  - tensorflow\compiler\mlir\stablehlo
+  - tensorflow\compiler\mlir\kernels
+- tensorflow\compiler\tf2xla
+  components:
+  - tensorflow\compiler\tf2xla\kernels
+  - tensorflow\compiler\tf2xla\lib
+  - tensorflow\compiler\tf2xla\python
+  - tensorflow\compiler\tf2xla\ops
+  - tensorflow\compiler\tf2xla\cc
+- tensorflow\compiler\jit
+  components:
+  - tensorflow\compiler\jit\tests
+  - tensorflow\compiler\jit\kernels
+  - tensorflow\compiler\jit\ops
+- tensorflow\compiler\tests
+- tensorflow\c
+  components:
+  - tensorflow\c\eager
+  - tensorflow\c\experimental\saved_model\core
+  - tensorflow\c\experimental\saved_model\internal
+  - tensorflow\c\experimental\gradients
+  - tensorflow\c\experimental\ops
+  - tensorflow\c\experimental\saved_model\public
+  - tensorflow\c\kernels
+  - tensorflow\c\experimental\filesystem
+  - tensorflow\c\experimental\stream_executor
+  - tensorflow\c\experimental\next_pluggable_device
+  - tensorflow\c\experimental\grappler
+  - tensorflow\c\experimental\pluggable_profiler
+- tensorflow\dtensor
+  components:
+  - tensorflow\dtensor\mlir
+  - tensorflow\dtensor\cc
+  - tensorflow\dtensor\python
+  - tensorflow\dtensor\tests
+  - tensorflow\dtensor\proto
+- tensorflow\tools\graph_transforms
+- tensorflow\tools\ci_build
+  components:
+  - tensorflow\tools\ci_build\install
+  - tensorflow\tools\ci_build\ctpu
+  - tensorflow\tools\ci_build\gpu_build
+- tensorflow\cc
+  components:
+  - tensorflow\cc\saved_model
+  - tensorflow\cc\experimental\libexport
+  - tensorflow\cc\experimental\base\public
+  - tensorflow\cc\framework\fuzzing
+  - tensorflow\cc\experimental\base\tests
+  - tensorflow\cc\tools
+- tensorflow\go
+  components:
+  - tensorflow\go\op
+  - tensorflow\go\genop
+  - tensorflow\go\core\framework
+  - tensorflow\go\core\protobuf
+  - tensorflow\go\stream_executor
+  - tensorflow\go\tsl\profiler\protobuf
+  - tensorflow\go\tsl\protobuf
+- tensorflow\compiler\aot
+  components:
+  - tensorflow\compiler\aot\tests
+- tensorflow\tools\proto_splitter
+  components:
+  - tensorflow\tools\proto_splitter\testdata
+  - tensorflow\tools\proto_splitter\cc
+  - tensorflow\tools\proto_splitter\python
+- tensorflow\examples\speech_commands
+- tensorflow\java
+  components:
+  - tensorflow\java\src\main\native
+  - tensorflow\java\src\main\java\org\tensorflow\examples
+- tensorflow\security\fuzzing
+  components:
+  - tensorflow\security\fuzzing\cc
+  - tensorflow\security\fuzzing\py
+- tensorflow\examples\adding_an_op
+- tensorflow\tools\compatibility
+  components:
+  - tensorflow\tools\compatibility\update
+- tensorflow\tools\pip_package
+  components:
+  - tensorflow\tools\pip_package\redundant_tensorflow_gpu
+  - tensorflow\tools\pip_package\redundant_tf_nightly_gpu
+  - tensorflow\tools\pip_package\utils
+  - tensorflow\tools\pip_package\xla_build
+- tensorflow\tools\docs
+- tensorflow\tools\benchmark
+- tensorflow\tools\test
+- tensorflow\tools\tf_sig_build_dockerfiles
+- tensorflow\examples\custom_ops_doc\multiplex_4
+- tensorflow\examples\custom_ops_doc\multiplex_2
+- tensorflow\tools\toolchains
+  components:
+  - tensorflow\tools\toolchains\embedded\arm-linux
+  - tensorflow\tools\toolchains\win
+  - tensorflow\tools\toolchains\win2022
+  - tensorflow\tools\toolchains\clang6
+  - tensorflow\tools\toolchains\remote
+  - tensorflow\tools\toolchains\cpus\aarch64\crosstool
+  - tensorflow\tools\toolchains\cross_compile\cc
+  - tensorflow\tools\toolchains\cross_compile\config
+  - tensorflow\tools\toolchains\android
+  - tensorflow\tools\toolchains\cpus\py
+  - tensorflow\tools\toolchains\cpus\py3
+  - tensorflow\tools\toolchains\ios
+  - tensorflow\tools\toolchains\java
+  - tensorflow\tools\toolchains\linux
+  - tensorflow\tools\toolchains\win_1803\py38
+  - tensorflow\tools\toolchains\win_1803\py39
+- tensorflow\examples\custom_ops_doc\simple_hash_table
+- tensorflow\examples\custom_ops_doc\sleep
+- tensorflow\tools\common
+- tensorflow\tools\lib_package
+- tensorflow\tools\proto_text
+- tensorflow\compiler\tf2tensorrt
+- tensorflow\examples\custom_ops_doc\multiplex_1
+- tensorflow\examples\custom_ops_doc\multiplex_3
+- tensorflow\examples\wav_to_spectrogram
+- tensorflow\tools\api\tests
+- tensorflow\distribute\experimental\rpc\kernels
+  components:
+  - tensorflow\distribute\experimental\rpc\kernels\oss
+- tensorflow\tools\def_file_filter
+- tensorflow\tools\tensorflow_builder\compat_checker
+- tensorflow\examples\label_image
+- tensorflow\tools\android\inference_interface
+- tensorflow\tools\api\lib
+- tensorflow\tools\optimization
+- tensorflow\tools\tfg_graph_transforms
+- tensorflow\examples\multibox_detector
+- tensorflow\tools\gcs_test
+- tensorflow\tools\git
+- tensorflow\tools\mlpbtxt
+- tensorflow\compiler\plugin
+- tensorflow\distribute\experimental\rpc\proto
+- tensorflow\tools\build_info
+- tensorflow\tools\tensorflow_builder\config_detector
+  components:
+  - tensorflow\tools\tensorflow_builder\config_detector\data\golden
+- tensorflow\js
+
+third_party
+files: 190
+evidence: 40
+subsystems:
+- third_party\xla
+  components:
+  - third_party\xla\xla
+  - third_party\xla\third_party
+  - third_party\xla\build_tools
+  - third_party\xla\tools\toolchains
+  - third_party\xla\tools\def_file_filter
+  - third_party\xla\.github
+  - third_party\xla\tools\ci_build\gpu_build
+- third_party\icu
+  components:
+  - third_party\icu\data
+- third_party\systemlibs
+- third_party\py
+  components:
+  - third_party\py\non_hermetic\ml_dtypes
+  - third_party\py\ml_dtypes
+  - third_party\py\non_hermetic\numpy
+  - third_party\py\numpy
+  - third_party\py\absl_py
+- third_party\fft2d
+- third_party\flatbuffers
+- third_party\gif
+- third_party\jpeg
+- third_party\android
+- third_party\jpegxl
+- third_party\absl
+- third_party\com_google_highway
+- third_party\extensions
+- third_party\git
+- third_party\hexagon
+- third_party\kissfft
+- third_party\libprotobuf_mutator
+- third_party\libwebp
+- third_party\nccl
+- third_party\opencl_headers
+- third_party\pybind11_protobuf
+- third_party\skcms
+- third_party\sobol_data
+- third_party\tf_runtime
+- third_party\vulkan_headers
+- third_party\xprof
+- third_party\xxd
+- third_party\cpuinfo
+- third_party\cython
+- third_party\llvm_openmp
+- third_party\nvtx
+- third_party\org_brotli
+- third_party\ruy
+- third_party\sentencepiece
+- third_party\six
+- third_party\tf_gcp_tools
+- third_party\xctestrunner
+- third_party\boringssl
+
+_root
+files: 30
+evidence: 2
+
+ci
+files: 24
+evidence: 4
+subsystems:
+- ci\official\containers\ml_build
+- ci\official\requirements_updater
+- ci\devinfra\docker\windows
+- ci\devinfra\docker\windows2022
+
+.github
+files: 2
+evidence: 1
+
+
+Candidate Modules Found: 1374
+Retained Modules: 1056
+Compression Ratio: 0.77
+
+Major Modules:
+- tensorflow\core\api_def\base_api
+  score: 1807
+  files: 1567
+  evidence: 1
+- tensorflow\core\ops\compat\ops_history_v2
+  score: 1804
+  files: 1564
+  evidence: 1
+- tensorflow\core\ops\compat\ops_history_v1
+  score: 1491
+  files: 1261
+  evidence: 1
+- tensorflow\core\kernels
+  score: 1417
+  files: 1157
+  evidence: 1
+- tensorflow\core\api_def\java_api
+  score: 1214
+  files: 994
+  evidence: 1
+- tensorflow\core\api_def\python_api
+  score: 1174
+  files: 954
+  evidence: 1
+- tensorflow
+  score: 965
+  files: 25
+  evidence: 1
+- tensorflow\lite\kernels
+  score: 774
+  files: 364
+  evidence: 2
+- third_party\xla\xla\service
+  score: 707
+  files: 477
+  evidence: 1
+- third_party\xla
+  score: 654
+  files: 24
+  evidence: 2
+- tensorflow\lite
+  score: 619
+  files: 89
+  evidence: 2
+- tensorflow\tools\android\test
+  score: 610
+  files: 10
+  evidence: 3
+- third_party\xla\xla\mlir_hlo
+  score: 609
+  files: 9
+  evidence: 3
+- tensorflow\tools\api\golden\v2
+  score: 609
+  files: 599
+  evidence: 0
+- tensorflow\tools\api\golden\v1
+  score: 594
+  files: 584
+  evidence: 0
+- third_party\xla\xla
+  score: 561
+  files: 151
+  evidence: 1
+- tensorflow\core
+  score: 533
+  files: 3
+  evidence: 1
+- tensorflow\core\common_runtime
+  score: 507
+  files: 297
+  evidence: 1
+- third_party\xla\xla\backends\gpu\runtime
+  score: 469
+  files: 269
+  evidence: 1
+- third_party
+  score: 461
+  files: 11
+  evidence: 1
+- third_party\xla\xla\backends\gpu\transforms
+  score: 456
+  files: 256
+  evidence: 1
+- tensorflow\security\advisory
+  score: 442
+  files: 432
+  evidence: 0
+- tensorflow\core\framework
+  score: 433
+  files: 233
+  evidence: 1
+- _root
+  score: 430
+  files: 30
+  evidence: 2
+- tensorflow\lite\c
+  score: 423
+  files: 23
+  evidence: 2
+- tensorflow\lite\tools\benchmark
+  score: 423
+  files: 23
+  evidence: 2
+- third_party\xla\xla\mlir_hlo\tests
+  score: 417
+  files: 17
+  evidence: 2
+- tensorflow\compiler\mlir\tensorflow\tests
+  score: 414
+  files: 204
+  evidence: 1
+- tensorflow\python\ops
+  score: 414
+  files: 204
+  evidence: 1
+- tensorflow\lite\examples\label_image
+  score: 412
+  files: 12
+  evidence: 2
+- tensorflow\core\example
+  score: 411
+  files: 11
+  evidence: 2
+- tensorflow\lite\java\demo
+  score: 407
+  files: 7
+  evidence: 2
+- tensorflow\lite\java\ovic\demo
+  score: 405
+  files: 5
+  evidence: 2
+- tensorflow\lite\examples\minimal
+  score: 404
+  files: 4
+  evidence: 2
+- tensorflow\lite\java\ovic\demo\app
+  score: 404
+  files: 4
+  evidence: 2
+- tensorflow\lite\profiling\proto
+  score: 404
+  files: 4
+  evidence: 2
+- tensorflow\python\tpu\client\pip_package
+  score: 404
+  files: 4
+  evidence: 2
+- tensorflow\python\tpu\profiler\pip_package
+  score: 404
+  files: 4
+  evidence: 2
+- tensorflow\lite\tools\benchmark\proto
+  score: 403
+  files: 3
+  evidence: 2
+- tensorflow\lite\delegates\xnnpack
+  score: 396
+  files: 196
+  evidence: 1
+- tensorflow\core\ops
+  score: 396
+  files: 116
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\transforms
+  score: 387
+  files: 187
+  evidence: 1
+- third_party\icu\data
+  score: 387
+  files: 187
+  evidence: 1
+- tensorflow\compiler\tf2xla\kernels
+  score: 368
+  files: 168
+  evidence: 1
+- tensorflow\compiler\jit
+  score: 357
+  files: 157
+  evidence: 1
+- third_party\xla\xla\python\ifrt
+  score: 345
+  files: 145
+  evidence: 1
+- third_party\xla\xla\pjrt
+  score: 342
+  files: 132
+  evidence: 1
+- tensorflow\core\util
+  score: 341
+  files: 141
+  evidence: 1
+- tensorflow\compiler\tests
+  score: 326
+  files: 126
+  evidence: 1
+- third_party\xla\xla\stream_executor
+  score: 326
+  files: 116
+  evidence: 1
+- tensorflow\core\platform
+  score: 317
+  files: 117
+  evidence: 1
+- third_party\xla\third_party\tsl\tsl\platform
+  score: 317
+  files: 117
+  evidence: 1
+- tensorflow\compiler\tf2xla
+  score: 312
+  files: 112
+  evidence: 1
+- third_party\xla\xla\backends\cpu\runtime
+  score: 311
+  files: 111
+  evidence: 1
+- tensorflow\core\tpu\kernels
+  score: 308
+  files: 108
+  evidence: 1
+- tensorflow\python
+  score: 305
+  files: 35
+  evidence: 1
+- tensorflow\python\distribute
+  score: 303
+  files: 103
+  evidence: 1
+- tensorflow\core\api_def
+  score: 300
+  files: 10
+  evidence: 1
+- tensorflow\core\ir\importexport\tests\roundtrip
+  score: 295
+  files: 95
+  evidence: 1
+- third_party\xla\xla\backends\gpu\tests
+  score: 292
+  files: 92
+  evidence: 1
+- tensorflow\compiler\mlir
+  score: 290
+  files: 20
+  evidence: 1
+- tensorflow\core\data\service
+  score: 285
+  files: 85
+  evidence: 1
+- tensorflow\python\training
+  score: 284
+  files: 84
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\mini_benchmark
+  score: 281
+  files: 81
+  evidence: 1
+- third_party\xla\xla\service\gpu\model
+  score: 280
+  files: 80
+  evidence: 1
+- tensorflow\lite\delegates\gpu\gl\kernels
+  score: 279
+  files: 79
+  evidence: 1
+- third_party\xla\xla\python\pjrt_ifrt
+  score: 279
+  files: 79
+  evidence: 1
+- tensorflow\compiler\mlir\lite\tests
+  score: 278
+  files: 78
+  evidence: 1
+- tensorflow\core\distributed_runtime
+  score: 277
+  files: 77
+  evidence: 1
+- third_party\xla\xla\stream_executor\rocm
+  score: 277
+  files: 77
+  evidence: 1
+- third_party\xla\xla\python
+  score: 277
+  files: 67
+  evidence: 1
+- tensorflow\c
+  score: 274
+  files: 64
+  evidence: 1
+- third_party\xla\xla\hlo\analysis
+  score: 273
+  files: 73
+  evidence: 1
+- third_party\xla\xla\hlo\ir
+  score: 272
+  files: 72
+  evidence: 1
+- third_party\xla\xla\pjrt\c
+  score: 272
+  files: 72
+  evidence: 1
+- tensorflow\dtensor\mlir
+  score: 271
+  files: 71
+  evidence: 1
+- tensorflow\dtensor\mlir\tests
+  score: 271
+  files: 71
+  evidence: 1
+- third_party\xla\xla\backends\profiler\gpu
+  score: 270
+  files: 70
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\graphdef2mlir
+  score: 269
+  files: 69
+  evidence: 1
+- tensorflow\c\eager
+  score: 268
+  files: 68
+  evidence: 1
+- tensorflow\python\eager
+  score: 267
+  files: 67
+  evidence: 1
+- tensorflow\tools\graph_transforms
+  score: 265
+  files: 65
+  evidence: 1
+- third_party\xla\xla\tsl\platform
+  score: 265
+  files: 65
+  evidence: 1
+- tensorflow\lite\delegates\gpu\cl
+  score: 264
+  files: 64
+  evidence: 1
+- third_party\xla\xla\tools
+  score: 264
+  files: 64
+  evidence: 1
+- tensorflow\compiler\mlir\lite
+  score: 263
+  files: 43
+  evidence: 1
+- tensorflow\python\tpu
+  score: 262
+  files: 62
+  evidence: 1
+- third_party\xla\xla\backends\gpu\collectives
+  score: 262
+  files: 62
+  evidence: 1
+- third_party\xla\xla\tsl\profiler\utils
+  score: 262
+  files: 62
+  evidence: 1
+- tensorflow\python\saved_model
+  score: 261
+  files: 61
+  evidence: 1
+- third_party\xla\xla\backends\gpu\transforms\collectives
+  score: 261
+  files: 61
+  evidence: 1
+- tensorflow\core\data
+  score: 259
+  files: 59
+  evidence: 1
+- tensorflow\core\graph
+  score: 258
+  files: 58
+  evidence: 1
+- third_party\xla\xla\hlo\transforms
+  score: 258
+  files: 58
+  evidence: 1
+- tensorflow\lite\delegates\gpu\gl
+  score: 257
+  files: 57
+  evidence: 1
+- tensorflow\compiler\mlir\lite\tests\flatbuffer2mlir
+  score: 253
+  files: 53
+  evidence: 1
+- tensorflow\compiler\mlir\lite\stablehlo\tests
+  score: 252
+  files: 52
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow\tests
+  score: 252
+  files: 52
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen
+  score: 252
+  files: 52
+  evidence: 1
+- third_party\xla\xla\tsl\lib\io
+  score: 251
+  files: 51
+  evidence: 1
+- tensorflow\core\kernels\risc\experimental
+  score: 250
+  files: 50
+  evidence: 1
+- tensorflow\lite\testing
+  score: 250
+  files: 50
+  evidence: 1
+- tensorflow\lite\tools
+  score: 249
+  files: 39
+  evidence: 1
+- tensorflow\lite\experimental\microfrontend\lib
+  score: 248
+  files: 48
+  evidence: 1
+- third_party\xla\xla\hlo\translate\mhlo_to_hlo\tests
+  score: 247
+  files: 47
+  evidence: 1
+- third_party\xla\xla\tsl\util
+  score: 247
+  files: 47
+  evidence: 1
+- tensorflow\lite\delegates
+  score: 247
+  files: 17
+  evidence: 1
+- tensorflow\core\ir\importexport\tests\graphdef_to_mlir
+  score: 246
+  files: 46
+  evidence: 1
+- tensorflow\lite\delegates\gpu\cl\kernels
+  score: 246
+  files: 46
+  evidence: 1
+- tensorflow\compiler\mlir\lite\stablehlo\transforms\legalize_hlo_conversions
+  score: 245
+  files: 45
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\mlir2graphdef
+  score: 244
+  files: 44
+  evidence: 1
+- tensorflow\core\tfrt\ifrt
+  score: 243
+  files: 43
+  evidence: 1
+- tensorflow\tools\ci_build
+  score: 242
+  files: 42
+  evidence: 1
+- tensorflow\core\protobuf
+  score: 241
+  files: 41
+  evidence: 1
+- tensorflow\lite\profiling
+  score: 241
+  files: 41
+  evidence: 1
+- tensorflow\lite\toco
+  score: 241
+  files: 41
+  evidence: 1
+- third_party\xla\xla\service\memory_space_assignment
+  score: 241
+  files: 41
+  evidence: 1
+- third_party\xla\xla\service\spmd
+  score: 241
+  files: 41
+  evidence: 1
+- tensorflow\core\tpu
+  score: 240
+  files: 40
+  evidence: 1
+- third_party\xla\xla\backends\gpu\autotuner
+  score: 240
+  files: 40
+  evidence: 1
+- third_party\xla\xla\stream_executor\sycl
+  score: 240
+  files: 40
+  evidence: 1
+- tensorflow\python\debug\lib
+  score: 239
+  files: 39
+  evidence: 1
+- third_party\xla\xla\tsl\platform\cloud
+  score: 239
+  files: 39
+  evidence: 1
+- tensorflow\lite\delegates\coreml\builders
+  score: 238
+  files: 38
+  evidence: 1
+- third_party\xla\xla\python\ifrt_proxy\client
+  score: 237
+  files: 37
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\stablehlo\cc
+  score: 236
+  files: 36
+  evidence: 1
+- third_party\systemlibs
+  score: 236
+  files: 36
+  evidence: 1
+- third_party\xla\xla\backends\cpu\benchmarks
+  score: 236
+  files: 36
+  evidence: 1
+- third_party\xla\xla\tsl\framework
+  score: 236
+  files: 36
+  evidence: 1
+- tensorflow\lite\delegates\gpu\metal\kernels
+  score: 235
+  files: 35
+  evidence: 1
+- tensorflow\python\autograph\pyct
+  score: 235
+  files: 35
+  evidence: 1
+- tensorflow\cc\saved_model
+  score: 234
+  files: 34
+  evidence: 1
+- tensorflow\core\data\service\snapshot
+  score: 234
+  files: 34
+  evidence: 1
+- third_party\xla\xla\hlo\translate\hlo_to_mhlo\tests
+  score: 234
+  files: 34
+  evidence: 1
+- third_party\xla\xla\python\ifrt\ir\tests
+  score: 234
+  files: 34
+  evidence: 1
+- third_party\xla\xla\python\ifrt\ir\transforms
+  score: 234
+  files: 34
+  evidence: 1
+- tensorflow\lite\delegates\hexagon\builders\tests
+  score: 233
+  files: 33
+  evidence: 1
+- tensorflow\python\compiler\tensorrt\test
+  score: 233
+  files: 33
+  evidence: 1
+- tensorflow\tools\ci_build\install
+  score: 233
+  files: 33
+  evidence: 1
+- third_party\xla\xla\codegen\emitters\transforms
+  score: 233
+  files: 33
+  evidence: 1
+- third_party\xla\xla\backends\cpu
+  score: 233
+  files: 23
+  evidence: 1
+- tensorflow\compiler\mlir\tf2xla\transforms
+  score: 232
+  files: 32
+  evidence: 1
+- tensorflow\core\profiler\internal
+  score: 232
+  files: 32
+  evidence: 1
+- tensorflow\dtensor\cc
+  score: 232
+  files: 32
+  evidence: 1
+- tensorflow\lite\python
+  score: 232
+  files: 32
+  evidence: 1
+- tensorflow\python\autograph\tests
+  score: 232
+  files: 32
+  evidence: 1
+- third_party\xla\xla\ffi
+  score: 232
+  files: 32
+  evidence: 1
+- third_party\xla\xla\backends\gpu
+  score: 232
+  files: 2
+  evidence: 1
+- third_party\xla\xla\hlo\evaluator
+  score: 231
+  files: 31
+  evidence: 1
+- third_party\xla\xla\service\llvm_ir
+  score: 231
+  files: 31
+  evidence: 1
+- third_party\xla\xla\tests\exhaustive
+  score: 231
+  files: 31
+  evidence: 1
+- tensorflow\tools\api\golden
+  score: 231
+  files: 1
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\tf_saved_model
+  score: 230
+  files: 30
+  evidence: 1
+- tensorflow\go
+  score: 230
+  files: 30
+  evidence: 1
+- tensorflow\python\tools
+  score: 230
+  files: 30
+  evidence: 1
+- tensorflow\compiler\aot
+  score: 229
+  files: 29
+  evidence: 1
+- tensorflow\compiler\mlir\tf2xla\internal\passes
+  score: 229
+  files: 29
+  evidence: 1
+- tensorflow\core\profiler\protobuf
+  score: 229
+  files: 29
+  evidence: 1
+- tensorflow\lite\experimental\ml_adjacent\algo
+  score: 229
+  files: 29
+  evidence: 1
+- tensorflow\lite\experimental\shlo
+  score: 229
+  files: 29
+  evidence: 1
+- tensorflow\python\checkpoint
+  score: 229
+  files: 29
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\triton\transforms\tests
+  score: 229
+  files: 29
+  evidence: 1
+- tensorflow\core\profiler\utils
+  score: 228
+  files: 28
+  evidence: 1
+- tensorflow\examples\speech_commands
+  score: 228
+  files: 28
+  evidence: 1
+- tensorflow\python\eager\polymorphic_function
+  score: 228
+  files: 28
+  evidence: 1
+- tensorflow\tools\proto_splitter\testdata
+  score: 228
+  files: 28
+  evidence: 1
+- third_party\xla\xla\stream_executor\tpu
+  score: 228
+  files: 28
+  evidence: 1
+- third_party\xla\xla\tsl\cuda
+  score: 228
+  files: 28
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen
+  score: 228
+  files: 18
+  evidence: 1
+- tensorflow\java\src\main\native
+  score: 227
+  files: 27
+  evidence: 1
+- tensorflow\lite\delegates\flex
+  score: 227
+  files: 27
+  evidence: 1
+- tensorflow\python\autograph\converters
+  score: 227
+  files: 27
+  evidence: 1
+- third_party\xla\third_party\tsl\tsl\profiler\lib
+  score: 227
+  files: 27
+  evidence: 1
+- third_party\xla\xla\hlo\utils
+  score: 227
+  files: 27
+  evidence: 1
+- third_party\xla\xla\service\spmd\shardy\test
+  score: 227
+  files: 27
+  evidence: 1
+- third_party\xla\xla\tpu
+  score: 227
+  files: 27
+  evidence: 1
+- tensorflow\core\ir\importexport
+  score: 226
+  files: 26
+  evidence: 1
+- tensorflow\core\tfrt\utils
+  score: 226
+  files: 26
+  evidence: 1
+- third_party\xla\third_party\absl
+  score: 226
+  files: 26
+  evidence: 1
+- tensorflow\lite\delegates\gpu\gl\compiler
+  score: 225
+  files: 25
+  evidence: 1
+- tensorflow\python\tpu\tests
+  score: 225
+  files: 25
+  evidence: 1
+- third_party\xla\xla\backends\cpu\collectives
+  score: 225
+  files: 25
+  evidence: 1
+- third_party\xla\xla\python\ifrt_proxy\common
+  score: 225
+  files: 25
+  evidence: 1
+- third_party\xla\xla\service\gpu\llvm_gpu_backend
+  score: 225
+  files: 25
+  evidence: 1
+- third_party\xla\third_party
+  score: 225
+  files: 15
+  evidence: 1
+- tensorflow\compiler\aot\tests
+  score: 224
+  files: 24
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt\tests
+  score: 224
+  files: 24
+  evidence: 1
+- tensorflow\core\tfrt\common
+  score: 224
+  files: 24
+  evidence: 1
+- tensorflow\lite\core
+  score: 224
+  files: 24
+  evidence: 1
+- tensorflow\lite\delegates\gpu\metal
+  score: 224
+  files: 24
+  evidence: 1
+- tensorflow\python\debug\cli
+  score: 224
+  files: 24
+  evidence: 1
+- tensorflow\python\keras\engine
+  score: 224
+  files: 24
+  evidence: 1
+- third_party\xla\third_party\gpus\cuda\hermetic
+  score: 224
+  files: 24
+  evidence: 1
+- third_party\xla\xla\core\host_offloading
+  score: 224
+  files: 24
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_interpreter\dialects
+  score: 224
+  files: 24
+  evidence: 1
+- third_party\xla\xla\runtime
+  score: 224
+  files: 24
+  evidence: 1
+- tensorflow\core\grappler
+  score: 223
+  files: 23
+  evidence: 1
+- tensorflow\core\ir
+  score: 223
+  files: 23
+  evidence: 1
+- tensorflow\lite\acceleration\configuration
+  score: 223
+  files: 23
+  evidence: 1
+- third_party\xla\xla\codegen
+  score: 223
+  files: 23
+  evidence: 1
+- tensorflow\c\experimental\saved_model\core
+  score: 222
+  files: 22
+  evidence: 1
+- tensorflow\core\lib\io
+  score: 222
+  files: 22
+  evidence: 1
+- tensorflow\core\tfrt\saved_model\tests
+  score: 222
+  files: 22
+  evidence: 1
+- tensorflow\lite\tools\optimize
+  score: 222
+  files: 22
+  evidence: 1
+- tensorflow\python\lib\core
+  score: 222
+  files: 22
+  evidence: 1
+- third_party\xla\xla\python\ifrt_proxy\server
+  score: 222
+  files: 22
+  evidence: 1
+- third_party\xla\xla\tsl\lib\monitoring
+  score: 222
+  files: 22
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow
+  score: 222
+  files: 2
+  evidence: 1
+- tensorflow\core\debug
+  score: 221
+  files: 21
+  evidence: 1
+- tensorflow\core\lib\core
+  score: 221
+  files: 21
+  evidence: 1
+- tensorflow\python\keras\utils
+  score: 221
+  files: 21
+  evidence: 1
+- tensorflow\security\fuzzing\cc
+  score: 221
+  files: 21
+  evidence: 1
+- tensorflow\tools\proto_splitter\cc
+  score: 221
+  files: 21
+  evidence: 1
+- third_party\xla\xla\python\transfer
+  score: 221
+  files: 21
+  evidence: 1
+- tensorflow\c\experimental\saved_model\internal
+  score: 220
+  files: 20
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt\tests\tfrt_fallback
+  score: 220
+  files: 20
+  evidence: 1
+- tensorflow\core\lib\monitoring
+  score: 220
+  files: 20
+  evidence: 1
+- tensorflow\core\tfrt\mlrt\interpreter
+  score: 220
+  files: 20
+  evidence: 1
+- tensorflow\python\trackable
+  score: 220
+  files: 20
+  evidence: 1
+- third_party\xla\third_party\py
+  score: 220
+  files: 20
+  evidence: 1
+- third_party\xla\xla\codegen\emitters\transforms\tests
+  score: 220
+  files: 20
+  evidence: 1
+- third_party\xla\xla\service\cpu\tests
+  score: 220
+  files: 20
+  evidence: 1
+- third_party\xla\xla\tsl\concurrency
+  score: 220
+  files: 20
+  evidence: 1
+- tensorflow\compiler\mlir\lite\schema
+  score: 219
+  files: 19
+  evidence: 1
+- tensorflow\compiler\mlir\tools\kernel_gen\tests
+  score: 219
+  files: 19
+  evidence: 1
+- tensorflow\compiler\mlir\tosa\tests
+  score: 219
+  files: 19
+  evidence: 1
+- tensorflow\core\lib\gtl
+  score: 219
+  files: 19
+  evidence: 1
+- tensorflow\examples\adding_an_op
+  score: 219
+  files: 19
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\compatibility
+  score: 219
+  files: 19
+  evidence: 1
+- tensorflow\python\autograph\operators
+  score: 219
+  files: 19
+  evidence: 1
+- tensorflow\python\profiler
+  score: 219
+  files: 19
+  evidence: 1
+- third_party\xla\xla\core\collectives
+  score: 219
+  files: 19
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\transforms
+  score: 219
+  files: 19
+  evidence: 1
+- ci\official\containers\ml_build
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\common
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow\python
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\compile_mlir_util
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\core\kernels\fuzzing
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\core\platform\cloud
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\python\keras
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\python\ops\numpy_ops
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\xla\xla\backends\autotuner
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\xla\xla\hlo\translate\tests
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\mhlo\IR
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\xla\xla\tsl\lib\gtl
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\xla\xla\tsl\lib\random
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\xla\xla\tsl\platform\windows
+  score: 218
+  files: 18
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow\cc
+  score: 217
+  files: 17
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt\ir
+  score: 217
+  files: 17
+  evidence: 1
+- tensorflow\core\grappler\costs\graph_properties_testdata
+  score: 217
+  files: 17
+  evidence: 1
+- tensorflow\python\kernel_tests
+  score: 217
+  files: 17
+  evidence: 1
+- tensorflow\tools\compatibility
+  score: 217
+  files: 17
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\stablehlo_ext\transforms
+  score: 217
+  files: 17
+  evidence: 1
+- third_party\xla\xla\python\ifrt\ir\tests\vifrt
+  score: 217
+  files: 17
+  evidence: 1
+- tensorflow\compiler\mlir\lite\python
+  score: 216
+  files: 16
+  evidence: 1
+- tensorflow\compiler\mlir\lite\tests\end2end
+  score: 216
+  files: 16
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow\calibrator
+  score: 216
+  files: 16
+  evidence: 1
+- tensorflow\core\ir\tests
+  score: 216
+  files: 16
+  evidence: 1
+- tensorflow\dtensor\python
+  score: 216
+  files: 16
+  evidence: 1
+- tensorflow\lite\toco\tflite
+  score: 216
+  files: 16
+  evidence: 1
+- third_party\xla\xla\backends\interpreter
+  score: 216
+  files: 16
+  evidence: 1
+- third_party\xla\xla\hlo\builder\tests
+  score: 216
+  files: 16
+  evidence: 1
+- third_party\xla\xla\service\gpu\autotuning
+  score: 216
+  files: 16
+  evidence: 1
+- third_party\xla\xla\tsl\profiler\backends\cpu
+  score: 216
+  files: 16
+  evidence: 1
+- tensorflow\c\experimental\gradients
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\compiler\mlir\tf2xla\tests
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\core\lib\strings
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\core\profiler\lib
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\core\tfrt\mlrt\kernel
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\core\tfrt\runtime
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\python\autograph\pyct\static_analysis
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\python\distribute\coordinator
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\python\keras\saving\saved_model
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\python\profiler\internal
+  score: 215
+  files: 15
+  evidence: 1
+- tensorflow\tools\proto_splitter
+  score: 215
+  files: 15
+  evidence: 1
+- third_party\xla\xla\hlo\tools\hlo_diff
+  score: 215
+  files: 15
+  evidence: 1
+- third_party\xla\xla\hlo\tools\tests
+  score: 215
+  files: 15
+  evidence: 1
+- third_party\xla\xla\tsl\profiler\convert
+  score: 215
+  files: 15
+  evidence: 1
+- third_party\xla\xla\tsl
+  score: 215
+  files: 5
+  evidence: 1
+- tensorflow\compiler\jit\tests
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\compiler\mlir\lite\experimental\tac
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\core\function\trace_type
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\core\runtime_fallback\util
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\core\summary
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\core\tfrt\fallback
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\core\tfrt\graph_executor
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\lite\experimental\resource
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\lite\experimental\shlo\legacy\test
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\lite\tools\delegates
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\python\feature_column
+  score: 214
+  files: 14
+  evidence: 1
+- third_party\xla\xla\backends\cpu\testlib
+  score: 214
+  files: 14
+  evidence: 1
+- third_party\xla\xla\hlo\builder
+  score: 214
+  files: 14
+  evidence: 1
+- third_party\xla\xla\stream_executor\host
+  score: 214
+  files: 14
+  evidence: 1
+- tensorflow\c\experimental\ops
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\compiler\mlir\lite\quantization\ir
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\configuration
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\lite\java\src\main\native
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\lite\nnapi
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\lite\python\testdata
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\python\autograph\utils
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\python\keras\layers
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\python\keras\optimizer_v2
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\python\ops\parallel_for
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\security\fuzzing
+  score: 213
+  files: 13
+  evidence: 1
+- third_party\py
+  score: 213
+  files: 13
+  evidence: 1
+- third_party\xla\xla\tools\multihost_hlo_runner
+  score: 213
+  files: 13
+  evidence: 1
+- tensorflow\c\experimental\ops\gen\common
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\c\experimental\saved_model\public
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\compiler\mlir\lite\quantization\common\quantization_lib
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\common\quantization_lib
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\transforms\host_runtime
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\core\profiler
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\tools\docs
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\tools\pip_package
+  score: 212
+  files: 12
+  evidence: 1
+- third_party\xla\third_party\raft
+  score: 212
+  files: 12
+  evidence: 1
+- third_party\xla\xla\backends\cpu\nanort
+  score: 212
+  files: 12
+  evidence: 1
+- third_party\xla\xla\client
+  score: 212
+  files: 12
+  evidence: 1
+- third_party\xla\xla\error
+  score: 212
+  files: 12
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\utils
+  score: 212
+  files: 12
+  evidence: 1
+- tensorflow\c\kernels
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\compiler\mlir\lite\experimental\tac\tests
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\compiler\mlir\lite\kernels\internal
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\compiler\mlir\lite\quantization
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\compiler\mlir\python\mlir_wrapper
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow\utils
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\compiler\tf2xla\lib
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\core\data\service\client
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\core\lib\gif\testdata
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\core\tfrt\mlrt\bytecode
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\core\tfrt\saved_model
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\core\util\proto
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\lite\delegates\gpu\gl\workgroups
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\mini_benchmark\model_modifier
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\lite\python\interpreter_wrapper
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\lite\testing\kernel_test
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\python\debug\examples\v1
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\python\lib\io
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\python\summary
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\tools\benchmark
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\tools\test
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\build_tools\rocm
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\third_party\gpus
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\third_party\llvm
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\xla\backends\cpu\autotuner
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\xla\backends\gpu\libraries\cub
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\xla\codegen\xtile\ir
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\xla\tsl\framework\fixedpoint
+  score: 211
+  files: 11
+  evidence: 1
+- third_party\xla\xla\tsl\protobuf
+  score: 211
+  files: 11
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt\transforms\ifrt\testdata
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\core\config
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\core\lib\jpeg\testdata
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\core\lib\jxl\testdata
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\core\tfrt\kernels
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\core\tfrt\run_handler_thread_pool
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\lite\delegates\gpu\cl\testing
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\lite\experimental\genai
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\lite\java
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\lite\toco\graph_transformations\tests
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\lite\toco\tensorflow_graph_matching
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\python\autograph\core
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\python\data\experimental\service
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\python\debug\wrappers
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\python\layers
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\python\saved_model\registration
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\tools\tf_sig_build_dockerfiles
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\build_tools\ci
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\third_party\mkl_dnn
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\emitters\ir
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\tiled\transforms\tests
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\emitters\ir
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\emitters\transforms\tests
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\gpu\target_config
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\profiler\cpu
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\profiler\plugin
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\backends\profiler\subprocess
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\codegen\emitters\ir
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\hlo\testlib
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_interpreter\framework
+  score: 210
+  files: 10
+  evidence: 1
+- tensorflow\c\experimental\ops\gen\model
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\compiler\mlir\lite\metrics
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow\ops
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\compiler\mlir\utils
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\core\lib\bmp\testdata
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\core\lib\random
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\core\util\ctc
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\core\util\tensor_bundle
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\examples\custom_ops_doc\multiplex_4
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\go\op
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\lite\tools\pip_package
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\lite\tools\serialization
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\python\distribute\experimental
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\python\keras\mixed_precision
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\python\kernel_tests\proto
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\python\tools\api\generator
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\security\fuzzing\cc\ops
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\third_party\compute_library
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\third_party\extensions
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\third_party\tsl\tsl\profiler\protobuf
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\backends\cpu\transforms
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\tools
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\hlo\pass
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\hlo\tools
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\hlo\translate
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_bisect\rewrites\tests
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\bindings\c
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\pjrt\proto
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\service\debug
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\service\heap_simulator
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\tsl\platform\profile_utils
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\xla\xla\util
+  score: 209
+  files: 9
+  evidence: 1
+- tensorflow\core\function\polymorphism
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\core\function\runtime_client
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\core\ir\importexport\tests\mlir_to_graphdef
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\core\ir\types
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\core\profiler\convert\trace_viewer
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\core\tfrt\ifrt\testdata
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\core\transforms
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\core\util\sparse
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\examples\custom_ops_doc\multiplex_2
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\lite\delegates\coreml
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\lite\delegates\gpu\gl\converters
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\lite\toco\logging
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\lite\tools\delegates\experimental\stable_delegate
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\lite\tools\evaluation
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\lite\tools\signature
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\lite\tools\versioning
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\python\ops\numpy_ops\tests
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\python\saved_model\model_utils
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\python\training\experimental
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\python\types
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\third_party\ducc
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\third_party\gpus\crosstool
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\third_party\grpc
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\triton\ir
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\triton\tests
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\codegen\testlib
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\hlo\separate_compilation
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\hlo\transforms\tests
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\megascale\c_api_client
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_replay\public
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\mhlo\transforms
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\python\ifrt_proxy\integration_tests
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\stream_executor\integrations
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\tsl\platform\testdata
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\xla\xla\tsl\util\proto
+  score: 208
+  files: 8
+  evidence: 1
+- tensorflow\c\experimental\filesystem
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\c\experimental\stream_executor
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\cc\experimental\libexport
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\cc\saved_model\experimental\public
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\compiler\mlir\lite\core
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\compiler\mlir\lite\experimental\remat
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\compiler\mlir\lite\tests\debuginfo
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\translate
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\core\distributed_runtime\integration_test
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\core\function\capture
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\core\nccl
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\core\profiler\internal\testdata
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\core\tfrt\gpu\kernel
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\core\tpu\kernels\xla
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\dtensor\tests
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\examples\custom_ops_doc\simple_hash_table
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\examples\custom_ops_doc\sleep
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\core\experimental\acceleration\configuration\c
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\experimental\ml_adjacent\tflite
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\python\metrics
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\python\optimize
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\schema
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\schema\builtin_ops_header
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\schema\builtin_ops_list
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\tools\benchmark\experimental\delegate_performance\android\src\main\native
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\lite\tools\optimize\python
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\python\distribute\failure_handling
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\python\eager\benchmarks\resnet50
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\python\keras\legacy_tf_layers
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\python\keras\saving
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\python\kernel_tests\custom_ops
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\python\summary\writer
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\python\training\saving
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\tools\common
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\tools\lib_package
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\tools\proto_text
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\tools\toolchains\embedded\arm-linux
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\build_tools\configure
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\third_party\nccl
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\third_party\py\rules_pywrap
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\third_party\rules_python\python
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\third_party\tensorrt
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\tools\toolchains\embedded\arm-linux
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\backends\cpu\benchmarks\e2e\keras
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\elemental
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\emitters
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\emitters\transforms\tests
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\codegen\xtile\ir\transforms
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\hlo\parser
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_bisect
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\mlir\utils
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\service\cpu\tests\restricted
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\tsl\c
+  score: 207
+  files: 7
+  evidence: 1
+- third_party\xla\xla\tsl\lib\core
+  score: 207
+  files: 7
+  evidence: 1
+- tensorflow\c\experimental\next_pluggable_device
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\cc\experimental\base\public
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\compiler\mlir\lite\stablehlo\odml_converter
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\stablehlo
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\stablehlo\python
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\transforms\sparsecore
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\compiler\tf2tensorrt
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\core\data\service\testdata
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\core\lib\jpeg
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\core\lib\png\testdata
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\core\profiler\convert
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\core\public
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\core\tfrt\tfrt_session
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\examples\custom_ops_doc\multiplex_1
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\examples\custom_ops_doc\multiplex_3
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\examples\wav_to_spectrogram
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\lite\acceleration\configuration\c
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\lite\delegates\gpu\common\selectors\default
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\configuration\c
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\lite\toco\logging\testdata
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\lite\tools\strip_buffers
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\python\compiler\tensorrt
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\tools\api\tests
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\tools\toolchains\win\20240424
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\fft2d
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\build_tools\pjrt_wheels
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\third_party\llvm_openmp
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\third_party\oneccl
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\tools\toolchains\win\20240424
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\backends\cpu\benchmarks\e2e\gemma2\flax_2b
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\backends\cpu\benchmarks\e2e\gemma2\pytorch_2b
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\backends\gpu\profiler
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\codegen\xtile\ir\transforms\tests
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\ffi\api
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\python\ifrt\hlo
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\python\ifrt\ir\conversions\mpmd
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\python\ifrt\ir\support
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\python_api
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\service\graphcycles
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\tests\restricted
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\xla\xla\tools\hlo_isolation
+  score: 206
+  files: 6
+  evidence: 1
+- tensorflow\c\experimental\grappler
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\cc\framework\fuzzing
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\lite\debug
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\lite\delegates\flex
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\lite\quantization\tensorflow\tests
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\stablehlo\tests\bridge
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\tensorflow\debugging
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow_to_stablehlo
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\tfr
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\tools
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\compiler\mlir\tools\kernel_gen\ir
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\activity_watcher
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\function\testing
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\kernels\spectrogram_test_data
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\lib\db
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\lib\webp\testdata
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\platform\profile_utils
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\platform\testdata
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\tfrt\stubs
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\core\util\quantization
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\distribute\experimental\rpc\kernels
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\go\genop
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\go\genop\internal
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\java
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\async\c
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\core\shims
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\delegates\gpu\java\src\main\java\org\tensorflow\lite\gpu
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\examples\experimental_new_converter
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\mini_benchmark\metrics
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\experimental\microfrontend
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\java\src\test\native
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\python\analyzer_wrapper
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\lite\tools\benchmark\experimental\delegate_performance\android
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\autograph\impl
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\autograph\pyct\testing
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\compat
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\distribute\v1
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\tools\api\generator2
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\tpu\client
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\tpu\profiler
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\python\util\protobuf
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\tools\def_file_filter
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\tools\proto_splitter\python
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\tools\tensorflow_builder\compat_checker
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\tools\toolchains\clang6
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\tools\toolchains\win2022\20241118
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\tools\toolchains\win2022\20260322
+  score: 205
+  files: 5
+  evidence: 1
+- tensorflow\tools\toolchains\win\tf_win_05022023
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\flatbuffers
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\gif
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\icu
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\jpeg
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\py\non_hermetic\ml_dtypes
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\farmhash
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\googletest
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\gpus\cuda
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\gpus\rocm
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\gpus\sycl
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\hwloc
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\implib_so
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\nasm
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\protobuf
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\rocm_device_libs
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\third_party\transformer_engine
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\tools\def_file_filter
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\tools\toolchains\clang6
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\tools\toolchains\win2022\20241118
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\tools\toolchains\win2022\20260322
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\tools\toolchains\win\tf_win_05022023
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\tools
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\tools\tests
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\triton\ir\tests
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\codegen\emitters\ir\tests
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\experiments\sm_bandwidth_benchmark
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\megascale
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\mlir\framework\transforms
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_bisect\tests
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_replay
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\deallocation\transforms
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\stablehlo_ext\IR
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\python\ifrt_proxy\contrib\pathways
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\python\profiler
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\service\cost_modelling
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\stream_executor\platform
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\tools\benchmarks\utils
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\tools\hlo_opt
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\tsl\framework\contraction
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\tsl\mkl
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\tsl\profiler\backends\gpu
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\tsl\profiler\rpc
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\xla\xla\tsl\python\lib\core
+  score: 205
+  files: 5
+  evidence: 1
+- ci\official\requirements_updater
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\c\experimental\ops\gen\cpp
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\c\experimental\pluggable_profiler
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\cc\experimental\base\tests
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\cc\tools
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\lite\sparsity
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\python
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\stablehlo\instrumentations
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\stablehlo\ops
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\stablehlo
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\ir\host_runtime
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\executor_tpuv1_outline_island
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\tfr\resources
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt\tests\analysis
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\framework\registration
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\lib\gif
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\lib\psnr\testdata
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\lib\ssim\testdata
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\lib\wav
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\lib\webp
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\platform\cloud\testdata
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\profiler\rpc
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\runtime_fallback
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\tfrt\mlrt\attribute
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\tfrt\utils\debug
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\core\util\tensor_bundle\testdata\old_string_tensors
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\examples\label_image
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\async
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\async\interop\c
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\delegates\gpu\cl\default
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\delegates\gpu\java\src\main\native
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\experimental\ml_adjacent\data
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\experimental\shlo\legacy\bench
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\kernels\variants\py
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\toco\python
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\tools\evaluation\proto
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\tools\evaluation\tasks\coco_object_detection
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\tools\evaluation\tasks\imagenet_image_classification
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\tools\optimize\sparsity
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\lite\types
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\autograph
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\autograph\lang
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\autograph\pyct\common_transformers
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\compiler\mlir
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\compiler\tensorrt\model_tests
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\debug\examples\v2
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\distribute\integration_test
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\distribute\parallel_device
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\eager\memory_tests
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\keras\initializers
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\keras\protobuf
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\tools\api\generator2\extractor
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\python\tools\api\generator2\generator
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\tools\android\inference_interface
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\tools\api\lib
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\tools\optimization
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\tools\tfg_graph_transforms
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\tools\toolchains\remote
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\tools\toolchains\win\bazel_211
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\android
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\jpegxl
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\py\ml_dtypes
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\py\non_hermetic\numpy\tf_numpy_api
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\py\numpy\tf_numpy_api
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\eigen3
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\libdrm
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\mpitrampoline
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\nccl\hermetic
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\nvshmem
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\nvshmem\hermetic
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\py\ml_dtypes
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\py\numpy\tf_numpy_api
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\rapids_logger
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\remote_config
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\rmm
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\spdlog
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\third_party\tsl
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\tools\toolchains\remote
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\tools\toolchains\win\bazel_211
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\dot
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\tiled
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\backends\cpu\tests
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\emitters\ir\tests
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\backends\gpu\host_offloading
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\backends\gpu\libraries\cutedsl
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\examples\axpy
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\hlo\tools\hlo_opt
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\mlir\framework\ir
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\mlir\framework\tests
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_bisect\rewrites
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\tests\python
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\tools\buffer_debug_log
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\tools\hlo_bisect
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\tsl\lib\hash
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\tsl\lib\histogram
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\tsl\platform\cloud\testdata
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\xla\xla\tsl\testing
+  score: 204
+  files: 4
+  evidence: 1
+- tensorflow\c\experimental\ops\gen
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\c\experimental\ops\gen\cpp\golden
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\jit\kernels
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\jit\ops
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\lite\core\c
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\lite\experimental\common
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\lite\tools
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\common\python
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\c
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\executor_tpuv1_island_coarsening
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\executor_tpuv1_island_inlining
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\tf2xla
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\tf2xla\tests\registration
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt\tests\ir
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\compiler\tf2xla\python
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\distributed_runtime\rpc\coordination
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\function\integration_test
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\function\transform
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\lib\hash
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\lib\jxl
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\lib\png
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\runtime_fallback\test\saved_model
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\tfrt\graph_executor\python
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\tfrt\mla
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\core\tfrt\ops
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\distribute\experimental\rpc\kernels\oss
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\examples\multibox_detector
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\java\src\main\java\org\tensorflow\examples
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\c\jni
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\core\experimental\acceleration\configuration
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\delegates\gpu\common\default
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\delegates\gpu\metal\benchmarking
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\delegates\hexagon\java
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\delegates\nnapi\java\src\main\java\org\tensorflow\lite\nnapi
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\examples\python
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\g3doc\tools
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\java\demo\app\src\main\assets
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\java\ovic
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\java\ovic\src\testdata
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\nnapi\sl
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\python\authoring
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\python\kernel_tests\signal
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\tools\benchmark\android
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\tools\benchmark\experimental\delegate_performance\android\models
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\tools\benchmark\experimental\delegate_performance\android\proto
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\tools\benchmark\experimental\delegate_performance\android\src\test\native
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\tools\evaluation\tasks\inference_diff
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\tools\optimize\debugging\python
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\lite\tutorials
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\autograph\impl\testing
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\debug
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\distribute\cluster_resolver\tpu
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\dlpack
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\module
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\ops\numpy_ops\integration_test
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\tools\api\generator2\shared
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\tpu\ops
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\python\user_ops
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\compatibility\update
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\gcs_test
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\git
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\mlpbtxt
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\pip_package\redundant_tensorflow_gpu
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\pip_package\redundant_tf_nightly_gpu
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\pip_package\utils
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\toolchains\cpus\aarch64\crosstool
+  score: 203
+  files: 3
+  evidence: 1
+- tensorflow\tools\toolchains\cross_compile\cc
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\absl
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\com_google_highway
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\extensions
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\git
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\hexagon
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\kissfft
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\libprotobuf_mutator
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\libwebp
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\nccl
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\opencl_headers
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\py\numpy
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\pybind11_protobuf
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\skcms
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\sobol_data
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\tf_runtime
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\vulkan_headers
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\.github
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\build_tools\dependencies
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\FP16
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\brotli
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\cccl
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\clang_toolchain
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\dlpack
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\fmt
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\gloo
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\highwayhash
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\nanobind
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\nvtx
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\py\numpy
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\pybind11_abseil
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\riegeli
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\robin_map
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\shardy
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\spirv_llvm_translator
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\stablehlo
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\third_party\uv
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\tools\toolchains\cpus\aarch64\crosstool
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\tools\toolchains\cross_compile\cc
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\backends\cpu\codegen\emitters\ir\tests
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\backends\cpu\lite_aot
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\backends\profiler\util
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\error\internal
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\internal
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_interpreter
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_interpreter\framework\tests
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\deallocation\utils
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\mhlo\utils
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\stablehlo_ext\analysis
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\python\compile_only_ifrt
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\python\ifrt\ir\reshard
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\service\gpu\llvm_gpu_backend\default
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\service\restricted
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\stream_executor\sycl\restricted
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\tools\hlo_isolation\restricted
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\tools\tests
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\tsl\distributed_runtime
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\tsl\lib\math
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xla\xla\tsl\lib\strings
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xprof
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\xxd
+  score: 203
+  files: 3
+  evidence: 1
+- .github
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\c\experimental\filesystem\plugins\windows
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\c\experimental\saved_model\internal\testdata
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\c\experimental\stream_executor\test
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\cc\saved_model\experimental\tests
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\cc\saved_model\python
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\kernels
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\lite\kernels
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\lite\quantization\common
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\lite\quantization\tests
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\lite\stablehlo
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\lite\stablehlo\odml_converter\tests
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\quantization\stablehlo\tests
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\graphdef2mlir\batch_use_same_function
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\mlir2graph
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\tf_to_hlo_pipeline
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\tensorflow\tests\tpu_bridge_v1
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\mlir\tfrt\tests\saved_model
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\plugin
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\compiler\tf2xla\ops
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\example\testdata
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\grappler\inputs\testdata
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\ir\importexport\tests\saved_model
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\lib\bfloat16
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\lib\gtl\subtle
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\lib\histogram
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\lib\llvm_rtti
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\lib\math
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\profiler\backends\gpu
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\profiler\builds
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\profiler\rpc\oss
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\tfrt\mlrt\kernel\testdata
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\core\user_ops
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\distribute\experimental\rpc\proto
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\dtensor
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\dtensor\proto
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\async\testing
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\delegates\flex\java\src\main\java\org\tensorflow\lite\flex
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\delegates\flex\java\src\main\native
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\delegates\gpu\common\google
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\delegates\gpu\gl\runtime
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\delegates\hexagon\java\src\main\java\org\tensorflow\lite
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\delegates\hexagon\java\src\main\native
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\delegates\nnapi\java\src\main\native
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\mini_benchmark\c
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\experimental\acceleration\mini_benchmark\models
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\experimental\ml_adjacent
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\internal
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\java\demo\app\src\main
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\java\src\testhelper\java\org\tensorflow\lite
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\lib_package
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\python\testdata\control_flow_v1_saved_model
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\stablehlo\schema
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\testdata\src
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\tools\benchmark\experimental\firebase\android
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\lite\tools\delegates\compatibility\protos
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\python\compiler
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\python\data
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\python\eager\benchmarks
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\python\kernel_tests\linalg\testdata
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\python\lib
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\python\saved_model\tests
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\python\tpu\experimental
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\security\fuzzing\cc\core\function
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\security\fuzzing\py
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\build_info
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\ci_build\ctpu
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\ci_build\gpu_build
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\pip_package\xla_build\pip_test
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\tensorflow_builder\config_detector
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\tensorflow_builder\config_detector\data\golden
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\toolchains
+  score: 202
+  files: 2
+  evidence: 1
+- tensorflow\tools\toolchains\cross_compile\config
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\cpuinfo
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\cython
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\llvm_openmp
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\nvtx
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\org_brotli
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\py\absl_py
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\py\non_hermetic\numpy
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\ruy
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\sentencepiece
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\six
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\tf_gcp_tools
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xctestrunner
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\build_tools
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\benchmark
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\cpuinfo
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\cudnn_frontend
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\cutlass
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\fxdiv
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\gemmlowp
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\gutil
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\highway
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\net_zstd
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\pthreadpool
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\py\absl_py
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\pybind11_bazel
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\slinky
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\tensorrt\plugin
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\triton
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\third_party\xnnpack
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\tools\ci_build\gpu_build
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\tools\toolchains
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\tools\toolchains\cross_compile\config
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\triton\tools
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\backends\profiler\plugin\oss
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\backends\profiler\tpu
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\c
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\codegen\xtile\ir\tests
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\experiments
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\hlo\tools\hlo_diff\proto
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\hlo\translate\stablehlo_to_hlo\tests
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\bindings\python
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\cmake\modules
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\stablehlo_ext
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\tools\mlir-hlo-opt
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\service\cpu\restricted
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\service\llvm_ir\restricted
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\stream_executor\platform\default
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tools\benchmarks\proto
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tools\platform
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tools\platform\default
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tools\ptx_opt
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tsl\framework\test_util
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tsl\lib\gtl\subtle
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tsl\lib\strings\python
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tsl\profiler\builds
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\xla\xla\tsl\profiler\convert\oss
+  score: 202
+  files: 2
+  evidence: 1
+- ci\devinfra\docker\windows
+  score: 201
+  files: 1
+  evidence: 1
+- ci\devinfra\docker\windows2022
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\cc
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\compiler\mlir\lite\delegates
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\compiler\mlir\tf2xla\internal\hlo_post_processing
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\compiler\tf2xla\cc
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\ir\importexport\tests
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\kernels\risc
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\lib\bmp
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\lib\psnr
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\lib\ssim
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\platform\default\build_config
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\runtime_fallback\test\gpu
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\tfrt
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\core\util\tensor_bundle\testdata
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\dtensor\mlir\dtensor_dialect
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\go\core\framework
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\go\core\protobuf
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\go\stream_executor
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\go\tsl\profiler\protobuf
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\go\tsl\protobuf
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\js
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\delegates\flex\test
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\experimental\shlo\legacy
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\g3doc\models
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\java\demo\app
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\java\jni
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\tools\cmake\modules\farmhash
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\tools\cmake\modules\fft2d
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\tools\cmake\modules\ml_dtypes
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\tools\cmake\modules\xnnpack
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\tools\cmake\native_tools\flatbuffers
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\android\test\assets
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\pip_package\xla_build
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\android
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\cpus\py
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\cpus\py3
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\ios
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\java
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\linux
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\win
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\win2022
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\win_1803\py38
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\tools\toolchains\win_1803\py39
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\boringssl
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\third_party\mkl
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\third_party\python_runtime
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\android
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\cpus\py
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\cpus\py3
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\ios
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\java
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\linux
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\win
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\win2022
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\win_1803\py38
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\tools\toolchains\win_1803\py39
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\backends\gpu\codegen\emitters\tests
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\backends\profiler
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\codegen\emitters\tests
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\mlir\tools\mlir_interpreter\dialects\tests
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\bindings
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\deallocation
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\mhlo
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\mlir_hlo\tools
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\tsl\profiler
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\xla\xla\tsl\xnnpack
+  score: 201
+  files: 1
+  evidence: 1
+- tensorflow\lite\g3doc\images
+  score: 200
+  files: 0
+  evidence: 1
+- third_party\xla\third_party\tsl\.github
+  score: 200
+  files: 0
+  evidence: 1
+- tensorflow\lite\delegates\gpu\common\tasks
+  score: -133
+  files: 167
+  evidence: 1

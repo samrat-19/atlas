@@ -103,7 +103,12 @@ func retainedModules(
 		indexes[i] = i
 	}
 	sort.Slice(indexes, func(i, j int) bool {
-		return strings.Count(paths[indexes[i]], "/") < strings.Count(paths[indexes[j]], "/")
+		leftDepth := strings.Count(paths[indexes[i]], "/")
+		rightDepth := strings.Count(paths[indexes[j]], "/")
+		if leftDepth == rightDepth {
+			return paths[indexes[i]] < paths[indexes[j]]
+		}
+		return leftDepth < rightDepth
 	})
 
 	retained := make([]bool, len(paths))
@@ -115,13 +120,21 @@ func retainedModules(
 
 		parent := parents[i]
 		if !retained[parent] {
-			retained[i] = float64(scores[i]) >= float64(scores[parent])*0.6 ||
-				(1.0-categoryOverlap[i]) > 0.2
+			retained[i] = isStrongComparedToParent(scores[i], scores[parent]) ||
+				isNovelComparedToParent(categoryOverlap[i])
 			continue
 		}
-		retained[i] = float64(scores[i]) >= float64(scores[parent])*0.6 ||
-			(1.0-extensionOverlap[i]) > 0.2 ||
-			(1.0-categoryOverlap[i]) > 0.2
+		retained[i] = isStrongComparedToParent(scores[i], scores[parent]) ||
+			isNovelComparedToParent(extensionOverlap[i]) ||
+			isNovelComparedToParent(categoryOverlap[i])
 	}
 	return retained
+}
+
+func isStrongComparedToParent(childScore, parentScore int) bool {
+	return float64(childScore) >= float64(parentScore)*childScoreRetentionRatio
+}
+
+func isNovelComparedToParent(overlap float64) bool {
+	return (1.0 - overlap) > noveltyRetentionDelta
 }

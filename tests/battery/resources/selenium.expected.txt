@@ -1,0 +1,1078 @@
+Root path: <ROOT>
+Total file count: 5129
+
+Evidence Found:
+- .github/workflows (ci/cd)
+- BUILD (build system)
+- BUILD.bazel (build system)
+- CMakeLists.txt (build system)
+- Cargo.lock (package manager)
+- Cargo.toml (package manager)
+- Dockerfile (container)
+- Gemfile (package manager)
+- Gemfile.lock (package manager)
+- WORKSPACE (build system)
+- build (build system)
+- package.json (package manager)
+- paket.dependencies (package manager)
+- pnpm-lock.yaml (package manager)
+- pom.xml (build system)
+- pyproject.toml (package manager)
+- requirements.txt (package manager)
+
+Evidence counts by category:
+- build system: 309
+- ci/cd: 1
+- container: 2
+- package manager: 12
+
+Evidence counts by filename:
+- .github/workflows: 1
+- BUILD: 1
+- BUILD.bazel: 302
+- CMakeLists.txt: 1
+- Cargo.lock: 1
+- Cargo.toml: 1
+- Dockerfile: 2
+- Gemfile: 1
+- Gemfile.lock: 1
+- WORKSPACE: 2
+- build: 2
+- package.json: 4
+- paket.dependencies: 1
+- pnpm-lock.yaml: 1
+- pom.xml: 1
+- pyproject.toml: 1
+- requirements.txt: 1
+
+Root-level evidence count: 4
+Nested evidence count: 320
+
+Top Clusters:
+- java (179 evidence files)
+  category breakdown:
+  - build system: 179
+- third_party (62 evidence files)
+  category breakdown:
+  - build system: 62
+- javascript (19 evidence files)
+  category breakdown:
+  - build system: 16
+  - package manager: 3
+- rb (19 evidence files)
+  category breakdown:
+  - build system: 17
+  - package manager: 2
+- common (14 evidence files)
+  category breakdown:
+  - build system: 14
+- dotnet (12 evidence files)
+  category breakdown:
+  - build system: 11
+  - package manager: 1
+- rust (5 evidence files)
+  category breakdown:
+  - build system: 3
+  - package manager: 2
+- _root (4 evidence files)
+  category breakdown:
+  - build system: 2
+  - package manager: 2
+- py (4 evidence files)
+  category breakdown:
+  - build system: 2
+  - package manager: 2
+- scripts (3 evidence files)
+  category breakdown:
+  - build system: 1
+  - container: 2
+
+Top Directories:
+- java (1711 files, 179 evidence)
+- dotnet (764 files, 12 evidence)
+- rb (536 files, 19 evidence)
+- javascript (526 files, 19 evidence)
+- third_party (431 files, 62 evidence)
+- common (381 files, 14 evidence)
+- py (301 files, 4 evidence)
+- cpp (275 files, 2 evidence)
+- rust (55 files, 5 evidence)
+- .github (42 files, 1 evidence)
+
+Top Extensions:
+- .java: 1490 files
+- .cs: 727 files
+- .js: 504 files
+- .html: 341 files
+- .bazel: 304 files
+- .rb: 303 files
+- .py: 277 files
+- .rbs: 200 files
+- .h: 144 files
+- .cpp: 108 files
+
+Top Extensions Per Cluster:
+.github:
+  - .yml: 38
+  - .json: 2
+  - .md: 2
+_root:
+  - (no ext): 6
+  - .md: 5
+  - .bazel: 3
+  - .json: 3
+  - .bat: 2
+common:
+  - .html: 233
+  - .png: 24
+  - .bzl: 14
+  - .bazel: 12
+  - .js: 12
+cpp:
+  - .h: 138
+  - .cpp: 106
+  - .cc: 7
+  - .filters: 5
+  - .vcxproj: 5
+dotnet:
+  - .cs: 696
+  - .bzl: 22
+  - .bazel: 10
+  - .csproj: 6
+  - .md: 6
+java:
+  - .java: 1490
+  - .bazel: 177
+  - .bzl: 17
+  - .txt: 10
+  - .xml: 4
+javascript:
+  - .js: 260
+  - .html: 108
+  - .tsx: 47
+  - .ts: 19
+  - .bazel: 16
+py:
+  - .py: 266
+  - .bzl: 8
+  - .pyi: 8
+  - .rst: 4
+  - .txt: 4
+rb:
+  - .rb: 300
+  - .rbs: 200
+  - .bazel: 17
+  - (no ext): 4
+  - .md: 3
+rust:
+  - .rs: 41
+  - .md: 5
+  - .bazel: 3
+  - .bzl: 3
+  - .toml: 2
+scripts:
+  - .sh: 19
+  - .py: 6
+  - .ps1: 4
+  - (no ext): 2
+  - .bazelproject: 2
+third_party:
+  - .js: 232
+  - .bazel: 61
+  - .css: 48
+  - .cs: 29
+  - .inl: 9
+
+Repository Hierarchy:
+_root
+files: 37
+evidence: 4
+
+rb
+files: 24
+evidence: 6
+subsystems:
+- rb\spec
+  components:
+  - rb\spec\integration
+  - rb\spec\unit
+- rb\lib
+  components:
+  - rb\lib\selenium\devtools
+  - rb\lib\selenium\webdriver\atoms
+- rb\support
+
+java
+files: 180
+evidence: 8
+subsystems:
+- java\src\org\openqa\selenium
+  components:
+  - java\src\org\openqa\selenium\remote
+  - java\src\org\openqa\selenium\grid
+  - java\src\org\openqa\selenium\bidi
+  - java\src\org\openqa\selenium\devtools
+  - java\src\org\openqa\selenium\json
+  - java\src\org\openqa\selenium\support
+  - java\src\org\openqa\selenium\firefox
+  - java\src\org\openqa\selenium\netty\server
+  - java\src\org\openqa\selenium\chromium
+  - java\src\org\openqa\selenium\docker
+  - java\src\org\openqa\selenium\safari
+  - java\src\org\openqa\selenium\chrome
+  - java\src\org\openqa\selenium\edge
+  - java\src\org\openqa\selenium\ie
+  - java\src\org\openqa\selenium\io
+  - java\src\org\openqa\selenium\events
+  - java\src\org\openqa\selenium\concurrent
+  - java\src\org\openqa\selenium\cli
+  - java\src\org\openqa\selenium\manager
+  - java\src\org\openqa\selenium\os
+  - java\src\org\openqa\selenium\redis
+  - java\src\org\openqa\selenium\status
+- java\test\org\openqa\selenium
+  components:
+  - java\test\org\openqa\selenium\grid\web
+  - java\test\org\openqa\selenium\tools\modules
+  - java\test\org\openqa\selenium\grid\sessionqueue
+- java\private
+- java\src\dev\selenium\tools\javadoc
+- java\src\dev\selenium\tools\modules
+
+py
+files: 35
+evidence: 4
+subsystems:
+- py\private
+
+rust
+files: 31
+evidence: 5
+subsystems:
+- rust\tests
+- rust\private
+
+dotnet
+files: 253
+evidence: 9
+subsystems:
+- dotnet\src\webdriver
+  components:
+  - dotnet\src\webdriver\DevTools
+  - dotnet\src\webdriver\assets
+- dotnet\test\webdriver
+- dotnet\private
+- dotnet\test\remote
+- dotnet\src\support
+- dotnet\test\support
+- dotnet\test\testing.webserver
+
+javascript
+files: 84
+evidence: 13
+subsystems:
+- javascript\selenium-webdriver
+  components:
+  - javascript\selenium-webdriver\private
+  - javascript\selenium-webdriver\lib\atoms
+- javascript\atoms
+  components:
+  - javascript\atoms\fragments
+- javascript\grid-ui
+  components:
+  - javascript\grid-ui\public
+- javascript\private
+- javascript\webdriver
+  components:
+  - javascript\webdriver\atoms
+- javascript\chrome-driver
+- javascript\bidi-support
+- javascript\cdp-support
+- javascript\ie-driver
+
+common
+files: 195
+evidence: 8
+subsystems:
+- common\src\web
+- common\remote-build
+  components:
+  - common\remote-build\cc
+- common\private
+- common\images
+- common\devtools
+  components:
+  - common\devtools\chromium\v146
+  - common\devtools\chromium\v147
+  - common\devtools\chromium\v148
+- common\extensions
+- common\manager
+
+third_party
+files: 56
+evidence: 10
+subsystems:
+- third_party\closure\goog
+  components:
+  - third_party\closure\goog\ui
+  - third_party\closure\goog\css
+  - third_party\closure\goog\events
+  - third_party\closure\goog\testing
+  - third_party\closure\goog\dom
+  - third_party\closure\goog\debug
+  - third_party\closure\goog\html
+  - third_party\closure\goog\fx
+  - third_party\closure\goog\labs
+  - third_party\closure\goog\async
+  - third_party\closure\goog\math
+  - third_party\closure\goog\positioning
+  - third_party\closure\goog\a11y\aria
+  - third_party\closure\goog\disposable
+  - third_party\closure\goog\net
+  - third_party\closure\goog\string
+  - third_party\closure\goog\structs
+  - third_party\closure\goog\useragent
+  - third_party\closure\goog\promise
+  - third_party\closure\goog\asserts
+  - third_party\closure\goog\collections
+  - third_party\closure\goog\color
+  - third_party\closure\goog\fs
+  - third_party\closure\goog\iter
+  - third_party\closure\goog\style
+  - third_party\closure\goog\uri
+  - third_party\closure\goog\array
+  - third_party\closure\goog\editor
+  - third_party\closure\goog\flags
+  - third_party\closure\goog\functions
+  - third_party\closure\goog\i18n
+  - third_party\closure\goog\json
+  - third_party\closure\goog\log
+  - third_party\closure\goog\memoize
+  - third_party\closure\goog\mochikit\async
+  - third_party\closure\goog\object
+  - third_party\closure\goog\reflect
+  - third_party\closure\goog\timer
+  - third_party\closure\goog\url
+  - third_party\closure\goog\utils
+  - third_party\closure\goog\window
+  - third_party\closure\goog\images
+- third_party\cpp\civetweb
+- third_party\dotnet\devtools
+  components:
+  - third_party\dotnet\devtools\src\generator
+- third_party\bazel
+- third_party\js\qunit
+- third_party\js\sizzle
+- third_party\firebug
+- third_party\jruby
+- third_party\js\selenium
+- third_party\chrome_ext
+
+scripts
+files: 20
+evidence: 3
+subsystems:
+- scripts\remote-image
+- scripts\dev-image
+
+.github
+files: 6
+evidence: 1
+
+cpp
+files: 4
+evidence: 2
+subsystems:
+- cpp\linux-specific
+- cpp\prebuilt
+
+
+Candidate Modules Found: 308
+Retained Modules: 171
+Compression Ratio: 0.56
+
+Major Modules:
+- _root
+  score: 837
+  files: 37
+  evidence: 4
+- rb
+  score: 714
+  files: 14
+  evidence: 3
+- java\src\org\openqa\selenium
+  score: 680
+  files: 70
+  evidence: 2
+- py
+  score: 669
+  files: 19
+  evidence: 3
+- rust
+  score: 618
+  files: 8
+  evidence: 3
+- java\test\org\openqa\selenium
+  score: 590
+  files: 80
+  evidence: 2
+- dotnet
+  score: 556
+  files: 16
+  evidence: 2
+- java
+  score: 542
+  files: 12
+  evidence: 1
+- javascript\selenium-webdriver
+  score: 449
+  files: 19
+  evidence: 2
+- javascript\atoms
+  score: 440
+  files: 20
+  evidence: 2
+- javascript\grid-ui
+  score: 432
+  files: 12
+  evidence: 2
+- dotnet\src\webdriver
+  score: 421
+  files: 131
+  evidence: 1
+- common\src\web
+  score: 418
+  files: 158
+  evidence: 1
+- common\remote-build\cc
+  score: 406
+  files: 6
+  evidence: 2
+- javascript
+  score: 306
+  files: 6
+  evidence: 1
+- dotnet\test\webdriver
+  score: 286
+  files: 66
+  evidence: 1
+- java\src\org\openqa\selenium\remote
+  score: 281
+  files: 61
+  evidence: 1
+- common
+  score: 277
+  files: 7
+  evidence: 1
+- java\src\org\openqa\selenium\grid
+  score: 269
+  files: 9
+  evidence: 1
+- third_party\closure\goog
+  score: 264
+  files: 4
+  evidence: 1
+- third_party\closure\goog\ui
+  score: 259
+  files: 49
+  evidence: 1
+- third_party\closure\goog\css
+  score: 248
+  files: 48
+  evidence: 1
+- dotnet\src\webdriver\DevTools
+  score: 246
+  files: 36
+  evidence: 1
+- java\src\org\openqa\selenium\bidi
+  score: 241
+  files: 11
+  evidence: 1
+- java\src\org\openqa\selenium\grid\data
+  score: 238
+  files: 38
+  evidence: 1
+- java\src\org\openqa\selenium\grid\node
+  score: 235
+  files: 25
+  evidence: 1
+- rb\spec\integration\selenium\webdriver
+  score: 232
+  files: 22
+  evidence: 1
+- rb\lib
+  score: 232
+  files: 2
+  evidence: 1
+- java\src\org\openqa\selenium\devtools
+  score: 231
+  files: 21
+  evidence: 1
+- java\src\org\openqa\selenium\json
+  score: 227
+  files: 27
+  evidence: 1
+- third_party\closure\goog\events
+  score: 225
+  files: 25
+  evidence: 1
+- java\src\org\openqa\selenium\support
+  score: 224
+  files: 14
+  evidence: 1
+- rb\spec
+  score: 223
+  files: 3
+  evidence: 1
+- java\src\org\openqa\selenium\firefox
+  score: 222
+  files: 22
+  evidence: 1
+- third_party\closure\goog\testing
+  score: 222
+  files: 22
+  evidence: 1
+- java\src\org\openqa\selenium\grid\config
+  score: 221
+  files: 21
+  evidence: 1
+- java\src\org\openqa\selenium\grid\web
+  score: 221
+  files: 21
+  evidence: 1
+- dotnet\private
+  score: 220
+  files: 20
+  evidence: 1
+- rust\tests
+  score: 220
+  files: 20
+  evidence: 1
+- java\src\org\openqa\selenium\netty\server
+  score: 219
+  files: 19
+  evidence: 1
+- java\src\org\openqa\selenium\chromium
+  score: 218
+  files: 18
+  evidence: 1
+- java\src\org\openqa\selenium\grid\commands
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\closure\goog\dom
+  score: 218
+  files: 18
+  evidence: 1
+- third_party\cpp\civetweb
+  score: 218
+  files: 18
+  evidence: 1
+- java\src\org\openqa\selenium\docker
+  score: 216
+  files: 16
+  evidence: 1
+- py\private
+  score: 216
+  files: 16
+  evidence: 1
+- scripts
+  score: 215
+  files: 15
+  evidence: 1
+- java\private
+  score: 214
+  files: 14
+  evidence: 1
+- java\src\org\openqa\selenium\grid\graphql
+  score: 213
+  files: 13
+  evidence: 1
+- java\src\org\openqa\selenium\safari
+  score: 213
+  files: 13
+  evidence: 1
+- dotnet\test\remote
+  score: 211
+  files: 11
+  evidence: 1
+- java\src\org\openqa\selenium\grid\distributor
+  score: 211
+  files: 11
+  evidence: 1
+- java\src\org\openqa\selenium\grid\sessionqueue
+  score: 211
+  files: 11
+  evidence: 1
+- rb\spec\integration
+  score: 211
+  files: 1
+  evidence: 1
+- rb\spec\unit
+  score: 211
+  files: 1
+  evidence: 1
+- java\src\org\openqa\selenium\chrome
+  score: 210
+  files: 10
+  evidence: 1
+- javascript\private
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\closure\goog\debug
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\closure\goog\html
+  score: 210
+  files: 10
+  evidence: 1
+- third_party\dotnet\devtools\src\generator\Templates
+  score: 210
+  files: 10
+  evidence: 1
+- common\private
+  score: 209
+  files: 9
+  evidence: 1
+- java\src\org\openqa\selenium\devtools\v146
+  score: 209
+  files: 9
+  evidence: 1
+- java\src\org\openqa\selenium\devtools\v147
+  score: 209
+  files: 9
+  evidence: 1
+- java\src\org\openqa\selenium\devtools\v148
+  score: 209
+  files: 9
+  evidence: 1
+- java\src\org\openqa\selenium\grid\server
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\closure\goog\fx
+  score: 209
+  files: 9
+  evidence: 1
+- third_party\closure\goog\labs\useragent
+  score: 209
+  files: 9
+  evidence: 1
+- common\images
+  score: 208
+  files: 8
+  evidence: 1
+- java\src\org\openqa\selenium\edge
+  score: 208
+  files: 8
+  evidence: 1
+- java\src\org\openqa\selenium\grid\sessionmap
+  score: 208
+  files: 8
+  evidence: 1
+- java\src\org\openqa\selenium\ie
+  score: 208
+  files: 8
+  evidence: 1
+- java\src\org\openqa\selenium\io
+  score: 208
+  files: 8
+  evidence: 1
+- javascript\webdriver
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\closure\goog\async
+  score: 208
+  files: 8
+  evidence: 1
+- third_party\closure\goog\math
+  score: 208
+  files: 8
+  evidence: 1
+- java\src\org\openqa\selenium\grid\jmx
+  score: 207
+  files: 7
+  evidence: 1
+- java\src\org\openqa\selenium\grid\log
+  score: 207
+  files: 7
+  evidence: 1
+- java\src\org\openqa\selenium\grid\security
+  score: 207
+  files: 7
+  evidence: 1
+- java\test\org\openqa\selenium\grid\web
+  score: 207
+  files: 7
+  evidence: 1
+- javascript\grid-ui\public
+  score: 207
+  files: 7
+  evidence: 1
+- .github
+  score: 206
+  files: 6
+  evidence: 1
+- common\devtools
+  score: 206
+  files: 6
+  evidence: 1
+- java\src\org\openqa\selenium\events
+  score: 206
+  files: 6
+  evidence: 1
+- java\src\org\openqa\selenium\grid\router
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\bazel
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\closure\goog\positioning
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\js\qunit
+  score: 206
+  files: 6
+  evidence: 1
+- third_party\js\sizzle
+  score: 206
+  files: 6
+  evidence: 1
+- common\extensions
+  score: 205
+  files: 5
+  evidence: 1
+- java\src\org\openqa\selenium\concurrent
+  score: 205
+  files: 5
+  evidence: 1
+- rb\spec\integration\selenium\webdriver\chrome
+  score: 205
+  files: 5
+  evidence: 1
+- rb\spec\integration\selenium\webdriver\edge
+  score: 205
+  files: 5
+  evidence: 1
+- rb\support
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\closure\goog\a11y\aria
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\closure\goog\disposable
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\closure\goog\net
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\closure\goog\string
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\closure\goog\structs
+  score: 205
+  files: 5
+  evidence: 1
+- third_party\closure\goog\useragent
+  score: 205
+  files: 5
+  evidence: 1
+- java\src\org\openqa\selenium\cli
+  score: 204
+  files: 4
+  evidence: 1
+- java\src\org\openqa\selenium\grid\session
+  score: 204
+  files: 4
+  evidence: 1
+- java\src\org\openqa\selenium\manager
+  score: 204
+  files: 4
+  evidence: 1
+- java\src\org\openqa\selenium\os
+  score: 204
+  files: 4
+  evidence: 1
+- java\test\org\openqa\selenium\tools\modules
+  score: 204
+  files: 4
+  evidence: 1
+- javascript\webdriver\atoms
+  score: 204
+  files: 4
+  evidence: 1
+- scripts\remote-image
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\closure\goog\promise
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\dotnet\devtools\src\generator
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\firebug
+  score: 204
+  files: 4
+  evidence: 1
+- third_party\jruby
+  score: 204
+  files: 4
+  evidence: 1
+- common\devtools\chromium\v146
+  score: 203
+  files: 3
+  evidence: 1
+- common\devtools\chromium\v147
+  score: 203
+  files: 3
+  evidence: 1
+- common\devtools\chromium\v148
+  score: 203
+  files: 3
+  evidence: 1
+- cpp\linux-specific
+  score: 203
+  files: 3
+  evidence: 1
+- dotnet\src\support
+  score: 203
+  files: 3
+  evidence: 1
+- dotnet\test\support
+  score: 203
+  files: 3
+  evidence: 1
+- dotnet\test\testing.webserver
+  score: 203
+  files: 3
+  evidence: 1
+- java\src\org\openqa\selenium\grid\component
+  score: 203
+  files: 3
+  evidence: 1
+- java\src\org\openqa\selenium\redis
+  score: 203
+  files: 3
+  evidence: 1
+- java\src\org\openqa\selenium\status
+  score: 203
+  files: 3
+  evidence: 1
+- javascript\chrome-driver
+  score: 203
+  files: 3
+  evidence: 1
+- javascript\selenium-webdriver\private
+  score: 203
+  files: 3
+  evidence: 1
+- rb\lib\selenium\devtools
+  score: 203
+  files: 3
+  evidence: 1
+- rust\private
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\closure\goog\asserts
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\closure\goog\collections
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\closure\goog\color
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\closure\goog\fs
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\closure\goog\iter
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\closure\goog\style
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\closure\goog\uri
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\dotnet\devtools
+  score: 203
+  files: 3
+  evidence: 1
+- third_party\js\selenium
+  score: 203
+  files: 3
+  evidence: 1
+- java\src\dev\selenium\tools\javadoc
+  score: 202
+  files: 2
+  evidence: 1
+- java\src\dev\selenium\tools\modules
+  score: 202
+  files: 2
+  evidence: 1
+- java\test\org\openqa\selenium\grid\sessionqueue\local
+  score: 202
+  files: 2
+  evidence: 1
+- java\test\org\openqa\selenium\grid\sessionqueue\redis
+  score: 202
+  files: 2
+  evidence: 1
+- javascript\bidi-support
+  score: 202
+  files: 2
+  evidence: 1
+- javascript\cdp-support
+  score: 202
+  files: 2
+  evidence: 1
+- javascript\ie-driver
+  score: 202
+  files: 2
+  evidence: 1
+- javascript\selenium-webdriver\lib\atoms
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\chrome_ext
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\array
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\editor
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\flags
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\functions
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\i18n
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\json
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\log
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\memoize
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\mochikit\async
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\object
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\reflect
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\timer
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\url
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\utils
+  score: 202
+  files: 2
+  evidence: 1
+- third_party\closure\goog\window
+  score: 202
+  files: 2
+  evidence: 1
+- common\manager
+  score: 201
+  files: 1
+  evidence: 1
+- common\remote-build
+  score: 201
+  files: 1
+  evidence: 1
+- cpp\prebuilt
+  score: 201
+  files: 1
+  evidence: 1
+- dotnet\src\webdriver\assets
+  score: 201
+  files: 1
+  evidence: 1
+- dotnet\src\webdriver\assets\nuget
+  score: 201
+  files: 1
+  evidence: 1
+- java\src\org\openqa\selenium\devtools\latest
+  score: 201
+  files: 1
+  evidence: 1
+- java\test\org\openqa\selenium\grid\sessionqueue
+  score: 201
+  files: 1
+  evidence: 1
+- javascript\atoms\fragments
+  score: 201
+  files: 1
+  evidence: 1
+- rb\lib\selenium\webdriver\atoms
+  score: 201
+  files: 1
+  evidence: 1
+- scripts\dev-image
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\closure\goog\css\editor
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\closure\goog\dom\testdata
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\closure\goog\images
+  score: 201
+  files: 1
+  evidence: 1
+- third_party\closure\goog\labs
+  score: 201
+  files: 1
+  evidence: 1

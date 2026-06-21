@@ -23,6 +23,15 @@ func buildHierarchy(modules []ModuleCandidate) HierarchySummary {
 		result = append(result, &value)
 	}
 	sort.Slice(result, func(i, j int) bool {
+		if result[i].Score == result[j].Score {
+			if result[i].FileCount == result[j].FileCount {
+				if result[i].EvidenceCount == result[j].EvidenceCount {
+					return result[i].Path < result[j].Path
+				}
+				return result[i].EvidenceCount > result[j].EvidenceCount
+			}
+			return result[i].FileCount > result[j].FileCount
+		}
 		return result[i].Score > result[j].Score
 	})
 

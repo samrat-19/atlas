@@ -1,0 +1,960 @@
+Root path: <ROOT>
+Total file count: 15747
+
+Evidence Found:
+- .github/workflows (ci/cd)
+- Cargo.lock (package manager)
+- Cargo.toml (package manager)
+- Dockerfile (container)
+- build (build system)
+- makefile (build system)
+- package-lock.json (package manager)
+- package.json (package manager)
+- pom.xml (build system)
+- pyproject.toml (package manager)
+- requirements.txt (package manager)
+- workspace (build system)
+
+Evidence counts by category:
+- build system: 29
+- ci/cd: 2
+- container: 2
+- package manager: 216
+
+Evidence counts by filename:
+- .github/workflows: 2
+- Cargo.lock: 2
+- Cargo.toml: 2
+- Dockerfile: 2
+- build: 19
+- makefile: 1
+- package-lock.json: 63
+- package.json: 147
+- pom.xml: 2
+- pyproject.toml: 1
+- requirements.txt: 1
+- workspace: 7
+
+Root-level evidence count: 3
+Nested evidence count: 246
+
+Top Clusters:
+- extensions (188 evidence files)
+  category breakdown:
+  - build system: 24
+  - ci/cd: 1
+  - container: 1
+  - package manager: 162
+- test (17 evidence files)
+  category breakdown:
+  - package manager: 17
+- build (16 evidence files)
+  category breakdown:
+  - package manager: 16
+- .vscode (8 evidence files)
+  category breakdown:
+  - package manager: 8
+- src (7 evidence files)
+  category breakdown:
+  - build system: 4
+  - package manager: 3
+- remote (4 evidence files)
+  category breakdown:
+  - package manager: 4
+- _root (3 evidence files)
+  category breakdown:
+  - build system: 1
+  - package manager: 2
+- cli (2 evidence files)
+  category breakdown:
+  - package manager: 2
+- .devcontainer (1 evidence files)
+  category breakdown:
+  - container: 1
+- .eslint-plugin-local (1 evidence files)
+  category breakdown:
+  - package manager: 1
+
+Top Directories:
+- src (8252 files, 7 evidence)
+- extensions (6448 files, 188 evidence)
+- build (343 files, 16 evidence)
+- test (186 files, 17 evidence)
+- resources (115 files, 0 evidence)
+- .github (114 files, 1 evidence)
+- cli (83 files, 2 evidence)
+- .vscode (58 files, 8 evidence)
+- .eslint-plugin-local (54 files, 1 evidence)
+- scripts (49 files, 1 evidence)
+
+Top Extensions:
+- .ts: 10963 files
+- .json: 1404 files
+- .css: 392 files
+- .snap: 333 files
+- .md: 283 files
+- .tsx: 263 files
+- .txt: 181 files
+- .js: 136 files
+- .html: 119 files
+- .svg: 98 files
+
+Top Extensions Per Cluster:
+.devcontainer:
+  - .json: 2
+  - .sh: 2
+  - (no ext): 1
+  - .md: 1
+.eslint-plugin-local:
+  - .ts: 51
+  - .json: 2
+  - .md: 1
+.github:
+  - .md: 72
+  - .yml: 21
+  - .svg: 6
+  - .ts: 4
+  - .mts: 3
+.vscode:
+  - .json: 22
+  - .ts: 21
+  - .github-issues: 10
+  - .code-search: 2
+  - .code-snippets: 1
+_root:
+  - .json: 7
+  - .md: 4
+  - .js: 2
+  - .txt: 2
+  - .editorconfig: 1
+build:
+  - .ts: 171
+  - .yml: 53
+  - .json: 29
+  - .isl: 17
+  - .plist: 8
+cli:
+  - .rs: 77
+  - .toml: 3
+  - .lock: 1
+  - .md: 1
+  - .txt: 1
+extensions:
+  - .ts: 3471
+  - .json: 1153
+  - .tsx: 261
+  - .snap: 196
+  - .md: 127
+remote:
+  - .json: 4
+  - .npmrc: 2
+scripts:
+  - .sh: 13
+  - .js: 11
+  - .bat: 10
+  - .ts: 10
+  - .json: 2
+src:
+  - .ts: 7128
+  - .css: 369
+  - .json: 151
+  - .snap: 137
+  - .tst: 90
+test:
+  - .ts: 107
+  - .json: 29
+  - .js: 20
+  - .md: 10
+  - .gitignore: 7
+
+Repository Hierarchy:
+extensions
+files: 528
+evidence: 125
+subsystems:
+- extensions\copilot
+  components:
+  - extensions\copilot\chat-lib
+  - extensions\copilot\src\extension\typescriptContext\serverPlugin
+  - extensions\copilot\test
+  - extensions\copilot\src\extension\prompts\node\panel
+  - extensions\copilot\src\platform
+  - extensions\copilot\.eslintplugin
+  - extensions\copilot\script
+  - extensions\copilot\.github
+  - extensions\copilot\.vscode\extensions\visualization-runner
+  - extensions\copilot\.vscode\extensions\test-extension
+- extensions\git-base
+- extensions\html-language-features
+  components:
+  - extensions\html-language-features\server
+- extensions\git
+- extensions\vscode-colorize-tests
+  components:
+  - extensions\vscode-colorize-tests\test\colorize-fixtures
+- extensions\terminal-suggest
+- extensions\markdown-math
+- extensions\mermaid-markdown-features
+- extensions\ipynb
+- extensions\simple-browser
+- extensions\github-authentication
+- extensions\configuration-editing
+- extensions\extension-editing
+- extensions\github
+- extensions\latex
+- extensions\notebook-renderers
+- extensions\vscode-test-resolver
+- extensions\debug-auto-launch
+- extensions\debug-server-ready
+- extensions\json-language-features\server
+- extensions\theme-seti
+- extensions\tunnel-forwarding
+- extensions\vscode-api-tests
+- extensions\cpp
+- extensions\css-language-features\server
+  components:
+  - extensions\css-language-features\server\test\linksTestFixtures\node_modules\foo
+- extensions\html
+- extensions\json
+- extensions\less
+- extensions\objective-c
+- extensions\php
+- extensions\razor
+- extensions\rust
+- extensions\sql
+- extensions\typescript-basics
+- extensions\vscode-colorize-perf-tests
+- extensions\yaml
+- extensions\ini
+- extensions\javascript
+- extensions\perl
+- extensions\xml
+- extensions\bat
+- extensions\clojure
+- extensions\coffeescript
+- extensions\csharp
+- extensions\css
+- extensions\dart
+- extensions\diff
+- extensions\docker
+- extensions\dotenv
+- extensions\fsharp
+- extensions\go
+- extensions\groovy
+- extensions\handlebars
+- extensions\hlsl
+- extensions\java
+- extensions\julia
+- extensions\lua
+- extensions\make
+- extensions\markdown-basics
+- extensions\powershell
+- extensions\prompt-basics
+- extensions\pug
+- extensions\python
+- extensions\r
+- extensions\restructuredtext
+- extensions\ruby
+- extensions\scss
+- extensions\shaderlab
+- extensions\shellscript
+- extensions\swift
+- extensions\vb
+- extensions\log
+- extensions\theme-abyss
+- extensions\theme-kimbie-dark
+- extensions\theme-monokai
+- extensions\theme-monokai-dimmed
+- extensions\theme-quietlight
+- extensions\theme-red
+- extensions\theme-solarized-dark
+- extensions\theme-solarized-light
+- extensions\theme-tomorrow-night-blue
+- extensions\microsoft-authentication\packageMocks\keytar
+- extensions\theme-defaults
+
+_root
+files: 27
+evidence: 3
+
+build
+files: 78
+evidence: 16
+subsystems:
+- build\vite
+- build\win32
+- build\rspack
+- build\agent-sdk\agents\claude
+- build\agent-sdk\agents\codex
+- build\npm\gyp
+- build\monaco
+- build\builtin
+
+test
+files: 49
+evidence: 16
+subsystems:
+- test\monaco
+- test\automation
+- test\smoke
+  components:
+  - test\smoke\extensions\vscode-smoketest-ext-host
+- test\componentFixtures\playwright
+- test\integration\browser
+- test\mcp
+- test\sanity
+- test\unit\node
+
+src
+files: 7
+evidence: 6
+subsystems:
+- src\vs\platform
+  components:
+  - src\vs\platform\agentHost\node\codex\protocol\generated\v2
+- src\vs\sessions\test\e2e
+  components:
+  - src\vs\sessions\test\e2e\extensions\sessions-e2e-mock
+- src\vs\workbench\contrib
+- src\vs\sessions\contrib
+- src\vs\sessions\services
+
+cli
+files: 6
+evidence: 2
+
+.vscode
+files: 14
+evidence: 8
+subsystems:
+- .vscode\extensions\vscode-pr-pinger
+- .vscode\extensions\vscode-selfhost-test-provider
+- .vscode\extensions\vscode-extras
+- .vscode\extensions\vscode-selfhost-import-aid
+
+remote
+files: 3
+evidence: 2
+
+.eslint-plugin-local
+files: 52
+evidence: 1
+
+scripts
+files: 33
+evidence: 1
+
+.github
+files: 9
+evidence: 1
+
+.devcontainer
+files: 6
+evidence: 1
+
+
+Candidate Modules Found: 166
+Retained Modules: 150
+Compression Ratio: 0.90
+
+Major Modules:
+- extensions\copilot
+  score: 886
+  files: 26
+  evidence: 3
+- extensions
+  score: 810
+  files: 10
+  evidence: 2
+- _root
+  score: 627
+  files: 27
+  evidence: 3
+- extensions\git-base
+  score: 611
+  files: 11
+  evidence: 3
+- extensions\html-language-features
+  score: 610
+  files: 10
+  evidence: 3
+- extensions\git
+  score: 608
+  files: 8
+  evidence: 3
+- src\vs\platform\agentHost\node\codex\protocol\generated\v2
+  score: 534
+  files: 504
+  evidence: 0
+- extensions\vscode-colorize-tests\test\colorize-fixtures
+  score: 508
+  files: 108
+  evidence: 2
+- build
+  score: 454
+  files: 34
+  evidence: 2
+- extensions\vscode-colorize-tests
+  score: 425
+  files: 5
+  evidence: 2
+- extensions\terminal-suggest
+  score: 421
+  files: 11
+  evidence: 2
+- build\vite
+  score: 415
+  files: 15
+  evidence: 2
+- extensions\markdown-math
+  score: 414
+  files: 14
+  evidence: 2
+- extensions\mermaid-markdown-features
+  score: 414
+  files: 14
+  evidence: 2
+- extensions\ipynb
+  score: 412
+  files: 12
+  evidence: 2
+- extensions\simple-browser
+  score: 412
+  files: 12
+  evidence: 2
+- extensions\github-authentication
+  score: 411
+  files: 11
+  evidence: 2
+- test\monaco
+  score: 411
+  files: 11
+  evidence: 2
+- extensions\configuration-editing
+  score: 409
+  files: 9
+  evidence: 2
+- extensions\extension-editing
+  score: 409
+  files: 9
+  evidence: 2
+- extensions\github
+  score: 409
+  files: 9
+  evidence: 2
+- extensions\latex
+  score: 409
+  files: 9
+  evidence: 2
+- extensions\notebook-renderers
+  score: 409
+  files: 9
+  evidence: 2
+- extensions\vscode-test-resolver
+  score: 409
+  files: 9
+  evidence: 2
+- extensions\copilot\chat-lib
+  score: 408
+  files: 8
+  evidence: 2
+- build\win32
+  score: 407
+  files: 7
+  evidence: 2
+- extensions\debug-auto-launch
+  score: 407
+  files: 7
+  evidence: 2
+- extensions\debug-server-ready
+  score: 407
+  files: 7
+  evidence: 2
+- extensions\json-language-features\server
+  score: 407
+  files: 7
+  evidence: 2
+- extensions\theme-seti
+  score: 407
+  files: 7
+  evidence: 2
+- extensions\tunnel-forwarding
+  score: 407
+  files: 7
+  evidence: 2
+- extensions\vscode-api-tests
+  score: 407
+  files: 7
+  evidence: 2
+- src\vs\sessions\test\e2e
+  score: 407
+  files: 7
+  evidence: 2
+- cli
+  score: 406
+  files: 6
+  evidence: 2
+- extensions\copilot\src\extension\typescriptContext\serverPlugin
+  score: 406
+  files: 6
+  evidence: 2
+- test\automation
+  score: 406
+  files: 6
+  evidence: 2
+- test\smoke
+  score: 406
+  files: 6
+  evidence: 2
+- extensions\cpp
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\css-language-features\server
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\html
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\html-language-features\server
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\json
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\less
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\objective-c
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\php
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\razor
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\rust
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\sql
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\typescript-basics
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\vscode-colorize-perf-tests
+  score: 405
+  files: 5
+  evidence: 2
+- extensions\yaml
+  score: 405
+  files: 5
+  evidence: 2
+- test\componentFixtures\playwright
+  score: 405
+  files: 5
+  evidence: 2
+- test\integration\browser
+  score: 405
+  files: 5
+  evidence: 2
+- test\mcp
+  score: 405
+  files: 5
+  evidence: 2
+- test\sanity
+  score: 405
+  files: 5
+  evidence: 2
+- .vscode\extensions\vscode-pr-pinger
+  score: 404
+  files: 4
+  evidence: 2
+- .vscode\extensions\vscode-selfhost-test-provider
+  score: 404
+  files: 4
+  evidence: 2
+- build\rspack
+  score: 404
+  files: 4
+  evidence: 2
+- .vscode\extensions\vscode-extras
+  score: 403
+  files: 3
+  evidence: 2
+- .vscode\extensions\vscode-selfhost-import-aid
+  score: 403
+  files: 3
+  evidence: 2
+- remote
+  score: 403
+  files: 3
+  evidence: 2
+- build\agent-sdk\agents\claude
+  score: 402
+  files: 2
+  evidence: 2
+- build\agent-sdk\agents\codex
+  score: 402
+  files: 2
+  evidence: 2
+- build\npm\gyp
+  score: 402
+  files: 2
+  evidence: 2
+- src\vs\workbench\contrib
+  score: 370
+  files: 0
+  evidence: 1
+- src\vs\platform
+  score: 310
+  files: 0
+  evidence: 1
+- extensions\copilot\test
+  score: 274
+  files: 14
+  evidence: 1
+- .eslint-plugin-local
+  score: 252
+  files: 52
+  evidence: 1
+- extensions\copilot\src\extension\prompts\node\panel
+  score: 244
+  files: 44
+  evidence: 1
+- extensions\copilot\src\platform
+  score: 240
+  files: 0
+  evidence: 1
+- scripts
+  score: 233
+  files: 33
+  evidence: 1
+- extensions\copilot\.eslintplugin
+  score: 215
+  files: 15
+  evidence: 1
+- test
+  score: 214
+  files: 4
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\codeMapper
+  score: 212
+  files: 12
+  evidence: 1
+- src\vs\sessions\contrib
+  score: 210
+  files: 0
+  evidence: 1
+- .github
+  score: 209
+  files: 9
+  evidence: 1
+- build\monaco
+  score: 208
+  files: 8
+  evidence: 1
+- extensions\copilot\script
+  score: 208
+  files: 8
+  evidence: 1
+- .devcontainer
+  score: 206
+  files: 6
+  evidence: 1
+- extensions\ini
+  score: 206
+  files: 6
+  evidence: 1
+- extensions\javascript
+  score: 206
+  files: 6
+  evidence: 1
+- extensions\perl
+  score: 206
+  files: 6
+  evidence: 1
+- extensions\xml
+  score: 206
+  files: 6
+  evidence: 1
+- extensions\bat
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\clojure
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\coffeescript
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\copilot\.github
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\csharp
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\css
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\dart
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\diff
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\docker
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\dotenv
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\fsharp
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\go
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\groovy
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\handlebars
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\hlsl
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\java
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\julia
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\lua
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\make
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\markdown-basics
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\powershell
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\prompt-basics
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\pug
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\python
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\r
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\restructuredtext
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\ruby
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\scss
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\shaderlab
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\shellscript
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\swift
+  score: 205
+  files: 5
+  evidence: 1
+- extensions\vb
+  score: 205
+  files: 5
+  evidence: 1
+- build\builtin
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\copilot\.vscode\extensions\visualization-runner
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\copilot\test\scenarios\test-tools
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\log
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-abyss
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-kimbie-dark
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-monokai
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-monokai-dimmed
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-quietlight
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-red
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-solarized-dark
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-solarized-light
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\theme-tomorrow-night-blue
+  score: 204
+  files: 4
+  evidence: 1
+- extensions\copilot\.vscode\extensions\test-extension
+  score: 203
+  files: 3
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\explain-project-context
+  score: 203
+  files: 3
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj
+  score: 202
+  files: 2
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj-with-test-file
+  score: 202
+  files: 2
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj-with-test-file-1
+  score: 202
+  files: 2
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj-with-test-file-2
+  score: 202
+  files: 2
+  evidence: 1
+- extensions\microsoft-authentication\packageMocks\keytar
+  score: 202
+  files: 2
+  evidence: 1
+- extensions\theme-defaults
+  score: 202
+  files: 2
+  evidence: 1
+- src\vs\sessions\test\e2e\extensions\sessions-e2e-mock
+  score: 202
+  files: 2
+  evidence: 1
+- test\smoke\extensions\vscode-smoketest-ext-host
+  score: 202
+  files: 2
+  evidence: 1
+- test\unit\node
+  score: 202
+  files: 2
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\generate\issue-6163
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\multiFileEdit\asciiart
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\multiFileEdit\fsprovider
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\multiFile\multiple-questions
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\java-example-project
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\java-example-project-with-existing-test-file
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\py-pyproject-toml
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\simple-js-proj
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\copilot\test\simulation\fixtures\tests\simple-js-proj copy
+  score: 201
+  files: 1
+  evidence: 1
+- extensions\css-language-features\server\test\linksTestFixtures\node_modules\foo
+  score: 201
+  files: 1
+  evidence: 1
+- src\vs\sessions\services
+  score: 200
+  files: 0
+  evidence: 1

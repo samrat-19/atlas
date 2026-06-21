@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"sort"
 	"strings"
 
 	"atlas/internal/collector"
@@ -59,14 +60,24 @@ func printEvidenceFound(evidence []collector.EvidenceItem, writer io.Writer) {
 			seen[item.Filename] = item.Category
 		}
 	}
-	for filename, category := range seen {
-		fmt.Fprintf(writer, "- %s (%s)\n", filename, category)
+	filenames := make([]string, 0, len(seen))
+	for filename := range seen {
+		filenames = append(filenames, filename)
+	}
+	sort.Strings(filenames)
+	for _, filename := range filenames {
+		fmt.Fprintf(writer, "- %s (%s)\n", filename, seen[filename])
 	}
 }
 
 func printCountMap(title string, counts map[string]int, writer io.Writer) {
 	fmt.Fprintln(writer, title)
-	for label, count := range counts {
-		fmt.Fprintf(writer, "- %s: %d\n", label, count)
+	labels := make([]string, 0, len(counts))
+	for label := range counts {
+		labels = append(labels, label)
+	}
+	sort.Strings(labels)
+	for _, label := range labels {
+		fmt.Fprintf(writer, "- %s: %d\n", label, counts[label])
 	}
 }

@@ -24,7 +24,7 @@ func printTopExtensions(
 	}
 
 	fmt.Fprintln(writer, "Top Extensions:")
-	printExtensionCounts(sortedExtensionCounts(extensions.ByExtension), 10, "", writer)
+	printExtensionCounts(sortedExtensionCounts(extensions.ByExtension), topExtensionLimit, "", writer)
 
 	fmt.Fprintln(writer)
 	fmt.Fprintln(writer, "Top Extensions Per Cluster:")
@@ -41,7 +41,7 @@ func printTopExtensions(
 			fmt.Fprintln(writer, "  none")
 			continue
 		}
-		printExtensionCounts(sortedExtensionCounts(counts), 5, "  ", writer)
+		printExtensionCounts(sortedExtensionCounts(counts), topClusterExtensionLimit, "  ", writer)
 	}
 }
 
@@ -51,6 +51,9 @@ func sortedExtensionCounts(counts map[string]int) []extensionCount {
 		result = append(result, extensionCount{extension: extension, count: count})
 	}
 	sort.Slice(result, func(i, j int) bool {
+		if result[i].count == result[j].count {
+			return result[i].extension < result[j].extension
+		}
 		return result[i].count > result[j].count
 	})
 	return result

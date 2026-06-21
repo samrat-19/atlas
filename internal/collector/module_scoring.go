@@ -11,23 +11,37 @@ func scoreModules(
 	categoryOverlap := make([]float64, len(modules))
 
 	for i, module := range modules {
-		coverage := 0
-		if totalFiles > 0 {
-			coverage = subtreeFiles[i] * 100 / totalFiles
-		}
-		score := module.EvidenceCount*200 + module.FileCount + coverage*10
+		score := compressionScore(module, subtreeFiles[i], totalFiles)
 
 		if parents[i] != -1 {
 			parent := modules[parents[i]]
 			extensionOverlap[i] = sliceOverlap(module.DominantExtensions, parent.DominantExtensions)
 			categoryOverlap[i] = mapKeyOverlap(module.EvidenceByCategory, parent.EvidenceByCategory)
 		}
-		if parents[i] != -1 && extensionOverlap[i] >= 0.9 && categoryOverlap[i] >= 0.9 {
-			score -= 500
+		if parents[i] != -1 && isHighlySimilarToParent(extensionOverlap[i], categoryOverlap[i]) {
+			score -= redundantChildPenalty
 		}
 		scores[i] = score
 	}
 	return scores, extensionOverlap, categoryOverlap
+}
+
+func compressionScore(module ModuleCandidate, subtreeFiles, totalFiles int) int {
+	return module.EvidenceCount*compressionEvidenceWeight +
+		module.FileCount +
+		repositoryCoveragePercent(subtreeFiles, totalFiles)*coverageScoreWeight
+}
+
+func repositoryCoveragePercent(subtreeFiles, totalFiles int) int {
+	if totalFiles == 0 {
+		return 0
+	}
+	return subtreeFiles * coveragePercentScale / totalFiles
+}
+
+func isHighlySimilarToParent(extensionOverlap, categoryOverlap float64) bool {
+	return extensionOverlap >= highOverlapThreshold &&
+		categoryOverlap >= highOverlapThreshold
 }
 
 func sliceOverlap(left, right []string) float64 {

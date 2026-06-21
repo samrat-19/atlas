@@ -51,7 +51,17 @@ func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writ
 	fmt.Fprintln(writer, "Major Modules:")
 
 	modules := summary.Modules
+	modules = append([]collector.ModuleCandidate(nil), modules...)
 	sort.Slice(modules, func(i, j int) bool {
+		if modules[i].Score == modules[j].Score {
+			if modules[i].EvidenceCount == modules[j].EvidenceCount {
+				if modules[i].FileCount == modules[j].FileCount {
+					return modules[i].Path < modules[j].Path
+				}
+				return modules[i].FileCount > modules[j].FileCount
+			}
+			return modules[i].EvidenceCount > modules[j].EvidenceCount
+		}
 		return modules[i].Score > modules[j].Score
 	})
 	for _, module := range modules {
@@ -73,12 +83,18 @@ func printTopDirectories(summary collector.CensusSummary, writer io.Writer) {
 		directories = append(directories, directory)
 	}
 	sort.Slice(directories, func(i, j int) bool {
+		if directories[i].TotalFiles == directories[j].TotalFiles {
+			if directories[i].EvidenceItemCount == directories[j].EvidenceItemCount {
+				return directories[i].DirectoryName < directories[j].DirectoryName
+			}
+			return directories[i].EvidenceItemCount > directories[j].EvidenceItemCount
+		}
 		return directories[i].TotalFiles > directories[j].TotalFiles
 	})
 
 	fmt.Fprintln(writer, "Top Directories:")
 	for i, directory := range directories {
-		if i >= 10 {
+		if i >= topDirectoryLimit {
 			break
 		}
 		fmt.Fprintf(
@@ -102,18 +118,26 @@ func printTopClusters(summary collector.ClusterSummary, writer io.Writer) {
 		clusters = append(clusters, cluster)
 	}
 	sort.Slice(clusters, func(i, j int) bool {
+		if clusters[i].EvidenceItemCount == clusters[j].EvidenceItemCount {
+			return clusters[i].ClusterName < clusters[j].ClusterName
+		}
 		return clusters[i].EvidenceItemCount > clusters[j].EvidenceItemCount
 	})
 
 	fmt.Fprintln(writer, "Top Clusters:")
 	for i, cluster := range clusters {
-		if i >= 10 {
+		if i >= topClusterLimit {
 			break
 		}
 		fmt.Fprintf(writer, "- %s (%d evidence files)\n", cluster.ClusterName, cluster.EvidenceItemCount)
 		fmt.Fprintln(writer, "  category breakdown:")
-		for category, count := range cluster.EvidenceCountByCategory {
-			fmt.Fprintf(writer, "  - %s: %d\n", category, count)
+		categories := make([]string, 0, len(cluster.EvidenceCountByCategory))
+		for category := range cluster.EvidenceCountByCategory {
+			categories = append(categories, category)
+		}
+		sort.Strings(categories)
+		for _, category := range categories {
+			fmt.Fprintf(writer, "  - %s: %d\n", category, cluster.EvidenceCountByCategory[category])
 		}
 	}
 }

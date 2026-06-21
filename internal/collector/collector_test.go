@@ -230,3 +230,45 @@ func TestBuildHierarchyFromRetainedModules(t *testing.T) {
 		t.Fatalf("expected nested component path, got %s", javaRegion.Children[0].Children[0].Path)
 	}
 }
+
+func TestBuildModuleSummaryUsesPathTieBreaker(t *testing.T) {
+	stats := map[string]*dirStat{
+		"z": {
+			FileCount:          1,
+			EvidenceCount:      1,
+			Extensions:         map[string]int{".go": 1},
+			EvidenceByCategory: map[string]int{"package manager": 1},
+			EvidenceByFilename: map[string]int{"go.mod": 1},
+		},
+		"a": {
+			FileCount:          1,
+			EvidenceCount:      1,
+			Extensions:         map[string]int{".go": 1},
+			EvidenceByCategory: map[string]int{"package manager": 1},
+			EvidenceByFilename: map[string]int{"go.mod": 1},
+		},
+	}
+
+	summary := buildModuleSummary(stats)
+	if len(summary.Modules) != 2 {
+		t.Fatalf("expected 2 modules, got %d", len(summary.Modules))
+	}
+	if summary.Modules[0].Path != "a" || summary.Modules[1].Path != "z" {
+		t.Fatalf("modules not ordered by path tie-breaker: %#v", summary.Modules)
+	}
+}
+
+func TestDominantExtensionsUsesExtensionTieBreaker(t *testing.T) {
+	extensions := dominantExtensions(map[string]int{
+		".z": 1,
+		".a": 1,
+		".m": 2,
+	}, 3)
+
+	want := []string{".m", ".a", ".z"}
+	for i := range want {
+		if extensions[i] != want[i] {
+			t.Fatalf("dominantExtensions[%d] = %q, want %q; full=%#v", i, extensions[i], want[i], extensions)
+		}
+	}
+}

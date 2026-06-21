@@ -12,19 +12,41 @@ func buildModuleSummary(dirStats map[string]*dirStat) ModuleSummary {
 	}
 
 	sort.Slice(modules, func(i, j int) bool {
+		if moduleCandidateScore(modules[i]) == moduleCandidateScore(modules[j]) {
+			return modules[i].Path < modules[j].Path
+		}
 		return moduleCandidateScore(modules[i]) > moduleCandidateScore(modules[j])
 	})
 	return ModuleSummary{TotalModules: len(modules), Modules: modules}
 }
 
 func isModuleCandidate(stats *dirStat) bool {
+	return hasEvidence(stats) ||
+		isLargeDirectory(stats) ||
+		hasHighEvidenceDensity(stats)
+}
+
+func hasEvidence(stats *dirStat) bool {
+	return stats.EvidenceCount > 0
+}
+
+func isLargeDirectory(stats *dirStat) bool {
+	return stats.FileCount >= largeDirectoryFileThreshold
+}
+
+func hasHighEvidenceDensity(stats *dirStat) bool {
+	if stats.FileCount < evidenceDenseFileThreshold {
+		return false
+	}
+	return evidenceDensity(stats) >= evidenceDensityThreshold
+}
+
+func evidenceDensity(stats *dirStat) float64 {
 	density := 0.0
 	if stats.FileCount > 0 {
 		density = float64(stats.EvidenceCount) / float64(stats.FileCount)
 	}
-	return stats.EvidenceCount > 0 ||
-		stats.FileCount >= 200 ||
-		(stats.FileCount >= 20 && density >= 0.05)
+	return density
 }
 
 func newModuleCandidate(path string, stats *dirStat) ModuleCandidate {
@@ -32,7 +54,7 @@ func newModuleCandidate(path string, stats *dirStat) ModuleCandidate {
 		Path:               path,
 		FileCount:          stats.FileCount,
 		EvidenceCount:      stats.EvidenceCount,
-		DominantExtensions: dominantExtensions(stats.Extensions, 3),
+		DominantExtensions: dominantExtensions(stats.Extensions, dominantExtensionLimit),
 		EvidenceByCategory: copyCountMap(stats.EvidenceByCategory),
 		EvidenceByFilename: copyCountMap(stats.EvidenceByFilename),
 	}
@@ -49,6 +71,9 @@ func dominantExtensions(extensions map[string]int, limit int) []string {
 		counts = append(counts, extensionCount{extension: extension, count: count})
 	}
 	sort.Slice(counts, func(i, j int) bool {
+		if counts[i].count == counts[j].count {
+			return counts[i].extension < counts[j].extension
+		}
 		return counts[i].count > counts[j].count
 	})
 
@@ -60,7 +85,7 @@ func dominantExtensions(extensions map[string]int, limit int) []string {
 }
 
 func moduleCandidateScore(module ModuleCandidate) int {
-	return module.EvidenceCount*100 + module.FileCount
+	return module.EvidenceCount*moduleEvidenceWeight + module.FileCount
 }
 
 func copyCountMap(source map[string]int) map[string]int {

@@ -70,6 +70,12 @@ func aggregateSubtree(node *RegionNode) {
 func sortRegionTree(node *RegionNode) {
 	sort.Slice(node.Children, func(i, j int) bool {
 		if node.Children[i].Score == node.Children[j].Score {
+			if node.Children[i].FileCount == node.Children[j].FileCount {
+				if node.Children[i].EvidenceCount == node.Children[j].EvidenceCount {
+					return node.Children[i].Path < node.Children[j].Path
+				}
+				return node.Children[i].EvidenceCount > node.Children[j].EvidenceCount
+			}
 			return node.Children[i].FileCount > node.Children[j].FileCount
 		}
 		return node.Children[i].Score > node.Children[j].Score
