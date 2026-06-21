@@ -3,6 +3,7 @@ package collector
 import (
 	"io/fs"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -18,6 +19,7 @@ func Collect(root string) (Result, error) {
 	res.Root = absRoot
 
 	var evidence []EvidenceItem
+	var pruned []PrunedPath
 	totalFiles := 0
 	topology := newTopologySummary()
 	clusters := newClusterSummary()
@@ -37,6 +39,19 @@ func Collect(root string) (Result, error) {
 		relPath, err := filepath.Rel(absRoot, absPath)
 		if err != nil {
 			return err
+		}
+
+		// Skip well-known operational directories that are never source.
+		// We check relPath != "." so we never accidentally prune the scan
+		// root itself (WalkDir visits the root first with relPath == ".").
+		if entry.IsDir() && relPath != "." {
+			if policy, ok := prunePolicy(entry.Name()); ok {
+				pruned = append(pruned, PrunedPath{
+					RelativePath: filepath.ToSlash(relPath),
+					Policy:       policy,
+				})
+				return fs.SkipDir
+			}
 		}
 
 		topDir := topLevelDirectoryForRelativePath(relPath)
@@ -70,7 +85,17 @@ func Collect(root string) (Result, error) {
 	moduleSummary := buildModuleSummary(dirStats)
 	compressedModules := compressModules(moduleSummary.Modules, dirStats, totalFiles)
 
+	// Sort pruned paths by relative path so the Result is byte-identical
+	// across repeated scans. WalkDir already walks lexically, but making
+	// the order an explicit contract here means it stays stable even if the
+	// traversal strategy changes later.
+	sort.Slice(pruned, func(i, j int) bool {
+		return pruned[i].RelativePath < pruned[j].RelativePath
+	})
+
+	res.SchemaVersion = schemaVersion
 	res.TotalFiles = totalFiles
+	res.PrunedPaths = pruned
 	res.Evidence = evidence
 	res.TopologySummary = topology
 	res.ClusterSummary = clusters

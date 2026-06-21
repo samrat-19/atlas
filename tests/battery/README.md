@@ -24,19 +24,34 @@ $env:ATLAS_BATTERY_VSCODE = "D:\path\to\vscode"
 
 ```powershell
 $env:ATLAS_BATTERY = "1"
-go test ./tests/battery
+go test ./tests/battery/
 ```
 
 Without `ATLAS_BATTERY=1`, the tests are skipped.
 
+## Updating expected output
+
+When Atlas output changes intentionally (e.g. after a noise-pruning fix or a
+new report section), the expected snapshot files need to be updated. Use the
+`-update` flag to regenerate them in one step:
+
+```powershell
+$env:ATLAS_BATTERY = "1"
+go test ./tests/battery/ -update
+```
+
+This runs Atlas against each repository, normalizes the output, and overwrites
+the corresponding `resources/*.expected.txt` file. Review the diff before
+committing — the updated files are the new correctness baseline.
+
 ## Normalization
 
-Battery tests currently compare text output only. They normalize:
+Battery tests normalize output before comparing or writing:
 
-- line endings
-- the `Root path: ...` line, replacing the absolute local path with
-  `Root path: <ROOT>`
+- Windows line endings (`\r\n`) are converted to `\n`
+- The `Root path: ...` line is replaced with `Root path: <ROOT>` so the
+  snapshot is not machine-specific
 
-JSON is intentionally not compared yet because current JSON includes absolute
-paths. Canonical JSON should be added after Phase 1 introduces a stable snapshot
-format.
+JSON is intentionally not compared because it includes absolute paths and
+timestamps. Canonical JSON comparison should be added after a stable snapshot
+format is introduced.

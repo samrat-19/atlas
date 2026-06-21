@@ -1,6 +1,7 @@
 package collector
 
 import (
+	"encoding/json"
 	"os"
 	"path/filepath"
 	"testing"
@@ -255,6 +256,190 @@ func TestBuildModuleSummaryUsesPathTieBreaker(t *testing.T) {
 	}
 	if summary.Modules[0].Path != "a" || summary.Modules[1].Path != "z" {
 		t.Fatalf("modules not ordered by path tie-breaker: %#v", summary.Modules)
+	}
+}
+
+// TestPruneSkipsDirectoryAndRecordsIt verifies the core pruning contract:
+// a pruned directory's files must not appear in TotalFiles, the directory
+// must appear in PrunedPaths, and no evidence from inside it must be collected.
+func TestPruneSkipsDirectoryAndRecordsIt(t *testing.T) {
+	dir := t.TempDir()
+
+	// node_modules is in the prune list. Put a package.json inside it — if
+	// pruning is broken, that file would appear as evidence and inflate counts.
+	nm := filepath.Join(dir, "node_modules", "some-lib")
+	if err := os.MkdirAll(nm, 0755); err != nil {
+		t.Fatalf("mkdir node_modules/some-lib: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(nm, "package.json"), []byte("{}"), 0644); err != nil {
+		t.Fatalf("write package.json: %v", err)
+	}
+
+	// A real source file at the root so TotalFiles is not trivially zero.
+	if err := os.WriteFile(filepath.Join(dir, "index.js"), []byte(""), 0644); err != nil {
+		t.Fatalf("write index.js: %v", err)
+	}
+
+	res, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("Collect: %v", err)
+	}
+
+	// Only index.js should be counted; nothing inside node_modules.
+	if res.TotalFiles != 1 {
+		t.Fatalf("TotalFiles = %d, want 1 (node_modules must not be counted)", res.TotalFiles)
+	}
+
+	// The evidence inside node_modules must not appear.
+	if res.TopologySummary.TotalEvidenceItems != 0 {
+		t.Fatalf("TotalEvidenceItems = %d, want 0 (node_modules evidence must be excluded)",
+			res.TopologySummary.TotalEvidenceItems)
+	}
+
+	// node_modules must be recorded in PrunedPaths.
+	if len(res.PrunedPaths) != 1 {
+		t.Fatalf("PrunedPaths = %v, want exactly one entry", res.PrunedPaths)
+	}
+	if res.PrunedPaths[0].RelativePath != "node_modules" {
+		t.Fatalf("PrunedPaths[0].RelativePath = %q, want %q", res.PrunedPaths[0].RelativePath, "node_modules")
+	}
+	if res.PrunedPaths[0].Policy != "installed-dependencies" {
+		t.Fatalf("PrunedPaths[0].Policy = %q, want %q", res.PrunedPaths[0].Policy, "installed-dependencies")
+	}
+}
+
+// TestPruneGitDirectory verifies that .git is excluded. This matters because
+// .git contains paths like ".git/description" that would otherwise produce
+// false evidence matches.
+func TestPruneGitDirectory(t *testing.T) {
+	dir := t.TempDir()
+
+	// Simulate a minimal .git layout.
+	if err := os.MkdirAll(filepath.Join(dir, ".git", "refs", "heads"), 0755); err != nil {
+		t.Fatalf("mkdir .git: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, ".git", "description"), []byte(""), 0644); err != nil {
+		t.Fatalf("write .git/description: %v", err)
+	}
+	// A real source file so the scan is not empty.
+	if err := os.WriteFile(filepath.Join(dir, "main.go"), []byte(""), 0644); err != nil {
+		t.Fatalf("write main.go: %v", err)
+	}
+
+	res, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("Collect: %v", err)
+	}
+
+	if res.TotalFiles != 1 {
+		t.Fatalf("TotalFiles = %d, want 1 (.git files must not be counted)", res.TotalFiles)
+	}
+
+	found := false
+	for _, p := range res.PrunedPaths {
+		if p.RelativePath == ".git" {
+			found = true
+			if p.Policy != "version-control" {
+				t.Fatalf(".git policy = %q, want %q", p.Policy, "version-control")
+			}
+		}
+	}
+	if !found {
+		t.Fatalf(".git not found in PrunedPaths: %v", res.PrunedPaths)
+	}
+}
+
+// TestPruneMultipleDirectories confirms that several prune-eligible sibling
+// directories are all recorded when they appear in the same scan.
+func TestPruneMultipleDirectories(t *testing.T) {
+	dir := t.TempDir()
+
+	for _, name := range []string{".git", "node_modules", "bazel-out", "__pycache__"} {
+		if err := os.MkdirAll(filepath.Join(dir, name), 0755); err != nil {
+			t.Fatalf("mkdir %s: %v", name, err)
+		}
+		if err := os.WriteFile(filepath.Join(dir, name, "file.txt"), []byte(""), 0644); err != nil {
+			t.Fatalf("write %s/file.txt: %v", name, err)
+		}
+	}
+	if err := os.WriteFile(filepath.Join(dir, "source.go"), []byte(""), 0644); err != nil {
+		t.Fatalf("write source.go: %v", err)
+	}
+
+	res, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("Collect: %v", err)
+	}
+
+	if res.TotalFiles != 1 {
+		t.Fatalf("TotalFiles = %d, want 1 (all noise dirs excluded)", res.TotalFiles)
+	}
+	if len(res.PrunedPaths) != 4 {
+		t.Fatalf("PrunedPaths count = %d, want 4", len(res.PrunedPaths))
+	}
+}
+
+// TestCollectIsDeterministic scans the same fixture twice and compares the
+// JSON-serialised Result byte-for-byte. Any nondeterminism — unsorted maps,
+// missing sort tie-breakers, or traversal-order dependence — will surface here.
+func TestCollectIsDeterministic(t *testing.T) {
+	dir := t.TempDir()
+
+	// Build a fixture with evidence, prunable dirs, and nested structure so
+	// every code path (extensions, clusters, modules, hierarchy) is exercised.
+	paths := []string{
+		"src/main.go",
+		"src/util.go",
+		"src/go.mod",
+		"web/package.json",
+		"web/index.ts",
+		"web/node_modules/dep/package.json", // must be pruned
+		".git/config",                        // must be pruned
+		"Dockerfile",
+	}
+	for _, p := range paths {
+		full := filepath.Join(dir, filepath.FromSlash(p))
+		if err := os.MkdirAll(filepath.Dir(full), 0755); err != nil {
+			t.Fatalf("mkdir %s: %v", p, err)
+		}
+		if err := os.WriteFile(full, []byte(""), 0644); err != nil {
+			t.Fatalf("write %s: %v", p, err)
+		}
+	}
+
+	marshal := func(r Result) []byte {
+		b, err := json.Marshal(r)
+		if err != nil {
+			t.Fatalf("json.Marshal: %v", err)
+		}
+		return b
+	}
+
+	first, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("first Collect: %v", err)
+	}
+	second, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("second Collect: %v", err)
+	}
+
+	a, b := marshal(first), marshal(second)
+	if string(a) != string(b) {
+		t.Fatalf("Collect is nondeterministic:\nfirst:  %s\nsecond: %s", a, b)
+	}
+}
+
+// TestSchemaVersionPresent confirms that every Result carries a schema version.
+// Consumers rely on this field to detect breaking changes.
+func TestSchemaVersionPresent(t *testing.T) {
+	dir := t.TempDir()
+	res, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("Collect: %v", err)
+	}
+	if res.SchemaVersion == "" {
+		t.Fatalf("SchemaVersion is empty; every Result must carry a version")
 	}
 }
 

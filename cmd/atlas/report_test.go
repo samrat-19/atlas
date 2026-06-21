@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -19,6 +21,34 @@ func TestPrintCountMapSortsLabels(t *testing.T) {
 	want := "Counts:\n- alpha: 2\n- beta: 3\n- zeta: 1\n"
 	if out.String() != want {
 		t.Fatalf("unexpected output:\n%s\nwant:\n%s", out.String(), want)
+	}
+}
+
+// TestWriteReportsFailsWhenOutputDirIsFile verifies that writeReports returns
+// a non-nil error when the output directory cannot be created. This guards
+// against the previous behaviour of silently discarding write failures.
+func TestWriteReportsFailsWhenOutputDirIsFile(t *testing.T) {
+	// Change into a temp dir so writeReports tries to create "output" there.
+	orig, err := os.Getwd()
+	if err != nil {
+		t.Fatalf("getwd: %v", err)
+	}
+	t.Cleanup(func() { _ = os.Chdir(orig) })
+
+	tmp := t.TempDir()
+	if err := os.Chdir(tmp); err != nil {
+		t.Fatalf("chdir: %v", err)
+	}
+
+	// Place a regular file at the path writeReports will try to use as a
+	// directory. MkdirAll will fail because you cannot mkdir over a file.
+	if err := os.WriteFile(filepath.Join(tmp, "output"), []byte(""), 0644); err != nil {
+		t.Fatalf("write output file: %v", err)
+	}
+
+	err = writeReports(collector.Result{}, "report text")
+	if err == nil {
+		t.Fatal("writeReports returned nil; expected an error when output dir cannot be created")
 	}
 }
 

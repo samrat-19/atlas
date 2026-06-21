@@ -1,5 +1,13 @@
 package collector
 
+// schemaVersion is embedded in every Result so consumers can detect breaking
+// changes to the JSON shape. The rule:
+//   - Adding an optional field → no bump needed.
+//   - Removing a field or changing its meaning → increment the number.
+//
+// Phase 1 establishes "1" as the first formally versioned schema.
+const schemaVersion = "1"
+
 // Atlas currently uses a simple three-step heuristic:
 //
 // 1. Candidate selection:

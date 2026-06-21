@@ -22,7 +22,14 @@ func main() {
 
 	report := renderReport(result)
 	fmt.Print(report)
-	writeReports(result, report)
+
+	// Output failure is a distinct condition from scan failure: the analysis
+	// succeeded and was printed to stdout, but the on-disk artifacts could not
+	// be written. Exit 3 signals this so callers can distinguish the two.
+	if err := writeReports(result, report); err != nil {
+		fmt.Fprintln(os.Stderr, "failed to write output files:", err)
+		os.Exit(3)
+	}
 }
 
 func scanRoot(args []string) (string, error) {

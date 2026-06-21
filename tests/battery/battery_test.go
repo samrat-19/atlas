@@ -2,6 +2,7 @@ package battery
 
 import (
 	"bytes"
+	"flag"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -9,6 +10,15 @@ import (
 	"strings"
 	"testing"
 )
+
+// update rewrites the expected output files instead of comparing against them.
+// Use this whenever Atlas output changes intentionally (e.g. after a Phase 1
+// noise-pruning change) so the snapshots reflect the new correct behaviour.
+//
+// Usage:
+//
+//	ATLAS_BATTERY=1 go test ./tests/battery/ -update
+var update = flag.Bool("update", false, "overwrite expected output files with current Atlas output")
 
 type batteryCase struct {
 	name        string
@@ -56,12 +66,23 @@ func TestBatteryTextOutput(t *testing.T) {
 				t.Skipf("repository path unavailable: %s: %v", repoPath, err)
 			}
 
+			actual := runAtlas(t, binary, repoPath)
+
+			if *update {
+				// Normalise before writing so the file never contains a
+				// machine-specific root path or Windows line endings.
+				if err := os.WriteFile(tc.expected, []byte(actual), 0644); err != nil {
+					t.Fatalf("failed to update expected file %s: %v", tc.expected, err)
+				}
+				t.Logf("updated %s", tc.expected)
+				return
+			}
+
 			expectedBytes, err := os.ReadFile(tc.expected)
 			if err != nil {
 				t.Skipf("expected resource unavailable: %s: %v", tc.expected, err)
 			}
 
-			actual := runAtlas(t, binary, repoPath)
 			expected := normalizeOutput(string(expectedBytes))
 			if actual != expected {
 				t.Fatalf("battery output changed for %s\n\nExpected resource: %s\n\nFirst difference:\n%s",

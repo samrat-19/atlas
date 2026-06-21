@@ -5,11 +5,22 @@ package collector
 // Result is returned by Collect and contains the root path and total file count
 // and discovered evidence.
 type Result struct {
+	// SchemaVersion identifies the shape of this Result so consumers can
+	// detect breaking changes. Increment when a field is removed or its
+	// meaning changes; adding an optional field does not require a bump.
+	SchemaVersion string
+
 	// Root is the provided directory root path that was analyzed.
 	Root string
 
 	// TotalFiles is the number of files (not directories) found under Root.
+	// Files inside pruned directories are not counted.
 	TotalFiles int
+
+	// PrunedPaths lists directories that were skipped during traversal.
+	// Each entry names the path and the policy that triggered the skip.
+	// Their files are excluded from TotalFiles and all statistics.
+	PrunedPaths []PrunedPath
 
 	// Evidence lists discovered evidence items found under Root.
 	Evidence []EvidenceItem
@@ -25,12 +36,28 @@ type Result struct {
 
 	// ExtensionSummary contains aggregated file extension counts.
 	ExtensionSummary ExtensionSummary
+
 	// ModuleSummary contains discovered module candidates.
 	ModuleSummary ModuleSummary
+
 	// CompressedModuleSummary contains a pruned set of high-value modules.
 	CompressedModuleSummary CompressedModuleSummary
+
 	// HierarchySummary contains a repository hierarchy view built from retained modules.
 	HierarchySummary HierarchySummary
+}
+
+// PrunedPath records a directory that was skipped during traversal.
+// Its files are not counted in TotalFiles and its contents do not contribute
+// to evidence, extension counts, or module candidates.
+type PrunedPath struct {
+	// RelativePath is the repository-relative path of the skipped directory,
+	// using forward slashes regardless of the host operating system.
+	RelativePath string
+
+	// Policy is the short label of the rule that caused the skip.
+	// See prunedDirectories in prune.go for the full set of labels.
+	Policy string
 }
 
 // EvidenceItem describes a single discovered evidence entry.
