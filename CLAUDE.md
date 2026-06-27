@@ -57,7 +57,7 @@ cmd/atlas/main.go
 
 ### Key concepts
 
-- **Evidence**: Files matching `EvidenceRegistry` (build files, package managers, CI/CD configs, containers/IaC). Each match produces an `EvidenceItem` with a category.
+- **Evidence**: Files matching `EvidenceRegistry`, a `map[string]EvidenceRule` (build files, package managers, CI/CD configs, containers/IaC). Each match produces an `EvidenceItem` with a category and a confidence (0–1) — confidence starts at the rule's intrinsic value and is discounted when the match sits under a noise-adjacent directory (`test`, `fixtures`, `examples`, `mocks`, etc. — see `pathContextMultiplier` in `registry.go`). Confidence is not yet consumed by scoring (Phase 2 in progress).
 - **Cluster**: Top-level directory under root; all evidence and file counts are rolled up to this level for the `ClusterSummary`.
 - **dirStat**: Internal per-directory accumulator (`directory_stats.go`). Tracks `FileCount`, `EvidenceCount`, extension counts, and evidence breakdowns per category/filename. Used downstream for module candidate construction.
 - **Module candidate**: A directory with evidence, sufficient file density, or large file count. Selected in `modules.go`; qualified by constants in `heuristics.go`. Scored by `EvidenceCount*100 + FileCount`.
@@ -91,7 +91,7 @@ cmd/atlas/main.go
 
 ### Extending evidence categories
 
-Add entries to `defaultEvidenceRegistry()` in `registry.go`. Keys are either plain filenames (matched by `filenameIndex`) or relative-path suffixes containing `/` (matched by `suffixIndex`). Call `SetRegistry(nil)` in tests to restore defaults.
+Add entries to `defaultEvidenceRegistry()` in `registry.go` as `EvidenceRule{Category, Confidence}` values. Keys are either plain filenames (matched by `filenameIndex`) or relative-path suffixes containing `/` (matched by `suffixIndex`). Call `SetRegistry(nil)` in tests to restore defaults.
 
 ### Tuning heuristics
 

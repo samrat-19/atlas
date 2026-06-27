@@ -443,6 +443,80 @@ func TestSchemaVersionPresent(t *testing.T) {
 	}
 }
 
+// TestCollectEvidenceConfidenceAtRootIsFull verifies that evidence found at
+// an ordinary, non-noise-adjacent path keeps the rule's full confidence.
+func TestCollectEvidenceConfidenceAtRootIsFull(t *testing.T) {
+	dir := t.TempDir()
+	if err := os.WriteFile(filepath.Join(dir, "go.mod"), []byte("module x"), 0644); err != nil {
+		t.Fatalf("write go.mod: %v", err)
+	}
+
+	res, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("Collect: %v", err)
+	}
+	if len(res.Evidence) != 1 {
+		t.Fatalf("expected 1 evidence item, got %d", len(res.Evidence))
+	}
+	if res.Evidence[0].Confidence != 1.0 {
+		t.Fatalf("Confidence = %v, want 1.0", res.Evidence[0].Confidence)
+	}
+}
+
+// TestCollectEvidenceConfidenceDiscountedUnderTestdata verifies that evidence
+// found beneath a noise-adjacent directory (testdata, fixtures, examples,
+// mocks) is recorded with reduced confidence rather than excluded outright.
+func TestCollectEvidenceConfidenceDiscountedUnderTestdata(t *testing.T) {
+	dir := t.TempDir()
+	nested := filepath.Join(dir, "internal", "testdata", "sample")
+	if err := os.MkdirAll(nested, 0755); err != nil {
+		t.Fatalf("mkdir: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(nested, "go.mod"), []byte("module x"), 0644); err != nil {
+		t.Fatalf("write go.mod: %v", err)
+	}
+
+	res, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("Collect: %v", err)
+	}
+	if len(res.Evidence) != 1 {
+		t.Fatalf("expected 1 evidence item, got %d", len(res.Evidence))
+	}
+	if res.Evidence[0].Confidence != noiseAdjacentConfidenceMultiplier {
+		t.Fatalf("Confidence = %v, want %v", res.Evidence[0].Confidence, noiseAdjacentConfidenceMultiplier)
+	}
+}
+
+// TestMatchEvidenceSuffixRuleCarriesConfidence verifies that path-suffix
+// rules (e.g. ".github/workflows") also carry confidence through
+// MatchEvidence, not just plain-filename rules.
+func TestMatchEvidenceSuffixRuleCarriesConfidence(t *testing.T) {
+	_, category, confidence, ok := MatchEvidence("workflows", filepath.FromSlash(".github/workflows"))
+	if !ok {
+		t.Fatalf("expected a match for .github/workflows")
+	}
+	if category != "ci/cd" {
+		t.Fatalf("category = %q, want ci/cd", category)
+	}
+	if confidence != 1.0 {
+		t.Fatalf("confidence = %v, want 1.0", confidence)
+	}
+}
+
+// TestMatchEvidenceNoMatchReturnsZeroConfidence verifies the no-match case
+// still returns a zero confidence alongside ok=false, rather than a stale or
+// undefined value.
+func TestMatchEvidenceNoMatchReturnsZeroConfidence(t *testing.T) {
+	_, _, confidence, ok := MatchEvidence("not-evidence.txt", "not-evidence.txt")
+	if ok {
+		t.Fatalf("expected no match for not-evidence.txt")
+	}
+	if confidence != 0 {
+		t.Fatalf("confidence = %v, want 0 on no match", confidence)
+	}
+}
+
 func TestDominantExtensionsUsesExtensionTieBreaker(t *testing.T) {
 	extensions := dominantExtensions(map[string]int{
 		".z": 1,

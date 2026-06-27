@@ -66,6 +66,11 @@ type EvidenceItem struct {
 	AbsolutePath string
 	RelativePath string
 	Category     string
+
+	// Confidence is the matched rule's signal strength, from 0 to 1, after
+	// any path-context adjustment (see MatchEvidence). It is not yet used by
+	// scoring or compression — Phase 2 D1 only establishes the data.
+	Confidence float64
 }
 
 // TopologySummary contains counts for discovered evidence.

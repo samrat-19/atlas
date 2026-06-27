@@ -28,7 +28,7 @@ func newExtensionSummary() ExtensionSummary {
 }
 
 func createEvidenceItem(entry fs.DirEntry, absPath, relPath string) (EvidenceItem, bool) {
-	key, category, ok := MatchEvidence(entry.Name(), relPath)
+	key, category, confidence, ok := MatchEvidence(entry.Name(), relPath)
 	if !ok {
 		return EvidenceItem{}, false
 	}
@@ -37,6 +37,7 @@ func createEvidenceItem(entry fs.DirEntry, absPath, relPath string) (EvidenceIte
 		AbsolutePath: absPath,
 		RelativePath: relPath,
 		Category:     category,
+		Confidence:   confidence,
 	}, true
 }
 

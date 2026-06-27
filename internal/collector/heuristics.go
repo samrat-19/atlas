@@ -24,6 +24,18 @@ const schemaVersion = "1"
 // repository importance. They are the current Phase 1 baseline that helps Atlas
 // turn a large directory tree into a shorter orientation report.
 
+// Evidence confidence constants answer: "How strong is this evidence match on
+// its own, before any scoring happens?"
+const (
+	// Applied to a rule's intrinsic confidence when the match is found under
+	// a noise-adjacent directory (test/fixtures/examples/mocks — see
+	// noiseAdjacentPathSegments in registry.go). A package.json under
+	// testdata/ is far less likely to mark a real module boundary than one at
+	// a project root, but Atlas cannot rule it out entirely, so the signal is
+	// weakened rather than discarded.
+	noiseAdjacentConfidenceMultiplier = 0.5
+)
+
 // Candidate selection constants answer: "Should Atlas consider this folder at all?"
 const (
 	// A folder with this many files is worth considering even if it has no
