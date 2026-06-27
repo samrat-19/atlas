@@ -33,9 +33,18 @@ func TestWriteReportsFailsWhenOutputDirIsFile(t *testing.T) {
 	if err != nil {
 		t.Fatalf("getwd: %v", err)
 	}
-	t.Cleanup(func() { _ = os.Chdir(orig) })
 
 	tmp := t.TempDir()
+
+	// Register the chdir-back cleanup after t.TempDir(), not before. Cleanups
+	// run in LIFO order, so this must be registered second to run first —
+	// otherwise t.TempDir()'s own RemoveAll cleanup runs while tmp is still
+	// the process's working directory. Windows holds a lock on a directory
+	// that is the current working directory, so RemoveAll fails with "the
+	// process cannot access the file because it is being used by another
+	// process" before we ever get a chance to chdir away.
+	t.Cleanup(func() { _ = os.Chdir(orig) })
+
 	if err := os.Chdir(tmp); err != nil {
 		t.Fatalf("chdir: %v", err)
 	}
