@@ -41,13 +41,25 @@ This is the foundation everything below reads from — role classification and
 multidimensional scoring both need confidence data to exist before they can
 use it.
 
-### D2: HeuristicProfile
+### D2: HeuristicProfile — done
 
 Centralize the constants currently hardcoded in `heuristics.go` — plus the new
 confidence weights from D1 — into a single `HeuristicProfile` struct, per the
 shape already sketched in `docs/heuristic-calibration.md`. The default profile
 must reproduce Phase 1 behavior exactly; this step relocates where the numbers
 live, it does not change scoring yet.
+
+Landed as a `HeuristicProfile` struct (`EvidenceConfidenceConfig`,
+`CandidateSelectionConfig`, `ScoringConfig`, `CompressionConfig`) with
+`DefaultHeuristics` holding the unchanged Phase 1 values. The profile is
+threaded as an explicit parameter through `MatchEvidence`,
+`buildModuleSummary`, `scoreModules`, and `compressModules` — not read from
+package constants inside those functions — confirmed by
+`TestIsModuleCandidateRespectsCustomProfile` and
+`TestIsStrongComparedToParentRespectsCustomProfile`, which construct an
+alternate profile and assert behavior actually changes. No `ReportConfig`
+was added (see `docs/heuristic-calibration.md` for why). Battery output for
+selenium and tensorflow is byte-identical to before D2.
 
 ### D3: Multidimensional scoring
 

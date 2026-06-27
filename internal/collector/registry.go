@@ -147,12 +147,13 @@ var noiseAdjacentPathSegments = map[string]struct{}{
 // matched evidence sits under a noise-adjacent directory (see
 // noiseAdjacentPathSegments). The final path segment is the matched file or
 // path-suffix itself, not a containing directory, so it is excluded from the
-// check.
-func pathContextMultiplier(relPath string) float64 {
+// check. The discount amount comes from profile rather than a bare constant
+// so a future profile could tune or disable it.
+func pathContextMultiplier(relPath string, profile HeuristicProfile) float64 {
 	segments := strings.Split(filepath.ToSlash(relPath), "/")
 	for _, segment := range segments[:len(segments)-1] {
 		if _, ok := noiseAdjacentPathSegments[strings.ToLower(segment)]; ok {
-			return noiseAdjacentConfidenceMultiplier
+			return profile.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
 		}
 	}
 	return 1.0
@@ -200,9 +201,9 @@ func buildIndexes(reg map[string]EvidenceRule) {
 
 // MatchEvidence attempts to match an entry by filename first, then by
 // relative-path suffix. It returns the registry key (as provided), the
-// category, a confidence score adjusted for path context, and whether a
-// match was found.
-func MatchEvidence(name, relPath string) (key string, category string, confidence float64, ok bool) {
+// category, a confidence score adjusted for path context using profile, and
+// whether a match was found.
+func MatchEvidence(name, relPath string, profile HeuristicProfile) (key string, category string, confidence float64, ok bool) {
 	isWindows := runtime.GOOS == "windows"
 
 	normName := name
@@ -211,7 +212,7 @@ func MatchEvidence(name, relPath string) (key string, category string, confidenc
 	}
 	// filename exact match
 	if rule, found := filenameIndex[normName]; found {
-		return name, rule.Category, rule.Confidence * pathContextMultiplier(relPath), true
+		return name, rule.Category, rule.Confidence * pathContextMultiplier(relPath, profile), true
 	}
 
 	// path-suffix match
@@ -221,7 +222,7 @@ func MatchEvidence(name, relPath string) (key string, category string, confidenc
 	}
 	for suff, rule := range suffixIndex {
 		if strings.HasSuffix(normRel, suff) {
-			return suff, rule.Category, rule.Confidence * pathContextMultiplier(relPath), true
+			return suff, rule.Category, rule.Confidence * pathContextMultiplier(relPath, profile), true
 		}
 	}
 	return "", "", 0, false

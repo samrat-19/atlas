@@ -250,7 +250,7 @@ func TestBuildModuleSummaryUsesPathTieBreaker(t *testing.T) {
 		},
 	}
 
-	summary := buildModuleSummary(stats)
+	summary := buildModuleSummary(stats, DefaultHeuristics)
 	if len(summary.Modules) != 2 {
 		t.Fatalf("expected 2 modules, got %d", len(summary.Modules))
 	}
@@ -483,8 +483,9 @@ func TestCollectEvidenceConfidenceDiscountedUnderTestdata(t *testing.T) {
 	if len(res.Evidence) != 1 {
 		t.Fatalf("expected 1 evidence item, got %d", len(res.Evidence))
 	}
-	if res.Evidence[0].Confidence != noiseAdjacentConfidenceMultiplier {
-		t.Fatalf("Confidence = %v, want %v", res.Evidence[0].Confidence, noiseAdjacentConfidenceMultiplier)
+	want := DefaultHeuristics.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
+	if res.Evidence[0].Confidence != want {
+		t.Fatalf("Confidence = %v, want %v", res.Evidence[0].Confidence, want)
 	}
 }
 
@@ -492,7 +493,7 @@ func TestCollectEvidenceConfidenceDiscountedUnderTestdata(t *testing.T) {
 // rules (e.g. ".github/workflows") also carry confidence through
 // MatchEvidence, not just plain-filename rules.
 func TestMatchEvidenceSuffixRuleCarriesConfidence(t *testing.T) {
-	_, category, confidence, ok := MatchEvidence("workflows", filepath.FromSlash(".github/workflows"))
+	_, category, confidence, ok := MatchEvidence("workflows", filepath.FromSlash(".github/workflows"), DefaultHeuristics)
 	if !ok {
 		t.Fatalf("expected a match for .github/workflows")
 	}
@@ -508,12 +509,49 @@ func TestMatchEvidenceSuffixRuleCarriesConfidence(t *testing.T) {
 // still returns a zero confidence alongside ok=false, rather than a stale or
 // undefined value.
 func TestMatchEvidenceNoMatchReturnsZeroConfidence(t *testing.T) {
-	_, _, confidence, ok := MatchEvidence("not-evidence.txt", "not-evidence.txt")
+	_, _, confidence, ok := MatchEvidence("not-evidence.txt", "not-evidence.txt", DefaultHeuristics)
 	if ok {
 		t.Fatalf("expected no match for not-evidence.txt")
 	}
 	if confidence != 0 {
 		t.Fatalf("confidence = %v, want 0 on no match", confidence)
+	}
+}
+
+// TestIsModuleCandidateRespectsCustomProfile proves the HeuristicProfile
+// threading introduced in Phase 2 D2 is load-bearing, not cosmetic: a
+// directory below the default large-directory threshold is rejected, but a
+// custom profile with a lower threshold accepts the same directory.
+func TestIsModuleCandidateRespectsCustomProfile(t *testing.T) {
+	stats := &dirStat{FileCount: 50}
+
+	if isModuleCandidate(stats, DefaultHeuristics) {
+		t.Fatalf("50 files with no evidence should not qualify under DefaultHeuristics (threshold %d)",
+			DefaultHeuristics.CandidateSelection.LargeDirectoryFileThreshold)
+	}
+
+	lenient := DefaultHeuristics
+	lenient.CandidateSelection.LargeDirectoryFileThreshold = 10
+	if !isModuleCandidate(stats, lenient) {
+		t.Fatalf("50 files with no evidence should qualify once the profile's threshold is lowered to 10")
+	}
+}
+
+// TestIsStrongComparedToParentRespectsCustomProfile proves
+// CompressionConfig.ChildScoreRetentionRatio is actually read from the
+// profile passed in, not a fixed value baked into the function.
+func TestIsStrongComparedToParentRespectsCustomProfile(t *testing.T) {
+	childScore, parentScore := 50, 100 // child is 50% of parent
+
+	if isStrongComparedToParent(childScore, parentScore, DefaultHeuristics) {
+		t.Fatalf("50%% of parent score should not be strong under the default ratio (%v)",
+			DefaultHeuristics.Compression.ChildScoreRetentionRatio)
+	}
+
+	lenient := DefaultHeuristics
+	lenient.Compression.ChildScoreRetentionRatio = 0.4
+	if !isStrongComparedToParent(childScore, parentScore, lenient) {
+		t.Fatalf("50%% of parent score should be strong once the retention ratio is lowered to 0.4")
 	}
 }
 

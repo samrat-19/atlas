@@ -58,31 +58,24 @@ This turns the question from "why 200?" into:
 
 ## Code Manageability Direction
 
-Hardcoded constants are okay for now, but Atlas should not grow into scattered
-score math.
+**Status: done (Phase 2 D2).** `HeuristicProfile` now lives in
+`internal/collector/heuristics.go`, grouped into `EvidenceConfidenceConfig`,
+`CandidateSelectionConfig`, `ScoringConfig`, and `CompressionConfig`.
+`DefaultHeuristics` holds the same numbers Phase 1 used as bare constants —
+nothing about scoring changed, only where the numbers live. The profile is
+passed as an explicit parameter through `buildModuleSummary`, `scoreModules`,
+`compressModules`, and `MatchEvidence`'s path-context confidence discount,
+not read from a package-level global inside those functions — so a future
+alternate profile only requires constructing a `HeuristicProfile` value and
+passing it to `Collect`, not editing scoring logic.
 
-The next code shape should be a profile:
-
-```go
-type HeuristicProfile struct {
-    CandidateSelection CandidateSelectionConfig
-    Scoring            ScoringConfig
-    Compression        CompressionConfig
-    Report             ReportConfig
-}
-```
-
-Then Atlas can have a clear default profile:
-
-```go
-var DefaultHeuristics = HeuristicProfile{
-    CandidateSelection: CandidateSelectionConfig{
-        LargeDirectoryFileThreshold: 200,
-        EvidenceDenseFileThreshold: 20,
-        EvidenceDensityThreshold: 0.05,
-    },
-}
-```
+One deliberate deviation from the sketch above: there is no `ReportConfig`.
+`heuristics.go` governs the classification model (which folders qualify, how
+they're scored and compressed); how many results the CLI prints
+(`report_limits.go`) is a display concern, not a classification heuristic,
+and folding it into the same profile would conflate two different things
+that happen to both be "numbers." It can be added if a real need for
+profile-driven display limits shows up.
 
 This keeps numbers centralized and makes it easier to introduce future modes:
 
@@ -126,7 +119,7 @@ Short term:
 - document them as defaults, not truths
 - use battery tests to catch output drift
 
-Medium term:
+Medium term — **done (Phase 2 D2)**:
 
 - introduce `HeuristicProfile`
 - move defaults into `DefaultHeuristics`

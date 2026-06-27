@@ -22,82 +22,151 @@ const schemaVersion = "1"
 //
 // These rules are intentionally simple. They are not a final definition of
 // repository importance. They are the current Phase 1 baseline that helps Atlas
-// turn a large directory tree into a shorter orientation report.
+// turn a large directory tree into a shorter orientation report. See
+// docs/heuristics.md for the full walkthrough with examples.
+//
+// Phase 2 D1 added a fourth concern — evidence confidence — that adjusts how
+// strong a match is before any of the three steps above run.
+//
+// Phase 2 D2 (this file) moves every tunable number out of bare package
+// constants and into a single HeuristicProfile value (DefaultHeuristics),
+// grouped by which step reads them. The grouping and the numbers are
+// unchanged from Phase 1 — this only changes where they live, so a future
+// profile can be constructed and passed through scoring and compression
+// without touching the functions that use it. See
+// docs/heuristic-calibration.md for the calibration methodology and the
+// longer-term plan to split scoring into named, explainable dimensions
+// instead of one number.
 
-// Evidence confidence constants answer: "How strong is this evidence match on
-// its own, before any scoring happens?"
-const (
-	// Applied to a rule's intrinsic confidence when the match is found under
-	// a noise-adjacent directory (test/fixtures/examples/mocks — see
-	// noiseAdjacentPathSegments in registry.go). A package.json under
-	// testdata/ is far less likely to mark a real module boundary than one at
-	// a project root, but Atlas cannot rule it out entirely, so the signal is
-	// weakened rather than discarded.
-	noiseAdjacentConfidenceMultiplier = 0.5
-)
+// EvidenceConfidenceConfig answers: "How strong is an evidence match on its
+// own, before any scoring happens?" Read by MatchEvidence (registry.go).
+type EvidenceConfidenceConfig struct {
+	// NoiseAdjacentConfidenceMultiplier is applied to a rule's intrinsic
+	// confidence when the match is found under a noise-adjacent directory
+	// (test/fixtures/examples/mocks — see noiseAdjacentPathSegments in
+	// registry.go). A package.json under testdata/ is far less likely to
+	// mark a real module boundary than one at a project root, but Atlas
+	// cannot rule it out entirely, so the signal is weakened rather than
+	// discarded.
+	NoiseAdjacentConfidenceMultiplier float64
+}
 
-// Candidate selection constants answer: "Should Atlas consider this folder at all?"
-const (
-	// A folder with this many files is worth considering even if it has no
-	// obvious build file. Example: a large src/ tree may matter even without its
-	// own package.json or BUILD file.
-	largeDirectoryFileThreshold = 200
+// CandidateSelectionConfig answers: "Should Atlas consider this folder at
+// all?" Read by isModuleCandidate and its helpers (modules.go).
+type CandidateSelectionConfig struct {
+	// LargeDirectoryFileThreshold: a folder with this many files is worth
+	// considering even if it has no obvious build file. Example: a large
+	// src/ tree may matter even without its own package.json or BUILD file.
+	LargeDirectoryFileThreshold int
 
-	// We only use the "evidence density" rule for folders with at least this many
-	// files. This avoids overreacting to tiny folders where 1 marker out of 1 file
-	// would look like "100% evidence".
-	evidenceDenseFileThreshold = 20
+	// EvidenceDenseFileThreshold: the "evidence density" rule only applies
+	// to folders with at least this many files. This avoids overreacting to
+	// tiny folders where 1 marker out of 1 file would look like "100%
+	// evidence".
+	EvidenceDenseFileThreshold int
 
-	// If at least this share of a folder's files are evidence files, the folder is
-	// probably structurally interesting. 0.05 means 5%, so 1 evidence file in 20
-	// files is enough.
-	evidenceDensityThreshold = 0.05
-)
+	// EvidenceDensityThreshold: if at least this share of a folder's files
+	// are evidence files, the folder is probably structurally interesting.
+	// 0.05 means 5%, so 1 evidence file in 20 files is enough.
+	EvidenceDensityThreshold float64
+}
 
-// Candidate fingerprint and scoring constants answer:
-// "How strong does this candidate look?"
-const (
-	// For each candidate folder, remember only this many common extensions. This
-	// gives us a small fingerprint like [".ts", ".json", ".md"] instead of the
-	// full file list.
-	dominantExtensionLimit = 3
+// ScoringConfig answers: "How strong does this candidate look, on first
+// pass?" Read by newModuleCandidate and moduleCandidateScore (modules.go).
+type ScoringConfig struct {
+	// DominantExtensionLimit: for each candidate folder, remember only this
+	// many common extensions. This gives a small fingerprint like
+	// [".ts", ".json", ".md"] instead of the full file list.
+	DominantExtensionLimit int
 
-	// First-pass ranking: one evidence file counts like this many normal files.
-	// This makes a folder with package/build files rank above a folder that is
-	// only slightly larger.
-	moduleEvidenceWeight = 100
-)
+	// ModuleEvidenceWeight: first-pass ranking. One evidence file counts
+	// like this many normal files. This makes a folder with package/build
+	// files rank above a folder that is only slightly larger.
+	ModuleEvidenceWeight int
+}
 
-// Compression constants answer:
-// "When Atlas shortens the candidate list, what should survive?"
-const (
-	// Converts "files in this subtree / files in repo" into a percentage. Example:
-	// 250 files out of 1000 becomes 25.
-	coveragePercentScale = 100
+// CompressionConfig answers: "When Atlas shortens the candidate list, what
+// should survive?" Read by scoreModules and compressModules
+// (module_scoring.go, module_compression.go).
+type CompressionConfig struct {
+	// CoveragePercentScale converts "files in this subtree / files in repo"
+	// into a percentage. Example: 250 files out of 1000 becomes 25.
+	CoveragePercentScale int
 
-	// Compression ranking: evidence matters even more here because we are deciding
-	// which candidate folders survive into the shorter "major modules" list.
-	compressionEvidenceWeight = 200
+	// CompressionEvidenceWeight: evidence matters even more here than
+	// ScoringConfig.ModuleEvidenceWeight, because Atlas is deciding which
+	// candidate folders survive into the shorter "major modules" list.
+	CompressionEvidenceWeight int
 
-	// During compression, each 1% of repo coverage adds this many points. This
-	// gives large subtrees some credit without letting size be the only signal.
-	coverageScoreWeight = 10
+	// CoverageScoreWeight: during compression, each 1% of repo coverage adds
+	// this many points. This gives large subtrees some credit without
+	// letting size be the only signal.
+	CoverageScoreWeight int
 
-	// If a child folder is this similar to its parent, Atlas treats it as probably
-	// redundant. Example: parent and child are both mostly .java and both only
-	// have build-system evidence.
-	highOverlapThreshold = 0.9
+	// HighOverlapThreshold: if a child folder is this similar to its parent,
+	// Atlas treats it as probably redundant. Example: parent and child are
+	// both mostly .java and both only have build-system evidence.
+	HighOverlapThreshold float64
 
-	// Score removed from a child folder when it looks almost the same as its
-	// parent. This nudges Atlas toward keeping the parent instead of every nested
-	// folder with the same shape.
-	redundantChildPenalty = 500
+	// RedundantChildPenalty: score removed from a child folder when it looks
+	// almost the same as its parent. This nudges Atlas toward keeping the
+	// parent instead of every nested folder with the same shape.
+	RedundantChildPenalty int
 
-	// Keep a child folder if its score is at least this fraction of its parent's
-	// score. 0.6 means a child that is 60% as strong as the parent can survive.
-	childScoreRetentionRatio = 0.6
+	// ChildScoreRetentionRatio: keep a child folder if its score is at least
+	// this fraction of its parent's score. 0.6 means a child that is 60% as
+	// strong as the parent can survive.
+	ChildScoreRetentionRatio float64
 
-	// Keep a child folder if it is different enough from its parent. 0.2 means
-	// "more than 20% different" by extension mix or evidence category.
-	noveltyRetentionDelta = 0.2
-)
+	// NoveltyRetentionDelta: keep a child folder if it is different enough
+	// from its parent. 0.2 means "more than 20% different" by extension mix
+	// or evidence category.
+	NoveltyRetentionDelta float64
+}
+
+// HeuristicProfile bundles every tunable number Atlas's classification
+// pipeline reads, grouped by the pipeline stage that consumes them. A
+// profile is plain data: constructing a different one and passing it through
+// Collect would change Atlas's behavior without changing any function body.
+//
+// Only DefaultHeuristics exists today. Nothing yet constructs an alternate
+// profile or exposes one to users — that is out of scope for Phase 2 (see
+// the constraints in docs/phase-2-plan.md). This type exists now so that the
+// later work is additive (new profiles, a way to choose one) instead of a
+// rewrite of how scoring reads its numbers.
+type HeuristicProfile struct {
+	EvidenceConfidence EvidenceConfidenceConfig
+	CandidateSelection CandidateSelectionConfig
+	Scoring            ScoringConfig
+	Compression        CompressionConfig
+}
+
+// DefaultHeuristics is the profile Atlas has always used. Its values are
+// starting assumptions calibrated by hand against Selenium, TensorFlow, and
+// VS Code (see docs/heuristic-calibration.md) — not proven-correct
+// constants. Every number here is identical to the bare constants Phase 1
+// used; D2 only changed where they live, not what they equal, so existing
+// battery fixtures keep passing unchanged.
+var DefaultHeuristics = HeuristicProfile{
+	EvidenceConfidence: EvidenceConfidenceConfig{
+		NoiseAdjacentConfidenceMultiplier: 0.5,
+	},
+	CandidateSelection: CandidateSelectionConfig{
+		LargeDirectoryFileThreshold: 200,
+		EvidenceDenseFileThreshold:  20,
+		EvidenceDensityThreshold:    0.05,
+	},
+	Scoring: ScoringConfig{
+		DominantExtensionLimit: 3,
+		ModuleEvidenceWeight:   100,
+	},
+	Compression: CompressionConfig{
+		CoveragePercentScale:      100,
+		CompressionEvidenceWeight: 200,
+		CoverageScoreWeight:       10,
+		HighOverlapThreshold:      0.9,
+		RedundantChildPenalty:     500,
+		ChildScoreRetentionRatio:  0.6,
+		NoveltyRetentionDelta:     0.2,
+	},
+}

@@ -12,6 +12,13 @@ import (
 func Collect(root string) (Result, error) {
 	var res Result
 
+	// profile is the single source of every tunable threshold and weight
+	// used below. Only DefaultHeuristics exists today (see heuristics.go);
+	// threading it explicitly, rather than reading package constants deep
+	// inside scoring and compression, is what makes a future alternate
+	// profile possible without changing those functions.
+	profile := DefaultHeuristics
+
 	absRoot, err := filepath.Abs(root)
 	if err != nil {
 		return res, err
@@ -64,7 +71,7 @@ func Collect(root string) (Result, error) {
 			directoryStatsFor(dirStats, relPath).updateWithFile(ext)
 		}
 
-		item, ok := createEvidenceItem(entry, absPath, relPath)
+		item, ok := createEvidenceItem(entry, absPath, relPath, profile)
 		if !ok {
 			return nil
 		}
@@ -82,8 +89,8 @@ func Collect(root string) (Result, error) {
 	}
 
 	census.TotalDirectories = len(census.Directories)
-	moduleSummary := buildModuleSummary(dirStats)
-	compressedModules := compressModules(moduleSummary.Modules, dirStats, totalFiles)
+	moduleSummary := buildModuleSummary(dirStats, profile)
+	compressedModules := compressModules(moduleSummary.Modules, dirStats, totalFiles, profile)
 
 	// Sort pruned paths by relative path so the Result is byte-identical
 	// across repeated scans. WalkDir already walks lexically, but making

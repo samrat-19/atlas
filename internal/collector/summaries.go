@@ -27,8 +27,8 @@ func newExtensionSummary() ExtensionSummary {
 	}
 }
 
-func createEvidenceItem(entry fs.DirEntry, absPath, relPath string) (EvidenceItem, bool) {
-	key, category, confidence, ok := MatchEvidence(entry.Name(), relPath)
+func createEvidenceItem(entry fs.DirEntry, absPath, relPath string, profile HeuristicProfile) (EvidenceItem, bool) {
+	key, category, confidence, ok := MatchEvidence(entry.Name(), relPath, profile)
 	if !ok {
 		return EvidenceItem{}, false
 	}

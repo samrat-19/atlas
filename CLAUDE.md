@@ -95,14 +95,15 @@ Add entries to `defaultEvidenceRegistry()` in `registry.go` as `EvidenceRule{Cat
 
 ### Tuning heuristics
 
-All scoring constants live in `heuristics.go` with inline explanations. Key ones:
+Every tunable number lives in a single `HeuristicProfile` value (`heuristics.go`), grouped by which pipeline stage reads it. `DefaultHeuristics` is the only profile that exists today; it is threaded as an explicit parameter through `MatchEvidence`, `buildModuleSummary`, `scoreModules`, and `compressModules` rather than read from package constants inside those functions — so a future alternate profile only requires constructing a new `HeuristicProfile` and passing it to `Collect`. Key fields:
 
-| Constant | Default | Effect |
+| Field | Default | Effect |
 |---|---|---|
-| `largeDirectoryFileThreshold` | 200 | File count to qualify a dir as a candidate without evidence |
-| `evidenceDensityThreshold` | 0.05 | Min evidence/file ratio to qualify a dense dir |
-| `moduleEvidenceWeight` | 100 | Score weight per evidence file in module selection |
-| `compressionEvidenceWeight` | 200 | Score weight per evidence file during compression |
-| `highOverlapThreshold` | 0.9 | Extension + category similarity above which a child is penalized |
-| `childScoreRetentionRatio` | 0.6 | Min child/parent score ratio to retain a child |
-| `noveltyRetentionDelta` | 0.2 | Min dissimilarity (1 - overlap) to retain a novel child |
+| `EvidenceConfidence.NoiseAdjacentConfidenceMultiplier` | 0.5 | Confidence discount for evidence found under test/fixture/example-style directories |
+| `CandidateSelection.LargeDirectoryFileThreshold` | 200 | File count to qualify a dir as a candidate without evidence |
+| `CandidateSelection.EvidenceDensityThreshold` | 0.05 | Min evidence/file ratio to qualify a dense dir |
+| `Scoring.ModuleEvidenceWeight` | 100 | Score weight per evidence file in module selection |
+| `Compression.CompressionEvidenceWeight` | 200 | Score weight per evidence file during compression |
+| `Compression.HighOverlapThreshold` | 0.9 | Extension + category similarity above which a child is penalized |
+| `Compression.ChildScoreRetentionRatio` | 0.6 | Min child/parent score ratio to retain a child |
+| `Compression.NoveltyRetentionDelta` | 0.2 | Min dissimilarity (1 - overlap) to retain a novel child |

@@ -6,10 +6,16 @@ import (
 	"strings"
 )
 
+// compressModules prunes redundant parent-child candidates, keeping a child
+// only when it scores strongly enough on its own or looks different enough
+// from its parent (see retainedModules). profile supplies every weight and
+// threshold scoreModules and retainedModules read — see CompressionConfig in
+// heuristics.go.
 func compressModules(
 	modules []ModuleCandidate,
 	dirStats map[string]*dirStat,
 	totalFiles int,
+	profile HeuristicProfile,
 ) CompressedModuleSummary {
 	summary := CompressedModuleSummary{TotalCandidates: len(modules)}
 	if len(modules) == 0 {
@@ -24,8 +30,9 @@ func compressModules(
 		subtreeFiles,
 		parents,
 		totalFiles,
+		profile,
 	)
-	retained := retainedModules(normalizedPaths, parents, scores, extensionOverlap, categoryOverlap)
+	retained := retainedModules(normalizedPaths, parents, scores, extensionOverlap, categoryOverlap, profile)
 
 	for i, keep := range retained {
 		if !keep {
@@ -91,12 +98,18 @@ func moduleParents(paths []string, index map[string]int) []int {
 	return parents
 }
 
+// retainedModules walks candidates shallowest-first so a parent's retention
+// decision is always settled before its children are evaluated, then keeps
+// each child if it is strong relative to its parent's score or different
+// enough in extension/category mix to represent a distinct subsystem rather
+// than a redundant nested view of the same one.
 func retainedModules(
 	paths []string,
 	parents []int,
 	scores []int,
 	extensionOverlap []float64,
 	categoryOverlap []float64,
+	profile HeuristicProfile,
 ) []bool {
 	indexes := make([]int, len(paths))
 	for i := range paths {
@@ -120,21 +133,21 @@ func retainedModules(
 
 		parent := parents[i]
 		if !retained[parent] {
-			retained[i] = isStrongComparedToParent(scores[i], scores[parent]) ||
-				isNovelComparedToParent(categoryOverlap[i])
+			retained[i] = isStrongComparedToParent(scores[i], scores[parent], profile) ||
+				isNovelComparedToParent(categoryOverlap[i], profile)
 			continue
 		}
-		retained[i] = isStrongComparedToParent(scores[i], scores[parent]) ||
-			isNovelComparedToParent(extensionOverlap[i]) ||
-			isNovelComparedToParent(categoryOverlap[i])
+		retained[i] = isStrongComparedToParent(scores[i], scores[parent], profile) ||
+			isNovelComparedToParent(extensionOverlap[i], profile) ||
+			isNovelComparedToParent(categoryOverlap[i], profile)
 	}
 	return retained
 }
 
-func isStrongComparedToParent(childScore, parentScore int) bool {
-	return float64(childScore) >= float64(parentScore)*childScoreRetentionRatio
+func isStrongComparedToParent(childScore, parentScore int, profile HeuristicProfile) bool {
+	return float64(childScore) >= float64(parentScore)*profile.Compression.ChildScoreRetentionRatio
 }
 
-func isNovelComparedToParent(overlap float64) bool {
-	return (1.0 - overlap) > noveltyRetentionDelta
+func isNovelComparedToParent(overlap float64, profile HeuristicProfile) bool {
+	return (1.0 - overlap) > profile.Compression.NoveltyRetentionDelta
 }
