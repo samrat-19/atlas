@@ -218,14 +218,29 @@ Known problems:
 - Test fixtures can look like real modules when they contain package files.
 - The current score mixes several ideas: size, evidence, coverage, and novelty.
 
-This is why Phase 2 should split the model into clearer dimensions:
+This is why Phase 2 should split the model into clearer dimensions. **Status
+as of Phase 2 D3:** `ModuleCandidate` now carries `BoundaryConfidence`,
+`EvidenceStrength`, `StructuralProminence`, `NoveltyVsParent`, and
+`NoiseProbability` as named 0–1 fields, computed from D1's per-match
+confidence and shown directly in the "Major Modules" report section
+alongside the legacy score. See the doc comment on `ModuleCandidate` in
+`internal/collector/types.go` for exactly what each one means and how it's
+computed.
 
-- boundary confidence
+Still open — not yet split out:
+
 - first-party probability
-- noise probability
-- structural prominence
 - evidence diversity
 - investigation priority
+
+These three need more than a per-directory confidence number to answer
+honestly (first-party probability in particular is close to the
+structural-role classification work planned for Phase 2 D4 — see
+`docs/phase-2-plan.md`). The known problems above involving `third_party` and
+test fixtures are partially addressed today: `NoiseProbability` is neutral
+(0.5) rather than confidently wrong for an evidence-less large directory, and
+evidence under a test/fixture path now visibly carries a lower
+`EvidenceStrength`. Neither problem is fully resolved — that's D4's job.
 
 ## Why Keep These Heuristics?
 

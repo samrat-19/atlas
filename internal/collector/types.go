@@ -151,6 +151,37 @@ type HierarchySummary struct {
 // ModuleCandidate represents a directory that looks like an independent module
 // or subsystem based on structure, file counts, evidence density, and
 // extension fingerprints.
+//
+// Score is the single compression-stage number Atlas has always used for
+// sorting and retention (see module_scoring.go). It is kept for backward
+// compatibility, but it collapses several different ideas — size, evidence,
+// coverage, redundancy — into one value with no way to tell them apart. The
+// five fields below (Phase 2 D3) are the named, explainable breakdown of
+// that same judgment, per docs/heuristics.md's stated direction:
+//
+//   - EvidenceStrength: average confidence of this directory's own evidence
+//     (0 if it has none). Confidence is discounted for matches under
+//     noise-adjacent paths — see EvidenceItem.Confidence and registry.go.
+//   - NoiseProbability: how likely this candidate is incidental noise rather
+//     than a real boundary. Derived from EvidenceStrength where evidence
+//     exists; 0.5 ("no signal either way") when a candidate qualified
+//     purely on size with zero evidence, since a large evidence-less
+//     directory can be entirely legitimate (docs/heuristics.md Rule 2) —
+//     Atlas should not assert noise it cannot support.
+//   - StructuralProminence: how much of the repository's files live under
+//     this candidate's subtree (0–1, the same repository-coverage
+//     percentage Score already factors in, exposed on its own).
+//   - NoveltyVsParent: how different this candidate is from its parent
+//     candidate, by extension mix or evidence category (1.0 for a
+//     candidate with no parent — nothing to be redundant with).
+//   - BoundaryConfidence: how confident Atlas is that this is a genuine,
+//     distinct module boundary rather than a redundant nested view of its
+//     parent. The average of EvidenceStrength and NoveltyVsParent — strong,
+//     confident evidence and/or meaningful difference from the parent both
+//     support treating this as a real boundary.
+//
+// All five are 0–1 and computed deterministically from structure; none of
+// them involve AI or a content read. See docs/phase-2-plan.md D3.
 type ModuleCandidate struct {
 	Path               string
 	FileCount          int
@@ -159,6 +190,12 @@ type ModuleCandidate struct {
 	EvidenceByCategory map[string]int
 	EvidenceByFilename map[string]int
 	Score              int
+
+	EvidenceStrength     float64
+	NoiseProbability     float64
+	StructuralProminence float64
+	NoveltyVsParent      float64
+	BoundaryConfidence   float64
 }
 
 // ModuleSummary aggregates discovered module candidates.

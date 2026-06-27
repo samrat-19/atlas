@@ -25,21 +25,18 @@ func compressModules(
 	normalizedPaths, index := indexModulePaths(modules)
 	subtreeFiles := moduleSubtreeFileCounts(normalizedPaths, dirStats)
 	parents := moduleParents(normalizedPaths, index)
-	scores, extensionOverlap, categoryOverlap := scoreModules(
-		modules,
-		subtreeFiles,
-		parents,
-		totalFiles,
-		profile,
-	)
-	retained := retainedModules(normalizedPaths, parents, scores, extensionOverlap, categoryOverlap, profile)
+	scores := scoreModules(modules, subtreeFiles, parents, totalFiles, profile)
+	retained := retainedModules(normalizedPaths, parents, scores, profile)
 
 	for i, keep := range retained {
 		if !keep {
 			continue
 		}
 		module := modules[i]
-		module.Score = scores[i]
+		module.Score = scores[i].Score
+		module.StructuralProminence = scores[i].StructuralProminence
+		module.NoveltyVsParent = scores[i].NoveltyVsParent
+		module.BoundaryConfidence = scores[i].BoundaryConfidence
 		summary.Modules = append(summary.Modules, module)
 	}
 
@@ -106,9 +103,7 @@ func moduleParents(paths []string, index map[string]int) []int {
 func retainedModules(
 	paths []string,
 	parents []int,
-	scores []int,
-	extensionOverlap []float64,
-	categoryOverlap []float64,
+	scores []moduleScore,
 	profile HeuristicProfile,
 ) []bool {
 	indexes := make([]int, len(paths))
@@ -133,13 +128,13 @@ func retainedModules(
 
 		parent := parents[i]
 		if !retained[parent] {
-			retained[i] = isStrongComparedToParent(scores[i], scores[parent], profile) ||
-				isNovelComparedToParent(categoryOverlap[i], profile)
+			retained[i] = isStrongComparedToParent(scores[i].Score, scores[parent].Score, profile) ||
+				isNovelComparedToParent(scores[i].CategoryOverlap, profile)
 			continue
 		}
-		retained[i] = isStrongComparedToParent(scores[i], scores[parent], profile) ||
-			isNovelComparedToParent(extensionOverlap[i], profile) ||
-			isNovelComparedToParent(categoryOverlap[i], profile)
+		retained[i] = isStrongComparedToParent(scores[i].Score, scores[parent].Score, profile) ||
+			isNovelComparedToParent(scores[i].ExtensionOverlap, profile) ||
+			isNovelComparedToParent(scores[i].CategoryOverlap, profile)
 	}
 	return retained
 }

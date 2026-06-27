@@ -396,683 +396,1538 @@ Major Modules:
   score: 837
   files: 37
   evidence: 4
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - rb
   score: 714
   files: 14
   evidence: 3
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.10
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium
   score: 680
   files: 70
   evidence: 2
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.21
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - py
   score: 669
   files: 19
   evidence: 3
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.05
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - rust
   score: 618
   files: 8
   evidence: 3
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\test\org\openqa\selenium
   score: 590
   files: 80
   evidence: 2
+  boundary confidence: 0.75
+  evidence strength: 0.50
+  structural prominence: 0.11
+  novelty vs parent: 1.00
+  noise probability: 0.50
 - dotnet
   score: 556
   files: 16
   evidence: 2
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.14
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java
   score: 542
   files: 12
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.33
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - javascript\selenium-webdriver
   score: 449
   files: 19
   evidence: 2
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.03
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - javascript\atoms
   score: 440
   files: 20
   evidence: 2
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.02
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - javascript\grid-ui
   score: 432
   files: 12
   evidence: 2
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.02
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - dotnet\src\webdriver
   score: 421
   files: 131
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.09
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - common\src\web
   score: 418
   files: 158
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.06
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - common\remote-build\cc
   score: 406
   files: 6
   evidence: 2
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - javascript
   score: 306
   files: 6
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.10
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - dotnet\test\webdriver
   score: 286
   files: 66
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 0.50
+  structural prominence: 0.02
+  novelty vs parent: 1.00
+  noise probability: 0.50
 - java\src\org\openqa\selenium\remote
   score: 281
   files: 61
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.02
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - common
   score: 277
   files: 7
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.07
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid
   score: 269
   files: 9
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.06
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog
   score: 264
   files: 4
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.06
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\closure\goog\ui
   score: 259
   files: 49
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\css
   score: 248
   files: 48
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - dotnet\src\webdriver\DevTools
   score: 246
   files: 36
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\bidi
   score: 241
   files: 11
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.03
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\data
   score: 238
   files: 38
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\node
   score: 235
   files: 25
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - rb\spec\integration\selenium\webdriver
   score: 232
   files: 22
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - rb\lib
   score: 232
   files: 2
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.03
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - java\src\org\openqa\selenium\devtools
   score: 231
   files: 21
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\json
   score: 227
   files: 27
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\events
   score: 225
   files: 25
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\support
   score: 224
   files: 14
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - rb\spec
   score: 223
   files: 3
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.02
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - java\src\org\openqa\selenium\firefox
   score: 222
   files: 22
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\testing
   score: 222
   files: 22
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\config
   score: 221
   files: 21
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\web
   score: 221
   files: 21
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - dotnet\private
   score: 220
   files: 20
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - rust\tests
   score: 220
   files: 20
   evidence: 1
+  boundary confidence: 0.58
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.50
 - java\src\org\openqa\selenium\netty\server
   score: 219
   files: 19
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\chromium
   score: 218
   files: 18
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\commands
   score: 218
   files: 18
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\dom
   score: 218
   files: 18
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\cpp\civetweb
   score: 218
   files: 18
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - java\src\org\openqa\selenium\docker
   score: 216
   files: 16
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - py\private
   score: 216
   files: 16
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - scripts
   score: 215
   files: 15
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - java\private
   score: 214
   files: 14
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\graphql
   score: 213
   files: 13
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\safari
   score: 213
   files: 13
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - dotnet\test\remote
   score: 211
   files: 11
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.50
 - java\src\org\openqa\selenium\grid\distributor
   score: 211
   files: 11
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\sessionqueue
   score: 211
   files: 11
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - rb\spec\integration
   score: 211
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - rb\spec\unit
   score: 211
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.01
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\src\org\openqa\selenium\chrome
   score: 210
   files: 10
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - javascript\private
   score: 210
   files: 10
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\debug
   score: 210
   files: 10
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\html
   score: 210
   files: 10
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\dotnet\devtools\src\generator\Templates
   score: 210
   files: 10
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - common\private
   score: 209
   files: 9
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\devtools\v146
   score: 209
   files: 9
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\devtools\v147
   score: 209
   files: 9
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\devtools\v148
   score: 209
   files: 9
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\server
   score: 209
   files: 9
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\fx
   score: 209
   files: 9
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\labs\useragent
   score: 209
   files: 9
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - common\images
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\src\org\openqa\selenium\edge
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\sessionmap
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\ie
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\io
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - javascript\webdriver
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\async
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\math
   score: 208
   files: 8
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\jmx
   score: 207
   files: 7
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\log
   score: 207
   files: 7
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\security
   score: 207
   files: 7
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\test\org\openqa\selenium\grid\web
   score: 207
   files: 7
   evidence: 1
+  boundary confidence: 0.42
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.50
 - javascript\grid-ui\public
   score: 207
   files: 7
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - .github
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - common\devtools
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\src\org\openqa\selenium\events
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\router
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\bazel
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\closure\goog\positioning
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\js\qunit
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - third_party\js\sizzle
   score: 206
   files: 6
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - common\extensions
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\src\org\openqa\selenium\concurrent
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - rb\spec\integration\selenium\webdriver\chrome
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - rb\spec\integration\selenium\webdriver\edge
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - rb\support
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - third_party\closure\goog\a11y\aria
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\disposable
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\net
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\string
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\structs
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\useragent
   score: 205
   files: 5
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\cli
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\grid\session
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\manager
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\os
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\test\org\openqa\selenium\tools\modules
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.50
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.50
 - javascript\webdriver\atoms
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - scripts\remote-image
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - third_party\closure\goog\promise
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\dotnet\devtools\src\generator
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\firebug
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\jruby
   score: 204
   files: 4
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - common\devtools\chromium\v146
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - common\devtools\chromium\v147
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - common\devtools\chromium\v148
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - cpp\linux-specific
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - dotnet\src\support
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - dotnet\test\support
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.50
 - dotnet\test\testing.webserver
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.50
 - java\src\org\openqa\selenium\grid\component
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\redis
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - java\src\org\openqa\selenium\status
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - javascript\chrome-driver
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - javascript\selenium-webdriver\private
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - rb\lib\selenium\devtools
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - rust\private
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\closure\goog\asserts
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\collections
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\color
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\fs
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\iter
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\style
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\uri
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\dotnet\devtools
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\js\selenium
   score: 203
   files: 3
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\src\dev\selenium\tools\javadoc
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - java\src\dev\selenium\tools\modules
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - java\test\org\openqa\selenium\grid\sessionqueue\local
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.50
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.50
 - java\test\org\openqa\selenium\grid\sessionqueue\redis
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.50
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.50
 - javascript\bidi-support
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - javascript\cdp-support
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - javascript\ie-driver
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - javascript\selenium-webdriver\lib\atoms
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\chrome_ext
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\closure\goog\array
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\editor
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\flags
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\functions
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\i18n
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\json
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\log
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\memoize
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\mochikit\async
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\object
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\reflect
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\timer
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\url
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\utils
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - third_party\closure\goog\window
   score: 202
   files: 2
   evidence: 1
+  boundary confidence: 0.67
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.33
+  noise probability: 0.00
 - common\manager
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - common\remote-build
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - cpp\prebuilt
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - dotnet\src\webdriver\assets
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - dotnet\src\webdriver\assets\nuget
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - java\src\org\openqa\selenium\devtools\latest
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - java\test\org\openqa\selenium\grid\sessionqueue
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.50
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.50
 - javascript\atoms\fragments
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - rb\lib\selenium\webdriver\atoms
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - scripts\dev-image
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 1.00
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 1.00
+  noise probability: 0.00
 - third_party\closure\goog\css\editor
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.75
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.00
 - third_party\closure\goog\dom\testdata
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.50
+  evidence strength: 0.50
+  structural prominence: 0.00
+  novelty vs parent: 0.50
+  noise probability: 0.50
 - third_party\closure\goog\images
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00
 - third_party\closure\goog\labs
   score: 201
   files: 1
   evidence: 1
+  boundary confidence: 0.83
+  evidence strength: 1.00
+  structural prominence: 0.00
+  novelty vs parent: 0.67
+  noise probability: 0.00

@@ -69,6 +69,14 @@ func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writ
 		fmt.Fprintf(writer, "  score: %d\n", module.Score)
 		fmt.Fprintf(writer, "  files: %d\n", module.FileCount)
 		fmt.Fprintf(writer, "  evidence: %d\n", module.EvidenceCount)
+		// Named, explainable dimensions (Phase 2 D3) behind the single score
+		// above — see ModuleCandidate's doc comment in
+		// internal/collector/types.go for what each one means.
+		fmt.Fprintf(writer, "  boundary confidence: %.2f\n", module.BoundaryConfidence)
+		fmt.Fprintf(writer, "  evidence strength: %.2f\n", module.EvidenceStrength)
+		fmt.Fprintf(writer, "  structural prominence: %.2f\n", module.StructuralProminence)
+		fmt.Fprintf(writer, "  novelty vs parent: %.2f\n", module.NoveltyVsParent)
+		fmt.Fprintf(writer, "  noise probability: %.2f\n", module.NoiseProbability)
 	}
 }
 

@@ -60,6 +60,7 @@ func evidenceDensity(stats *dirStat) float64 {
 }
 
 func newModuleCandidate(path string, stats *dirStat, profile HeuristicProfile) ModuleCandidate {
+	strength := evidenceStrength(stats)
 	return ModuleCandidate{
 		Path:               path,
 		FileCount:          stats.FileCount,
@@ -67,7 +68,34 @@ func newModuleCandidate(path string, stats *dirStat, profile HeuristicProfile) M
 		DominantExtensions: dominantExtensions(stats.Extensions, profile.Scoring.DominantExtensionLimit),
 		EvidenceByCategory: copyCountMap(stats.EvidenceByCategory),
 		EvidenceByFilename: copyCountMap(stats.EvidenceByFilename),
+		EvidenceStrength:   strength,
+		NoiseProbability:   noiseProbability(stats.EvidenceCount, strength),
 	}
+}
+
+// evidenceStrength is a directory's average evidence confidence: how strong
+// its own evidence matches are, independent of how many there are or how it
+// compares to any parent. A directory with no evidence has no confidence
+// signal to average, so it is 0 — not "weak evidence," just "no evidence."
+func evidenceStrength(stats *dirStat) float64 {
+	if stats.EvidenceCount == 0 {
+		return 0
+	}
+	return stats.EvidenceConfidenceSum / float64(stats.EvidenceCount)
+}
+
+// noiseProbability estimates how likely a candidate is incidental noise
+// rather than a real boundary, from the one signal Atlas actually has:
+// evidence confidence. A candidate with no evidence at all (qualified purely
+// by size — see isLargeDirectory) gets a neutral 0.5, not a high noise
+// estimate: docs/heuristics.md's own Rule 2 is that a large directory with no
+// build file of its own can still be genuinely important, so asserting it is
+// probably noise would contradict the reason that rule exists.
+func noiseProbability(evidenceCount int, strength float64) float64 {
+	if evidenceCount == 0 {
+		return 0.5
+	}
+	return 1 - strength
 }
 
 func dominantExtensions(extensions map[string]int, limit int) []string {

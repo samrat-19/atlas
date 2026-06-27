@@ -555,6 +555,120 @@ func TestIsStrongComparedToParentRespectsCustomProfile(t *testing.T) {
 	}
 }
 
+// TestNewModuleCandidateNoiseProbabilityNeutralWithoutEvidence verifies that
+// a candidate which qualifies purely on size (no evidence at all) gets a
+// neutral 0.5 noise probability rather than a confidently high one — Atlas
+// has no evidence-based signal to support calling it noise (a large
+// directory with no build file of its own can be entirely legitimate, see
+// docs/heuristics.md Rule 2).
+func TestNewModuleCandidateNoiseProbabilityNeutralWithoutEvidence(t *testing.T) {
+	stats := &dirStat{FileCount: 250}
+	candidate := newModuleCandidate("big", stats, DefaultHeuristics)
+
+	if candidate.EvidenceStrength != 0 {
+		t.Fatalf("EvidenceStrength = %v, want 0 (no evidence to average)", candidate.EvidenceStrength)
+	}
+	if candidate.NoiseProbability != 0.5 {
+		t.Fatalf("NoiseProbability = %v, want 0.5 (no evidence-based signal either way)", candidate.NoiseProbability)
+	}
+}
+
+// TestCollectModuleCandidateEvidenceStrengthReflectsConfidence proves the
+// full Phase 2 D1->D3 pipeline: a confidence discount applied at match time
+// (registry.go) flows through dirStat aggregation into the module
+// candidate's EvidenceStrength and NoiseProbability dimensions.
+func TestCollectModuleCandidateEvidenceStrengthReflectsConfidence(t *testing.T) {
+	dir := t.TempDir()
+	nested := filepath.Join(dir, "internal", "testdata", "sample")
+	if err := os.MkdirAll(nested, 0755); err != nil {
+		t.Fatalf("mkdir: %v", err)
+	}
+	if err := os.WriteFile(filepath.Join(nested, "go.mod"), []byte("module x"), 0644); err != nil {
+		t.Fatalf("write go.mod: %v", err)
+	}
+
+	res, err := Collect(dir)
+	if err != nil {
+		t.Fatalf("Collect: %v", err)
+	}
+
+	wantPath := filepath.ToSlash(filepath.Join("internal", "testdata", "sample"))
+	var found *ModuleCandidate
+	for i := range res.ModuleSummary.Modules {
+		if filepath.ToSlash(res.ModuleSummary.Modules[i].Path) == wantPath {
+			found = &res.ModuleSummary.Modules[i]
+		}
+	}
+	if found == nil {
+		t.Fatalf("module candidate %q not found in %#v", wantPath, res.ModuleSummary.Modules)
+	}
+
+	wantStrength := DefaultHeuristics.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
+	if found.EvidenceStrength != wantStrength {
+		t.Fatalf("EvidenceStrength = %v, want %v", found.EvidenceStrength, wantStrength)
+	}
+	if found.NoiseProbability != 1-wantStrength {
+		t.Fatalf("NoiseProbability = %v, want %v", found.NoiseProbability, 1-wantStrength)
+	}
+}
+
+// TestScoreModulesComputesNoveltyAndBoundaryConfidence exercises scoreModules
+// directly against a crafted parent/child set: a child identical to its
+// parent in extension mix and evidence category should score zero novelty,
+// a child with nothing in common should score full novelty, and a candidate
+// with no parent at all should default to full novelty since there is
+// nothing for it to be redundant with.
+func TestScoreModulesComputesNoveltyAndBoundaryConfidence(t *testing.T) {
+	modules := []ModuleCandidate{
+		{
+			Path: "parent", FileCount: 100, EvidenceCount: 1,
+			DominantExtensions: []string{".java"},
+			EvidenceByCategory: map[string]int{"build system": 1},
+			EvidenceStrength:   1.0,
+		},
+		{
+			Path: "parent/similar-child", FileCount: 50, EvidenceCount: 1,
+			DominantExtensions: []string{".java"},
+			EvidenceByCategory: map[string]int{"build system": 1},
+			EvidenceStrength:   1.0,
+		},
+		{
+			Path: "parent/different-child", FileCount: 50, EvidenceCount: 1,
+			DominantExtensions: []string{".ts"},
+			EvidenceByCategory: map[string]int{"package manager": 1},
+			EvidenceStrength:   1.0,
+		},
+	}
+	subtreeFiles := []int{200, 50, 50}
+	parents := []int{-1, 0, 0}
+	totalFiles := 200
+
+	scores := scoreModules(modules, subtreeFiles, parents, totalFiles, DefaultHeuristics)
+
+	if scores[0].NoveltyVsParent != 1.0 {
+		t.Fatalf("root NoveltyVsParent = %v, want 1.0 (no parent to compare against)", scores[0].NoveltyVsParent)
+	}
+	if scores[1].NoveltyVsParent != 0 {
+		t.Fatalf("identical-to-parent child NoveltyVsParent = %v, want 0 (full overlap)", scores[1].NoveltyVsParent)
+	}
+	if scores[2].NoveltyVsParent != 1.0 {
+		t.Fatalf("no-overlap child NoveltyVsParent = %v, want 1.0", scores[2].NoveltyVsParent)
+	}
+
+	if scores[1].BoundaryConfidence != 0.5 {
+		t.Fatalf("similar child BoundaryConfidence = %v, want 0.5 ((1.0 evidence strength + 0 novelty) / 2)",
+			scores[1].BoundaryConfidence)
+	}
+	if scores[2].BoundaryConfidence != 1.0 {
+		t.Fatalf("different child BoundaryConfidence = %v, want 1.0 ((1.0 evidence strength + 1.0 novelty) / 2)",
+			scores[2].BoundaryConfidence)
+	}
+
+	if scores[1].StructuralProminence != 0.25 {
+		t.Fatalf("StructuralProminence = %v, want 0.25 (50 of 200 files)", scores[1].StructuralProminence)
+	}
+}
+
 func TestDominantExtensionsUsesExtensionTieBreaker(t *testing.T) {
 	extensions := dominantExtensions(map[string]int{
 		".z": 1,

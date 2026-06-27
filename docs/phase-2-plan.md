@@ -61,7 +61,7 @@ alternate profile and assert behavior actually changes. No `ReportConfig`
 was added (see `docs/heuristic-calibration.md` for why). Battery output for
 selenium and tensorflow is byte-identical to before D2.
 
-### D3: Multidimensional scoring
+### D3: Multidimensional scoring — done
 
 Split the single `Score int` on `ModuleCandidate` / `RegionNode` into named,
 explainable dimensions: boundary confidence, evidence strength, size
@@ -69,6 +69,31 @@ prominence, novelty vs. parent, noise probability. Computed from D1's
 confidence data and D2's profile. A derived single score can stay for
 backward compatibility if useful, but the dimensions become the primary
 output.
+
+Landed on `ModuleCandidate` as `BoundaryConfidence`, `EvidenceStrength`,
+`StructuralProminence` (renamed from "size prominence" to match
+`docs/heuristics.md`'s existing wording), `NoveltyVsParent`, and
+`NoiseProbability` — all 0–1, all computed deterministically, none involving
+AI. `EvidenceStrength`/`NoiseProbability` only need a candidate's own stats
+(`modules.go`); `StructuralProminence`/`NoveltyVsParent`/`BoundaryConfidence`
+need subtree and parent context, so they're computed in `scoreModules`
+(`module_scoring.go`) where that context already exists. `Score` is
+unchanged, kept for backward-compatible sorting. All five are now printed in
+the "Major Modules" report section — confirmed sane against real noise
+patterns in tensorflow (`third_party` directories with no evidence get a
+neutral 0.5 `NoiseProbability`, not a falsely confident one; evidence under
+`test/` paths visibly shows the D1 confidence discount).
+
+Deliberately deferred: propagating these dimensions into `RegionNode` /
+the hierarchy view. Aggregating five non-additive 0–1 scores across a
+subtree (max? weighted average?) is a distinct design problem from computing
+them per-candidate, and doesn't yet have a justified answer — `RegionNode`
+keeps only `Score` for now.
+
+Also deferred, per `docs/heuristics.md`'s own wishlist: first-party
+probability, evidence diversity, investigation priority. First-party
+probability in particular overlaps with D4's structural-role classification
+rather than being a separate dimension — better resolved there.
 
 ### D4: Structural-role classification
 

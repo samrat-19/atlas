@@ -6,8 +6,17 @@ import (
 )
 
 type dirStat struct {
-	FileCount          int
-	EvidenceCount      int
+	FileCount     int
+	EvidenceCount int
+
+	// EvidenceConfidenceSum is the running total of every matched evidence
+	// item's Confidence (see EvidenceItem in types.go). Dividing by
+	// EvidenceCount gives the directory's average evidence confidence —
+	// the basis for ModuleCandidate.EvidenceStrength and, in turn,
+	// NoiseProbability and BoundaryConfidence (see modules.go and
+	// module_scoring.go).
+	EvidenceConfidenceSum float64
+
 	Extensions         map[string]int
 	EvidenceByCategory map[string]int
 	EvidenceByFilename map[string]int
@@ -42,6 +51,7 @@ func (s *dirStat) updateWithFile(extension string) {
 
 func (s *dirStat) updateWithEvidence(item EvidenceItem) {
 	s.EvidenceCount++
+	s.EvidenceConfidenceSum += item.Confidence
 	s.EvidenceByCategory[item.Category]++
 	s.EvidenceByFilename[item.Filename]++
 }
