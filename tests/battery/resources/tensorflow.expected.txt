@@ -481,7 +481,7 @@ evidence: 1
 
 
 Candidate Modules Found: 1374
-Retained Modules: 1056
+Retained Modules: 1055
 Compression Ratio: 0.77
 
 Major Modules:
@@ -9979,13 +9979,4 @@ Major Modules:
   evidence strength: 1.00
   structural prominence: 0.00
   novelty vs parent: 1.00
-  noise probability: 0.00
-- tensorflow\lite\delegates\gpu\common\tasks
-  score: -133
-  files: 167
-  evidence: 1
-  boundary confidence: 0.50
-  evidence strength: 1.00
-  structural prominence: 0.00
-  novelty vs parent: 0.00
   noise probability: 0.00

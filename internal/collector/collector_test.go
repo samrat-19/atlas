@@ -540,6 +540,33 @@ func TestIsModuleCandidateRespectsCustomProfile(t *testing.T) {
 // TestIsStrongComparedToParentRespectsCustomProfile proves
 // CompressionConfig.ChildScoreRetentionRatio is actually read from the
 // profile passed in, not a fixed value baked into the function.
+// TestIsStrongComparedToParentRejectsNegativeChildAgainstNegativeParent
+// reproduces a real case found in the tensorflow battery fixture:
+// tensorflow/lite/delegates/gpu/common/tasks scored -133 against a parent
+// (gpu/common) that scored -237. The unfixed formula, -133 >= -237*0.6
+// (-142.2), evaluated true: a negative parent score made the threshold
+// LESS negative, so a child just as redundant as its parent (zero novelty,
+// confirmed separately by BoundaryConfidence/NoveltyVsParent) was retained
+// by the strength check alone. A child with a genuinely negative score must
+// never pass this check, regardless of how negative its parent is.
+func TestIsStrongComparedToParentRejectsNegativeChildAgainstNegativeParent(t *testing.T) {
+	if isStrongComparedToParent(-133, -237, DefaultHeuristics) {
+		t.Fatalf("a negative-scoring child must not be considered strong against a negative-scoring parent")
+	}
+}
+
+// TestIsStrongComparedToParentStillWorksForPositiveParent confirms the fix
+// did not change behavior for the common, non-buggy case: a positive parent
+// score is compared exactly as before.
+func TestIsStrongComparedToParentStillWorksForPositiveParent(t *testing.T) {
+	if !isStrongComparedToParent(650, 1000, DefaultHeuristics) {
+		t.Fatalf("650 is 65%% of 1000, should clear the default 60%% retention ratio")
+	}
+	if isStrongComparedToParent(500, 1000, DefaultHeuristics) {
+		t.Fatalf("500 is 50%% of 1000, should not clear the default 60%% retention ratio")
+	}
+}
+
 func TestIsStrongComparedToParentRespectsCustomProfile(t *testing.T) {
 	childScore, parentScore := 50, 100 // child is 50% of parent
 

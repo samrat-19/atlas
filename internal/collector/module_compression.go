@@ -139,8 +139,28 @@ func retainedModules(
 	return retained
 }
 
+// isStrongComparedToParent answers "does this child retain enough of its
+// parent's strength to survive on its own merits?" — at least
+// ChildScoreRetentionRatio of the parent's score.
+//
+// That question only makes sense when there is positive parent strength to
+// retain a fraction of. A parent's score goes negative once the redundant-
+// child penalty (see scoreModules) exceeds its own evidence/size
+// contribution — i.e. the parent itself already looks redundant. Multiplying
+// a negative parent score by a fractional ratio makes it LESS negative, not
+// smaller in magnitude, so the raw formula inverts: the more redundant the
+// parent, the easier the bar is to clear, letting an equally redundant child
+// look "strong" by comparison. Clamping the parent side at zero treats a
+// non-positive parent as having no strength to be a fraction of, so a child
+// can only pass this check by having a genuinely non-negative score of its
+// own — it can no longer pass by being merely less negative than a parent
+// that is itself redundant.
 func isStrongComparedToParent(childScore, parentScore int, profile HeuristicProfile) bool {
-	return float64(childScore) >= float64(parentScore)*profile.Compression.ChildScoreRetentionRatio
+	effectiveParentScore := parentScore
+	if effectiveParentScore < 0 {
+		effectiveParentScore = 0
+	}
+	return float64(childScore) >= float64(effectiveParentScore)*profile.Compression.ChildScoreRetentionRatio
 }
 
 func isNovelComparedToParent(overlap float64, profile HeuristicProfile) bool {
