@@ -120,7 +120,6 @@ normalized to `Root path: <ROOT>`.
 cmd/atlas/              CLI and report rendering
 internal/collector/     repository traversal, evidence aggregation, module heuristics
 tests/battery/          opt-in large repository regression tests
-codexPlans/             planning documents and decision log
 ```
 
 ## Current Phase
