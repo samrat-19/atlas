@@ -164,7 +164,7 @@ same compression/retention logic already patched once for the negative-score
 bug, so it needs its own deliberate review and a calibration pass — not a
 decision made as a side effect of adding the label.
 
-### D5: Calibration pass
+### D5: Calibration pass — done
 
 Re-run against Selenium, TensorFlow, and VS Code. Per
 `docs/heuristic-calibration.md`'s methodology: define expected
@@ -172,6 +172,62 @@ promotions/demotions per repo before looking at output, then check for false
 positives, missed regions, and whether a change that helps one repo hurts
 another. Update battery fixtures only after expected outcomes are met — not
 just because output changed.
+
+First worth stating plainly: **D1, D3, and D4a changed no retention or
+ranking behavior at all** — `Score`'s formula is byte-identical to Phase 1.
+The only thing since Phase 1 that actually changed *what* gets retained is
+the negative-score retention bugfix (one entry removed from TensorFlow). So
+the classic calibration risk ("a threshold change helped one repo and hurt
+another") doesn't apply to D1/D3/D4a by construction — there's no threshold
+to have miscalibrated. What D5 actually needed to check is whether the *new*
+labels and numbers are themselves trustworthy, not whether they broke
+existing rankings.
+
+Pre-registered expectations per repo (written down before re-checking
+output, based on general knowledge of each project — not from what we'd
+already seen during D1–D4a):
+
+| Repo | Expected first-party | Expected vendored | Expected ambiguous |
+|---|---|---|---|
+| Selenium | `java/`, `py/`, `rb/`, `javascript/`, `rust/`, `dotnet/` | `third_party/` | test trees |
+| TensorFlow | `tensorflow/` (dominant) | `third_party/` incl. `xla` | `tools/api/golden`, `security/advisory` |
+| VS Code | `src/` (dominant), `extensions/` | none (deps via npm, hard-pruned) | test trees |
+
+All confirmed exactly as expected, plus a systematic sweep of the negative
+space we hadn't explicitly checked before:
+
+- All 6 Selenium language clusters and TensorFlow's `tensorflow/` root
+  (structural prominence 0.74, boundary confidence 1.00) labeled
+  `first-party` correctly. VS Code's `extensions/` — easy to mistake for
+  vendored since it's modular, but it's genuinely part of the project —
+  correctly `first-party`, zero `vendored` labels anywhere in VS Code at all
+  (matches expectation: it has no `third_party`/`vendor` directory).
+- TensorFlow's 111 `test-fixture` labels: sampled the largest (up to 204
+  files) — every one is a real `tests`/`test` directory inside the MLIR
+  compiler infrastructure. No false positives.
+- TensorFlow's and Selenium's `vendored` labels are correct by construction
+  (the role can only fire if the path already matched a vendored pattern),
+  but the largest ones were checked for *sense*, not just mechanical
+  correctness: `third_party\xla` (TF co-develops XLA as a semi-independent
+  compiler — correct to call vendored) and `third_party\icu` (the
+  well-known ICU library) both check out.
+- Zero `build-output` labels fired in any of the three repos. Confirmed
+  benign, not a bug: `dist`/`target` directories essentially don't exist in
+  a git checkout (build output is normally gitignored) — found exactly one,
+  `vscode-main/test/monaco/dist`, and it had a single file, far below the
+  candidate threshold, so it never became a candidate to classify.
+- A genuine, real-world confirmation of a D4a judgment call: VS Code's
+  `build\monaco` and `build\builtin` directories surfaced and were
+  correctly labeled `first-party`, not `build-output` — because `build` was
+  deliberately excluded from `buildOutputPathSegments` as too ambiguous.
+  Had it been included, this would have been a real false positive: in VS
+  Code, `build/` holds first-party build-tooling source (gulp scripts),
+  not throwaway output.
+- Swept all three repos for any other negative score: none found — the
+  bugfix holds and there's no second instance of that pattern.
+
+No issues found requiring a fix. Battery fixtures were not changed by this
+pass (no code changed, only verification).
 
 ## Constraints
 
