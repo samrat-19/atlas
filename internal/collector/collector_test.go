@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"testing"
+
+	"atlas/internal/model"
 )
 
 func TestCollectCountsFiles(t *testing.T) {
@@ -194,7 +196,7 @@ func TestCollectCensusSummary(t *testing.T) {
 }
 
 func TestBuildHierarchyFromRetainedModules(t *testing.T) {
-	mods := []ModuleCandidate{
+	mods := []model.ModuleCandidate{
 		{Path: "java", FileCount: 100, EvidenceCount: 5, Score: 1200},
 		{Path: "java/src", FileCount: 40, EvidenceCount: 2, Score: 800},
 		{Path: "java/src/org/openqa/selenium/grid", FileCount: 20, EvidenceCount: 1, Score: 300},
@@ -250,7 +252,7 @@ func TestBuildModuleSummaryUsesPathTieBreaker(t *testing.T) {
 		},
 	}
 
-	summary := buildModuleSummary(stats, DefaultHeuristics)
+	summary := buildModuleSummary(stats, model.DefaultHeuristics)
 	if len(summary.Modules) != 2 {
 		t.Fatalf("expected 2 modules, got %d", len(summary.Modules))
 	}
@@ -407,7 +409,7 @@ func TestCollectIsDeterministic(t *testing.T) {
 		}
 	}
 
-	marshal := func(r Result) []byte {
+	marshal := func(r model.Result) []byte {
 		b, err := json.Marshal(r)
 		if err != nil {
 			t.Fatalf("json.Marshal: %v", err)
@@ -483,7 +485,7 @@ func TestCollectEvidenceConfidenceDiscountedUnderTestdata(t *testing.T) {
 	if len(res.Evidence) != 1 {
 		t.Fatalf("expected 1 evidence item, got %d", len(res.Evidence))
 	}
-	want := DefaultHeuristics.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
+	want := model.DefaultHeuristics.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
 	if res.Evidence[0].Confidence != want {
 		t.Fatalf("Confidence = %v, want %v", res.Evidence[0].Confidence, want)
 	}
@@ -493,7 +495,7 @@ func TestCollectEvidenceConfidenceDiscountedUnderTestdata(t *testing.T) {
 // rules (e.g. ".github/workflows") also carry confidence through
 // MatchEvidence, not just plain-filename rules.
 func TestMatchEvidenceSuffixRuleCarriesConfidence(t *testing.T) {
-	_, category, confidence, ok := MatchEvidence("workflows", filepath.FromSlash(".github/workflows"), DefaultHeuristics)
+	_, category, confidence, ok := MatchEvidence("workflows", filepath.FromSlash(".github/workflows"), model.DefaultHeuristics)
 	if !ok {
 		t.Fatalf("expected a match for .github/workflows")
 	}
@@ -509,7 +511,7 @@ func TestMatchEvidenceSuffixRuleCarriesConfidence(t *testing.T) {
 // still returns a zero confidence alongside ok=false, rather than a stale or
 // undefined value.
 func TestMatchEvidenceNoMatchReturnsZeroConfidence(t *testing.T) {
-	_, _, confidence, ok := MatchEvidence("not-evidence.txt", "not-evidence.txt", DefaultHeuristics)
+	_, _, confidence, ok := MatchEvidence("not-evidence.txt", "not-evidence.txt", model.DefaultHeuristics)
 	if ok {
 		t.Fatalf("expected no match for not-evidence.txt")
 	}
@@ -525,21 +527,18 @@ func TestMatchEvidenceNoMatchReturnsZeroConfidence(t *testing.T) {
 func TestIsModuleCandidateRespectsCustomProfile(t *testing.T) {
 	stats := &dirStat{FileCount: 50}
 
-	if isModuleCandidate(stats, DefaultHeuristics) {
+	if isModuleCandidate(stats, model.DefaultHeuristics) {
 		t.Fatalf("50 files with no evidence should not qualify under DefaultHeuristics (threshold %d)",
-			DefaultHeuristics.CandidateSelection.LargeDirectoryFileThreshold)
+			model.DefaultHeuristics.CandidateSelection.LargeDirectoryFileThreshold)
 	}
 
-	lenient := DefaultHeuristics
+	lenient := model.DefaultHeuristics
 	lenient.CandidateSelection.LargeDirectoryFileThreshold = 10
 	if !isModuleCandidate(stats, lenient) {
 		t.Fatalf("50 files with no evidence should qualify once the profile's threshold is lowered to 10")
 	}
 }
 
-// TestIsStrongComparedToParentRespectsCustomProfile proves
-// CompressionConfig.ChildScoreRetentionRatio is actually read from the
-// profile passed in, not a fixed value baked into the function.
 // TestIsStrongComparedToParentRejectsNegativeChildAgainstNegativeParent
 // reproduces a real case found in the tensorflow battery fixture:
 // tensorflow/lite/delegates/gpu/common/tasks scored -133 against a parent
@@ -550,7 +549,7 @@ func TestIsModuleCandidateRespectsCustomProfile(t *testing.T) {
 // by the strength check alone. A child with a genuinely negative score must
 // never pass this check, regardless of how negative its parent is.
 func TestIsStrongComparedToParentRejectsNegativeChildAgainstNegativeParent(t *testing.T) {
-	if isStrongComparedToParent(-133, -237, DefaultHeuristics) {
+	if isStrongComparedToParent(-133, -237, model.DefaultHeuristics) {
 		t.Fatalf("a negative-scoring child must not be considered strong against a negative-scoring parent")
 	}
 }
@@ -559,23 +558,26 @@ func TestIsStrongComparedToParentRejectsNegativeChildAgainstNegativeParent(t *te
 // did not change behavior for the common, non-buggy case: a positive parent
 // score is compared exactly as before.
 func TestIsStrongComparedToParentStillWorksForPositiveParent(t *testing.T) {
-	if !isStrongComparedToParent(650, 1000, DefaultHeuristics) {
+	if !isStrongComparedToParent(650, 1000, model.DefaultHeuristics) {
 		t.Fatalf("650 is 65%% of 1000, should clear the default 60%% retention ratio")
 	}
-	if isStrongComparedToParent(500, 1000, DefaultHeuristics) {
+	if isStrongComparedToParent(500, 1000, model.DefaultHeuristics) {
 		t.Fatalf("500 is 50%% of 1000, should not clear the default 60%% retention ratio")
 	}
 }
 
+// TestIsStrongComparedToParentRespectsCustomProfile proves
+// CompressionConfig.ChildScoreRetentionRatio is actually read from the
+// profile passed in, not a fixed value baked into the function.
 func TestIsStrongComparedToParentRespectsCustomProfile(t *testing.T) {
 	childScore, parentScore := 50, 100 // child is 50% of parent
 
-	if isStrongComparedToParent(childScore, parentScore, DefaultHeuristics) {
+	if isStrongComparedToParent(childScore, parentScore, model.DefaultHeuristics) {
 		t.Fatalf("50%% of parent score should not be strong under the default ratio (%v)",
-			DefaultHeuristics.Compression.ChildScoreRetentionRatio)
+			model.DefaultHeuristics.Compression.ChildScoreRetentionRatio)
 	}
 
-	lenient := DefaultHeuristics
+	lenient := model.DefaultHeuristics
 	lenient.Compression.ChildScoreRetentionRatio = 0.4
 	if !isStrongComparedToParent(childScore, parentScore, lenient) {
 		t.Fatalf("50%% of parent score should be strong once the retention ratio is lowered to 0.4")
@@ -590,7 +592,7 @@ func TestIsStrongComparedToParentRespectsCustomProfile(t *testing.T) {
 // docs/heuristics.md Rule 2).
 func TestNewModuleCandidateNoiseProbabilityNeutralWithoutEvidence(t *testing.T) {
 	stats := &dirStat{FileCount: 250}
-	candidate := newModuleCandidate("big", stats, DefaultHeuristics)
+	candidate := newModuleCandidate("big", stats, model.DefaultHeuristics)
 
 	if candidate.EvidenceStrength != 0 {
 		t.Fatalf("EvidenceStrength = %v, want 0 (no evidence to average)", candidate.EvidenceStrength)
@@ -620,7 +622,7 @@ func TestCollectModuleCandidateEvidenceStrengthReflectsConfidence(t *testing.T) 
 	}
 
 	wantPath := filepath.ToSlash(filepath.Join("internal", "testdata", "sample"))
-	var found *ModuleCandidate
+	var found *model.ModuleCandidate
 	for i := range res.ModuleSummary.Modules {
 		if filepath.ToSlash(res.ModuleSummary.Modules[i].Path) == wantPath {
 			found = &res.ModuleSummary.Modules[i]
@@ -630,7 +632,7 @@ func TestCollectModuleCandidateEvidenceStrengthReflectsConfidence(t *testing.T) 
 		t.Fatalf("module candidate %q not found in %#v", wantPath, res.ModuleSummary.Modules)
 	}
 
-	wantStrength := DefaultHeuristics.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
+	wantStrength := model.DefaultHeuristics.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
 	if found.EvidenceStrength != wantStrength {
 		t.Fatalf("EvidenceStrength = %v, want %v", found.EvidenceStrength, wantStrength)
 	}
@@ -646,7 +648,7 @@ func TestCollectModuleCandidateEvidenceStrengthReflectsConfidence(t *testing.T) 
 // with no parent at all should default to full novelty since there is
 // nothing for it to be redundant with.
 func TestScoreModulesComputesNoveltyAndBoundaryConfidence(t *testing.T) {
-	modules := []ModuleCandidate{
+	modules := []model.ModuleCandidate{
 		{
 			Path: "parent", FileCount: 100, EvidenceCount: 1,
 			DominantExtensions: []string{".java"},
@@ -670,7 +672,7 @@ func TestScoreModulesComputesNoveltyAndBoundaryConfidence(t *testing.T) {
 	parents := []int{-1, 0, 0}
 	totalFiles := 200
 
-	scores := scoreModules(modules, subtreeFiles, parents, totalFiles, DefaultHeuristics)
+	scores := scoreModules(modules, subtreeFiles, parents, totalFiles, model.DefaultHeuristics)
 
 	if scores[0].NoveltyVsParent != 1.0 {
 		t.Fatalf("root NoveltyVsParent = %v, want 1.0 (no parent to compare against)", scores[0].NoveltyVsParent)
@@ -696,10 +698,6 @@ func TestScoreModulesComputesNoveltyAndBoundaryConfidence(t *testing.T) {
 	}
 }
 
-// TestBuildUnrecognizedSummaryGroupsByDominantExtension verifies the core
-// behavior: evidence-less candidates sharing a dominant extension are
-// grouped into one cluster, and candidates with any evidence at all are
-// excluded entirely (Atlas already has something to say about them).
 // TestClassifyRolePathPatterns covers each path-pattern role in isolation —
 // the cases the unrecognized-extension diagnostic and the project's own
 // existing conventions (vendor/, node_modules', test/, etc.) directly
@@ -708,17 +706,17 @@ func TestClassifyRolePathPatterns(t *testing.T) {
 	cases := []struct {
 		name string
 		path string
-		want Role
+		want model.Role
 	}{
-		{"vendor directory", "third_party/xla", RoleVendored},
-		{"vendor exact segment", "vendor/lib", RoleVendored},
-		{"generated directory, real VS Code case", "src/vs/platform/agentHost/node/codex/protocol/generated/v2", RoleGenerated},
-		{"build output", "web/dist", RoleBuildOutput},
-		{"test fixture", "internal/testdata/sample", RoleTestFixture},
+		{"vendor directory", "third_party/xla", model.RoleVendored},
+		{"vendor exact segment", "vendor/lib", model.RoleVendored},
+		{"generated directory, real VS Code case", "src/vs/platform/agentHost/node/codex/protocol/generated/v2", model.RoleGenerated},
+		{"build output", "web/dist", model.RoleBuildOutput},
+		{"test fixture", "internal/testdata/sample", model.RoleTestFixture},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			got := classifyRole(tc.path, 0, 0, DefaultHeuristics)
+			got := classifyRole(tc.path, 0, 0, model.DefaultHeuristics)
 			if got != tc.want {
 				t.Fatalf("classifyRole(%q) = %q, want %q", tc.path, got, tc.want)
 			}
@@ -734,16 +732,16 @@ func TestClassifyRoleFirstPartyAndAmbiguous(t *testing.T) {
 		name             string
 		evidenceCount    int
 		evidenceStrength float64
-		want             Role
+		want             model.Role
 	}{
-		{"strong evidence, no pattern match", 1, 1.0, RoleFirstParty},
-		{"at the threshold exactly", 1, DefaultHeuristics.RoleClassification.FirstPartyEvidenceStrengthThreshold, RoleFirstParty},
-		{"no evidence at all", 0, 0, RoleAmbiguous},
-		{"evidence below threshold", 1, 0.5, RoleAmbiguous},
+		{"strong evidence, no pattern match", 1, 1.0, model.RoleFirstParty},
+		{"at the threshold exactly", 1, model.DefaultHeuristics.RoleClassification.FirstPartyEvidenceStrengthThreshold, model.RoleFirstParty},
+		{"no evidence at all", 0, 0, model.RoleAmbiguous},
+		{"evidence below threshold", 1, 0.5, model.RoleAmbiguous},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			got := classifyRole("src/normal-folder", tc.evidenceCount, tc.evidenceStrength, DefaultHeuristics)
+			got := classifyRole("src/normal-folder", tc.evidenceCount, tc.evidenceStrength, model.DefaultHeuristics)
 			if got != tc.want {
 				t.Fatalf("classifyRole(evidenceCount=%d, strength=%v) = %q, want %q",
 					tc.evidenceCount, tc.evidenceStrength, got, tc.want)
@@ -762,21 +760,25 @@ func TestClassifyRolePrecedenceIsFixedNotMapOrder(t *testing.T) {
 	// first in classifyRole's switch, so it must always win.
 	path := "third_party/generated/stuff"
 	for i := 0; i < 20; i++ {
-		got := classifyRole(path, 0, 0, DefaultHeuristics)
-		if got != RoleVendored {
-			t.Fatalf("run %d: classifyRole(%q) = %q, want %q every time (fixed precedence)", i, path, got, RoleVendored)
+		got := classifyRole(path, 0, 0, model.DefaultHeuristics)
+		if got != model.RoleVendored {
+			t.Fatalf("run %d: classifyRole(%q) = %q, want %q every time (fixed precedence)", i, path, got, model.RoleVendored)
 		}
 	}
 }
 
+// TestBuildUnrecognizedSummaryGroupsByDominantExtension verifies the core
+// behavior: evidence-less candidates sharing a dominant extension are
+// grouped into one cluster, and candidates with any evidence at all are
+// excluded entirely (Atlas already has something to say about them).
 func TestBuildUnrecognizedSummaryGroupsByDominantExtension(t *testing.T) {
-	modules := []ModuleCandidate{
+	modules := []model.ModuleCandidate{
 		{Path: "a", FileCount: 300, EvidenceCount: 0, DominantExtensions: []string{".bzl"}},
 		{Path: "b", FileCount: 200, EvidenceCount: 0, DominantExtensions: []string{".bzl"}},
 		{Path: "c", FileCount: 500, EvidenceCount: 1, DominantExtensions: []string{".bzl"}}, // has evidence, excluded
 	}
 
-	summary := buildUnrecognizedSummary(modules, DefaultHeuristics)
+	summary := buildUnrecognizedSummary(modules, model.DefaultHeuristics)
 
 	if summary.TotalUnrecognizedDirectories != 2 {
 		t.Fatalf("TotalUnrecognizedDirectories = %d, want 2", summary.TotalUnrecognizedDirectories)
@@ -797,7 +799,7 @@ func TestBuildUnrecognizedSummaryGroupsByDominantExtension(t *testing.T) {
 // DirectoryCount descending, then TotalFiles descending, then Extension
 // ascending as a full deterministic tie-break.
 func TestBuildUnrecognizedSummarySortOrder(t *testing.T) {
-	modules := []ModuleCandidate{
+	modules := []model.ModuleCandidate{
 		{Path: "a", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".rare"}},
 		{Path: "b1", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".common"}},
 		{Path: "b2", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".common"}},
@@ -807,7 +809,7 @@ func TestBuildUnrecognizedSummarySortOrder(t *testing.T) {
 		{Path: "d2", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".tied-b"}},
 	}
 
-	summary := buildUnrecognizedSummary(modules, DefaultHeuristics)
+	summary := buildUnrecognizedSummary(modules, model.DefaultHeuristics)
 
 	var order []string
 	for _, c := range summary.Clusters {
@@ -824,14 +826,14 @@ func TestBuildUnrecognizedSummarySortOrder(t *testing.T) {
 // TestBuildUnrecognizedSummaryCapsExamplePaths verifies ExamplePaths respects
 // DiagnosticsConfig.ExampleDirectoryLimit and is sorted alphabetically.
 func TestBuildUnrecognizedSummaryCapsExamplePaths(t *testing.T) {
-	modules := []ModuleCandidate{
+	modules := []model.ModuleCandidate{
 		{Path: "z", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
 		{Path: "y", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
 		{Path: "a", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
 		{Path: "m", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
 	}
 
-	limited := DefaultHeuristics
+	limited := model.DefaultHeuristics
 	limited.Diagnostics.ExampleDirectoryLimit = 2
 
 	summary := buildUnrecognizedSummary(modules, limited)
@@ -851,11 +853,11 @@ func TestBuildUnrecognizedSummaryCapsExamplePaths(t *testing.T) {
 // no blind spots produces an empty, zero-valued summary rather than
 // nil-vs-empty ambiguity.
 func TestBuildUnrecognizedSummaryEmptyWhenAllHaveEvidence(t *testing.T) {
-	modules := []ModuleCandidate{
+	modules := []model.ModuleCandidate{
 		{Path: "a", FileCount: 100, EvidenceCount: 1, DominantExtensions: []string{".go"}},
 	}
 
-	summary := buildUnrecognizedSummary(modules, DefaultHeuristics)
+	summary := buildUnrecognizedSummary(modules, model.DefaultHeuristics)
 	if summary.TotalUnrecognizedDirectories != 0 || summary.TotalUnrecognizedFiles != 0 || len(summary.Clusters) != 0 {
 		t.Fatalf("expected an empty summary, got %#v", summary)
 	}

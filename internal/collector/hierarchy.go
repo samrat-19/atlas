@@ -3,11 +3,13 @@ package collector
 import (
 	"sort"
 	"strings"
+
+	"atlas/internal/model"
 )
 
-func buildHierarchy(modules []ModuleCandidate) HierarchySummary {
+func buildHierarchy(modules []model.ModuleCandidate) model.HierarchySummary {
 	if len(modules) == 0 {
-		return HierarchySummary{}
+		return model.HierarchySummary{}
 	}
 
 	paths, index := indexModulePaths(modules)
@@ -15,7 +17,7 @@ func buildHierarchy(modules []ModuleCandidate) HierarchySummary {
 	nodes := hierarchyNodes(modules, paths)
 	regions := attachHierarchyNodes(modules, paths, parents, nodes)
 
-	result := make([]*RegionNode, 0, len(regions))
+	result := make([]*model.RegionNode, 0, len(regions))
 	for _, region := range regions {
 		aggregateRegion(region)
 		sortRegionTree(region)
@@ -35,7 +37,7 @@ func buildHierarchy(modules []ModuleCandidate) HierarchySummary {
 		return result[i].Score > result[j].Score
 	})
 
-	return HierarchySummary{
+	return model.HierarchySummary{
 		TotalRegions:    len(result),
 		TotalSubsystems: countSubsystems(result),
 		Regions:         result,
@@ -64,10 +66,10 @@ func hierarchyParents(paths []string, index map[string]int) []int {
 	return parents
 }
 
-func hierarchyNodes(modules []ModuleCandidate, paths []string) map[string]*RegionNode {
-	nodes := make(map[string]*RegionNode, len(modules))
+func hierarchyNodes(modules []model.ModuleCandidate, paths []string) map[string]*model.RegionNode {
+	nodes := make(map[string]*model.RegionNode, len(modules))
 	for i, module := range modules {
-		nodes[paths[i]] = &RegionNode{
+		nodes[paths[i]] = &model.RegionNode{
 			Path:          module.Path,
 			FileCount:     module.FileCount,
 			EvidenceCount: module.EvidenceCount,
@@ -78,12 +80,12 @@ func hierarchyNodes(modules []ModuleCandidate, paths []string) map[string]*Regio
 }
 
 func attachHierarchyNodes(
-	modules []ModuleCandidate,
+	modules []model.ModuleCandidate,
 	paths []string,
 	parents []int,
-	nodes map[string]*RegionNode,
-) map[string]*RegionNode {
-	regions := make(map[string]*RegionNode)
+	nodes map[string]*model.RegionNode,
+) map[string]*model.RegionNode {
+	regions := make(map[string]*model.RegionNode)
 	for i, module := range modules {
 		path := paths[i]
 		regionKey := strings.Split(path, "/")[0]
@@ -91,7 +93,7 @@ func attachHierarchyNodes(
 		if !ok {
 			region = nodes[regionKey]
 			if region == nil {
-				region = &RegionNode{Path: regionKey}
+				region = &model.RegionNode{Path: regionKey}
 			}
 			regions[regionKey] = region
 		}

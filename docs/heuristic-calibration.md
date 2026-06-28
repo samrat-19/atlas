@@ -59,7 +59,9 @@ This turns the question from "why 200?" into:
 ## Code Manageability Direction
 
 **Status: done (Phase 2 D2).** `HeuristicProfile` now lives in
-`internal/collector/heuristics.go`, grouped into `EvidenceConfidenceConfig`,
+`internal/model/heuristics.go` (moved here from `internal/collector` during
+the Phase 2 package-boundary refactor — see `docs/phase-2-plan.md`), grouped
+into `EvidenceConfidenceConfig`,
 `CandidateSelectionConfig`, `ScoringConfig`, and `CompressionConfig`.
 `DefaultHeuristics` holds the same numbers Phase 1 used as bare constants —
 nothing about scoring changed, only where the numbers live. The profile is

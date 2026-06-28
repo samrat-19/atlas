@@ -3,6 +3,8 @@ package collector
 import (
 	"path/filepath"
 	"strings"
+
+	"atlas/internal/model"
 )
 
 type dirStat struct {
@@ -10,7 +12,7 @@ type dirStat struct {
 	EvidenceCount int
 
 	// EvidenceConfidenceSum is the running total of every matched evidence
-	// item's Confidence (see EvidenceItem in types.go). Dividing by
+	// item's Confidence (see model.EvidenceItem). Dividing by
 	// EvidenceCount gives the directory's average evidence confidence —
 	// the basis for ModuleCandidate.EvidenceStrength and, in turn,
 	// NoiseProbability and BoundaryConfidence (see modules.go and
@@ -49,7 +51,7 @@ func (s *dirStat) updateWithFile(extension string) {
 	s.Extensions[extension]++
 }
 
-func (s *dirStat) updateWithEvidence(item EvidenceItem) {
+func (s *dirStat) updateWithEvidence(item model.EvidenceItem) {
 	s.EvidenceCount++
 	s.EvidenceConfidenceSum += item.Confidence
 	s.EvidenceByCategory[item.Category]++

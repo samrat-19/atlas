@@ -4,20 +4,22 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"atlas/internal/model"
 )
 
 // compressModules prunes redundant parent-child candidates, keeping a child
 // only when it scores strongly enough on its own or looks different enough
 // from its parent (see retainedModules). profile supplies every weight and
-// threshold scoreModules and retainedModules read — see CompressionConfig in
-// heuristics.go.
+// threshold scoreModules and retainedModules read — see
+// model.CompressionConfig.
 func compressModules(
-	modules []ModuleCandidate,
+	modules []model.ModuleCandidate,
 	dirStats map[string]*dirStat,
 	totalFiles int,
-	profile HeuristicProfile,
-) CompressedModuleSummary {
-	summary := CompressedModuleSummary{TotalCandidates: len(modules)}
+	profile model.HeuristicProfile,
+) model.CompressedModuleSummary {
+	summary := model.CompressedModuleSummary{TotalCandidates: len(modules)}
 	if len(modules) == 0 {
 		return summary
 	}
@@ -45,7 +47,7 @@ func compressModules(
 	return summary
 }
 
-func indexModulePaths(modules []ModuleCandidate) ([]string, map[string]int) {
+func indexModulePaths(modules []model.ModuleCandidate) ([]string, map[string]int) {
 	paths := make([]string, len(modules))
 	index := make(map[string]int, len(modules))
 	for i, module := range modules {
@@ -104,7 +106,7 @@ func retainedModules(
 	paths []string,
 	parents []int,
 	scores []moduleScore,
-	profile HeuristicProfile,
+	profile model.HeuristicProfile,
 ) []bool {
 	indexes := make([]int, len(paths))
 	for i := range paths {
@@ -155,7 +157,7 @@ func retainedModules(
 // can only pass this check by having a genuinely non-negative score of its
 // own — it can no longer pass by being merely less negative than a parent
 // that is itself redundant.
-func isStrongComparedToParent(childScore, parentScore int, profile HeuristicProfile) bool {
+func isStrongComparedToParent(childScore, parentScore int, profile model.HeuristicProfile) bool {
 	effectiveParentScore := parentScore
 	if effectiveParentScore < 0 {
 		effectiveParentScore = 0
@@ -163,6 +165,6 @@ func isStrongComparedToParent(childScore, parentScore int, profile HeuristicProf
 	return float64(childScore) >= float64(effectiveParentScore)*profile.Compression.ChildScoreRetentionRatio
 }
 
-func isNovelComparedToParent(overlap float64, profile HeuristicProfile) bool {
+func isNovelComparedToParent(overlap float64, profile model.HeuristicProfile) bool {
 	return (1.0 - overlap) > profile.Compression.NoveltyRetentionDelta
 }

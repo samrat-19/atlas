@@ -1,14 +1,23 @@
 package collector
 
-import "sort"
+import (
+	"sort"
+
+	"atlas/internal/model"
+)
 
 // buildModuleSummary turns per-directory stats into the candidate module
 // list: which folders qualify (isModuleCandidate), how they're scored
 // (moduleCandidateScore), sorted strongest first. profile supplies every
-// threshold and weight used along the way — see HeuristicProfile in
-// heuristics.go for what each field means and why.
-func buildModuleSummary(dirStats map[string]*dirStat, profile HeuristicProfile) ModuleSummary {
-	var modules []ModuleCandidate
+// threshold and weight used along the way — see model.HeuristicProfile for
+// what each field means and why.
+//
+// Role is deliberately not set here — see classifyRole in role.go, called
+// from collect.go's orchestration after this function returns. Scoring and
+// classification are independent concerns; nothing in this file imports or
+// calls role.go.
+func buildModuleSummary(dirStats map[string]*dirStat, profile model.HeuristicProfile) model.ModuleSummary {
+	var modules []model.ModuleCandidate
 	for path, stats := range dirStats {
 		if !isModuleCandidate(stats, profile) {
 			continue
@@ -23,14 +32,14 @@ func buildModuleSummary(dirStats map[string]*dirStat, profile HeuristicProfile) 
 		}
 		return scoreI > scoreJ
 	})
-	return ModuleSummary{TotalModules: len(modules), Modules: modules}
+	return model.ModuleSummary{TotalModules: len(modules), Modules: modules}
 }
 
 // isModuleCandidate answers candidate-selection Rule 1–3 from
 // docs/heuristics.md: a folder qualifies if it has any evidence, is large
 // enough to matter on its own, or is dense enough with evidence relative to
 // its size.
-func isModuleCandidate(stats *dirStat, profile HeuristicProfile) bool {
+func isModuleCandidate(stats *dirStat, profile model.HeuristicProfile) bool {
 	return hasEvidence(stats) ||
 		isLargeDirectory(stats, profile) ||
 		hasHighEvidenceDensity(stats, profile)
@@ -40,11 +49,11 @@ func hasEvidence(stats *dirStat) bool {
 	return stats.EvidenceCount > 0
 }
 
-func isLargeDirectory(stats *dirStat, profile HeuristicProfile) bool {
+func isLargeDirectory(stats *dirStat, profile model.HeuristicProfile) bool {
 	return stats.FileCount >= profile.CandidateSelection.LargeDirectoryFileThreshold
 }
 
-func hasHighEvidenceDensity(stats *dirStat, profile HeuristicProfile) bool {
+func hasHighEvidenceDensity(stats *dirStat, profile model.HeuristicProfile) bool {
 	if stats.FileCount < profile.CandidateSelection.EvidenceDenseFileThreshold {
 		return false
 	}
@@ -59,9 +68,9 @@ func evidenceDensity(stats *dirStat) float64 {
 	return density
 }
 
-func newModuleCandidate(path string, stats *dirStat, profile HeuristicProfile) ModuleCandidate {
+func newModuleCandidate(path string, stats *dirStat, profile model.HeuristicProfile) model.ModuleCandidate {
 	strength := evidenceStrength(stats)
-	return ModuleCandidate{
+	return model.ModuleCandidate{
 		Path:               path,
 		FileCount:          stats.FileCount,
 		EvidenceCount:      stats.EvidenceCount,
@@ -70,7 +79,6 @@ func newModuleCandidate(path string, stats *dirStat, profile HeuristicProfile) M
 		EvidenceByFilename: copyCountMap(stats.EvidenceByFilename),
 		EvidenceStrength:   strength,
 		NoiseProbability:   noiseProbability(stats.EvidenceCount, strength),
-		Role:               classifyRole(path, stats.EvidenceCount, strength, profile),
 	}
 }
 
@@ -123,7 +131,7 @@ func dominantExtensions(extensions map[string]int, limit int) []string {
 	return result
 }
 
-func moduleCandidateScore(module ModuleCandidate, profile HeuristicProfile) int {
+func moduleCandidateScore(module model.ModuleCandidate, profile model.HeuristicProfile) int {
 	return module.EvidenceCount*profile.Scoring.ModuleEvidenceWeight + module.FileCount
 }
 

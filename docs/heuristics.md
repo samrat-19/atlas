@@ -224,7 +224,7 @@ as of Phase 2 D3:** `ModuleCandidate` now carries `BoundaryConfidence`,
 `NoiseProbability` as named 0–1 fields, computed from D1's per-match
 confidence and shown directly in the "Major Modules" report section
 alongside the legacy score. See the doc comment on `ModuleCandidate` in
-`internal/collector/types.go` for exactly what each one means and how it's
+`internal/model/types.go` for exactly what each one means and how it's
 computed.
 
 **Status as of Phase 2 D4a:** `ModuleCandidate` now also carries `Role` — a

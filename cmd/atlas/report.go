@@ -6,10 +6,10 @@ import (
 	"sort"
 	"strings"
 
-	"atlas/internal/collector"
+	"atlas/internal/model"
 )
 
-func renderReport(result collector.Result) string {
+func renderReport(result model.Result) string {
 	var report strings.Builder
 	fmt.Fprintf(&report, "Root path: %s\n", result.Root)
 	fmt.Fprintf(&report, "Total file count: %d\n", result.TotalFiles)
@@ -17,7 +17,7 @@ func renderReport(result collector.Result) string {
 	return report.String()
 }
 
-func printEvidenceSummary(result collector.Result, writer io.Writer) {
+func printEvidenceSummary(result model.Result, writer io.Writer) {
 	fmt.Fprintln(writer)
 	if len(result.Evidence) == 0 {
 		fmt.Fprintln(writer, "Evidence Found: none")
@@ -55,7 +55,7 @@ func printEvidenceSummary(result collector.Result, writer io.Writer) {
 	printUnrecognizedClusters(result.UnrecognizedSummary, writer)
 }
 
-func printEvidenceFound(evidence []collector.EvidenceItem, writer io.Writer) {
+func printEvidenceFound(evidence []model.EvidenceItem, writer io.Writer) {
 	fmt.Fprintln(writer, "Evidence Found:")
 	seen := make(map[string]string)
 	for _, item := range evidence {

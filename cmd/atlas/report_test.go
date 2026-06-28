@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"atlas/internal/collector"
+	"atlas/internal/model"
 )
 
 func TestPrintCountMapSortsLabels(t *testing.T) {
@@ -55,7 +55,7 @@ func TestWriteReportsFailsWhenOutputDirIsFile(t *testing.T) {
 		t.Fatalf("write output file: %v", err)
 	}
 
-	err = writeReports(collector.Result{}, "report text")
+	err = writeReports(model.Result{}, "report text")
 	if err == nil {
 		t.Fatal("writeReports returned nil; expected an error when output dir cannot be created")
 	}
@@ -63,7 +63,7 @@ func TestWriteReportsFailsWhenOutputDirIsFile(t *testing.T) {
 
 func TestPrintUnrecognizedClustersShowsNoneWhenEmpty(t *testing.T) {
 	var out strings.Builder
-	printUnrecognizedClusters(collector.UnrecognizedSummary{}, &out)
+	printUnrecognizedClusters(model.UnrecognizedSummary{}, &out)
 
 	want := "Unrecognized Extension Clusters: none\n"
 	if out.String() != want {
@@ -72,10 +72,10 @@ func TestPrintUnrecognizedClustersShowsNoneWhenEmpty(t *testing.T) {
 }
 
 func TestPrintUnrecognizedClustersShowsClusterDetails(t *testing.T) {
-	summary := collector.UnrecognizedSummary{
+	summary := model.UnrecognizedSummary{
 		TotalUnrecognizedDirectories: 3,
 		TotalUnrecognizedFiles:       900,
-		Clusters: []collector.UnrecognizedExtensionCluster{
+		Clusters: []model.UnrecognizedExtensionCluster{
 			{Extension: ".bzl", DirectoryCount: 2, TotalFiles: 600, ExamplePaths: []string{"a/b", "c/d"}},
 		},
 	}
@@ -98,11 +98,11 @@ func TestPrintUnrecognizedClustersShowsClusterDetails(t *testing.T) {
 }
 
 func TestPrintMajorModulesSortsWithoutMutatingSummary(t *testing.T) {
-	summary := collector.CompressedModuleSummary{
+	summary := model.CompressedModuleSummary{
 		TotalCandidates:    3,
 		RetainedCandidates: 3,
 		CompressionRatio:   1,
-		Modules: []collector.ModuleCandidate{
+		Modules: []model.ModuleCandidate{
 			{Path: "b", Score: 10, FileCount: 1, EvidenceCount: 1},
 			{Path: "a", Score: 10, FileCount: 1, EvidenceCount: 1},
 			{Path: "c", Score: 20, FileCount: 1, EvidenceCount: 1},

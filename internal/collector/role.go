@@ -1,41 +1,6 @@
 package collector
 
-// Role is Atlas's best guess at what kind of thing a module candidate is,
-// using only directory-name patterns and the confidence/evidence signals
-// Phase 2 D1-D3 already established — never AI, never a content read. See
-// classifyRole.
-type Role string
-
-const (
-	// RoleFirstParty: looks like genuine first-party project structure —
-	// confident evidence, no vendored/generated/build-output/test-fixture
-	// pattern match.
-	RoleFirstParty Role = "first-party"
-
-	// RoleVendored: path matches a vendored/third-party convention (see
-	// vendoredPathSegments in patterns.go).
-	RoleVendored Role = "vendored"
-
-	// RoleGenerated: path matches a generated-code convention (see
-	// generatedPathSegments in patterns.go).
-	RoleGenerated Role = "generated"
-
-	// RoleTestFixture: path matches a test/fixture/example/mock convention
-	// (see noiseAdjacentPathSegments in patterns.go) — the same signal D1
-	// uses to discount evidence confidence.
-	RoleTestFixture Role = "test-fixture"
-
-	// RoleBuildOutput: path matches a build-output convention (see
-	// buildOutputPathSegments in patterns.go).
-	RoleBuildOutput Role = "build-output"
-
-	// RoleAmbiguous: no path pattern matched, and either there is no
-	// evidence at all or the evidence isn't strong enough to commit to
-	// first-party. This is a legitimate, honest answer, not a fallback to
-	// be avoided — see docs/heuristics.md and the determinism discussion in
-	// docs/phase-2-plan.md D4.
-	RoleAmbiguous Role = "ambiguous"
-)
+import "atlas/internal/model"
 
 // classifyRole assigns a structural role to a module candidate using a
 // fixed, ordered list of checks: path patterns first (most specific, least
@@ -50,25 +15,27 @@ const (
 //
 // path is the candidate's own directory path (every segment is a directory
 // name, unlike the evidence-file paths pathContextMultiplier checks).
-// evidenceCount and evidenceStrength come from the same candidate — see
-// newModuleCandidate in modules.go, the only caller.
+// evidenceCount and evidenceStrength come from the same candidate. Called
+// from collect.go's orchestration after buildModuleSummary, not from
+// modules.go itself — scoring and classification are independent concerns,
+// tied together only by Collect's sequencing.
 //
 // This function changes no scoring, retention, or compression behavior.
 // Whether a role should ever influence retention is a separate, later
 // decision (docs/phase-2-plan.md D4b), deliberately not made here.
-func classifyRole(path string, evidenceCount int, evidenceStrength float64, profile HeuristicProfile) Role {
+func classifyRole(path string, evidenceCount int, evidenceStrength float64, profile model.HeuristicProfile) model.Role {
 	switch {
-	case pathContainsSegment(path, vendoredPathSegments, true):
-		return RoleVendored
-	case pathContainsSegment(path, generatedPathSegments, true):
-		return RoleGenerated
-	case pathContainsSegment(path, buildOutputPathSegments, true):
-		return RoleBuildOutput
-	case pathContainsSegment(path, noiseAdjacentPathSegments, true):
-		return RoleTestFixture
+	case model.PathContainsSegment(path, model.VendoredPathSegments, true):
+		return model.RoleVendored
+	case model.PathContainsSegment(path, model.GeneratedPathSegments, true):
+		return model.RoleGenerated
+	case model.PathContainsSegment(path, model.BuildOutputPathSegments, true):
+		return model.RoleBuildOutput
+	case model.PathContainsSegment(path, model.NoiseAdjacentPathSegments, true):
+		return model.RoleTestFixture
 	case evidenceCount > 0 && evidenceStrength >= profile.RoleClassification.FirstPartyEvidenceStrengthThreshold:
-		return RoleFirstParty
+		return model.RoleFirstParty
 	default:
-		return RoleAmbiguous
+		return model.RoleAmbiguous
 	}
 }

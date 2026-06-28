@@ -6,10 +6,10 @@ import (
 	"sort"
 	"strings"
 
-	"atlas/internal/collector"
+	"atlas/internal/model"
 )
 
-func printRepositoryHierarchy(summary collector.HierarchySummary, writer io.Writer) {
+func printRepositoryHierarchy(summary model.HierarchySummary, writer io.Writer) {
 	fmt.Fprintln(writer, "Repository Hierarchy:")
 	if len(summary.Regions) == 0 {
 		fmt.Fprintln(writer, "none")
@@ -38,7 +38,7 @@ func printRepositoryHierarchy(summary collector.HierarchySummary, writer io.Writ
 	}
 }
 
-func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writer) {
+func printMajorModules(summary model.CompressedModuleSummary, writer io.Writer) {
 	if summary.TotalCandidates == 0 {
 		fmt.Fprintln(writer, "Candidate Modules Found: 0")
 		return
@@ -51,7 +51,7 @@ func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writ
 	fmt.Fprintln(writer, "Major Modules:")
 
 	modules := summary.Modules
-	modules = append([]collector.ModuleCandidate(nil), modules...)
+	modules = append([]model.ModuleCandidate(nil), modules...)
 	sort.Slice(modules, func(i, j int) bool {
 		if modules[i].Score == modules[j].Score {
 			if modules[i].EvidenceCount == modules[j].EvidenceCount {
@@ -71,7 +71,7 @@ func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writ
 		fmt.Fprintf(writer, "  evidence: %d\n", module.EvidenceCount)
 		// Named, explainable dimensions (Phase 2 D3) behind the single score
 		// above — see ModuleCandidate's doc comment in
-		// internal/collector/types.go for what each one means.
+		// internal/model/types.go for what each one means.
 		fmt.Fprintf(writer, "  boundary confidence: %.2f\n", module.BoundaryConfidence)
 		fmt.Fprintf(writer, "  evidence strength: %.2f\n", module.EvidenceStrength)
 		fmt.Fprintf(writer, "  structural prominence: %.2f\n", module.StructuralProminence)
@@ -88,8 +88,8 @@ func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writ
 // shared dominant extension. This is a diagnostic for spotting evidence
 // registry gaps from real repository structure, not a scoring or retention
 // signal — see UnrecognizedSummary's doc comment in
-// internal/collector/types.go.
-func printUnrecognizedClusters(summary collector.UnrecognizedSummary, writer io.Writer) {
+// internal/model/types.go.
+func printUnrecognizedClusters(summary model.UnrecognizedSummary, writer io.Writer) {
 	if len(summary.Clusters) == 0 {
 		fmt.Fprintln(writer, "Unrecognized Extension Clusters: none")
 		return
@@ -118,13 +118,13 @@ func printUnrecognizedClusters(summary collector.UnrecognizedSummary, writer io.
 	}
 }
 
-func printTopDirectories(summary collector.CensusSummary, writer io.Writer) {
+func printTopDirectories(summary model.CensusSummary, writer io.Writer) {
 	if len(summary.Directories) == 0 {
 		fmt.Fprintln(writer, "Top Directories: none")
 		return
 	}
 
-	directories := make([]collector.DirectoryCensus, 0, len(summary.Directories))
+	directories := make([]model.DirectoryCensus, 0, len(summary.Directories))
 	for _, directory := range summary.Directories {
 		directories = append(directories, directory)
 	}
@@ -153,13 +153,13 @@ func printTopDirectories(summary collector.CensusSummary, writer io.Writer) {
 	}
 }
 
-func printTopClusters(summary collector.ClusterSummary, writer io.Writer) {
+func printTopClusters(summary model.ClusterSummary, writer io.Writer) {
 	if len(summary.Clusters) == 0 {
 		fmt.Fprintln(writer, "Top Clusters: none")
 		return
 	}
 
-	clusters := make([]collector.EvidenceCluster, 0, len(summary.Clusters))
+	clusters := make([]model.EvidenceCluster, 0, len(summary.Clusters))
 	for _, cluster := range summary.Clusters {
 		clusters = append(clusters, cluster)
 	}

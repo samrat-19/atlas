@@ -4,23 +4,9 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
+
+	"atlas/internal/model"
 )
-
-// EvidenceRule describes one entry in the evidence registry: the category it
-// implies and how strong a signal it is on its own.
-type EvidenceRule struct {
-	// Category is the evidence classification (e.g. "build system",
-	// "package manager") used throughout topology, cluster, and module
-	// summaries.
-	Category string
-
-	// Confidence is this rule's intrinsic signal strength in isolation, from
-	// 0 (no signal) to 1 (unambiguous). The registry key a rule is stored
-	// under (filename or path suffix) is its stable identity; there is no
-	// separate ID field because nothing today needs to reference a rule
-	// independently of how it is matched.
-	Confidence float64
-}
 
 // EvidenceRegistry maps evidence keys (filenames or relative-path suffixes)
 // to typed rules. It is configurable via SetRegistry. By default it contains
@@ -31,15 +17,15 @@ var EvidenceRegistry = defaultEvidenceRegistry()
 
 // filenameIndex contains registry entries keyed by plain filename.
 // suffixIndex contains registry entries keyed by normalized relative-path suffix.
-var filenameIndex map[string]EvidenceRule
-var suffixIndex map[string]EvidenceRule
+var filenameIndex map[string]model.EvidenceRule
+var suffixIndex map[string]model.EvidenceRule
 
 func init() {
 	buildIndexes(EvidenceRegistry)
 }
 
-func defaultEvidenceRegistry() map[string]EvidenceRule {
-	return map[string]EvidenceRule{
+func defaultEvidenceRegistry() map[string]model.EvidenceRule {
+	return map[string]model.EvidenceRule{
 		// Build systems
 		"pom.xml":             {Category: "build system", Confidence: 1.0},
 		"build.gradle":        {Category: "build system", Confidence: 1.0},
@@ -123,18 +109,17 @@ func defaultEvidenceRegistry() map[string]EvidenceRule {
 
 // pathContextMultiplier discounts a rule's intrinsic confidence when the
 // matched evidence sits under a noise-adjacent directory (see
-// noiseAdjacentPathSegments in patterns.go). The discount amount comes from
-// profile rather than a bare constant so a future profile could tune or
-// disable it.
-func pathContextMultiplier(relPath string, profile HeuristicProfile) float64 {
-	if pathContainsSegment(relPath, noiseAdjacentPathSegments, false) {
+// model.NoiseAdjacentPathSegments). The discount amount comes from profile
+// rather than a bare constant so a future profile could tune or disable it.
+func pathContextMultiplier(relPath string, profile model.HeuristicProfile) float64 {
+	if model.PathContainsSegment(relPath, model.NoiseAdjacentPathSegments, false) {
 		return profile.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
 	}
 	return 1.0
 }
 
 // SetRegistry replaces the global evidence registry. Pass nil to restore defaults.
-func SetRegistry(reg map[string]EvidenceRule) {
+func SetRegistry(reg map[string]model.EvidenceRule) {
 	if reg == nil {
 		EvidenceRegistry = defaultEvidenceRegistry()
 		buildIndexes(EvidenceRegistry)
@@ -144,8 +129,8 @@ func SetRegistry(reg map[string]EvidenceRule) {
 	buildIndexes(EvidenceRegistry)
 }
 
-func copyRegistry(src map[string]EvidenceRule) map[string]EvidenceRule {
-	dst := make(map[string]EvidenceRule, len(src))
+func copyRegistry(src map[string]model.EvidenceRule) map[string]model.EvidenceRule {
+	dst := make(map[string]model.EvidenceRule, len(src))
 	for k, v := range src {
 		dst[k] = v
 	}
@@ -155,9 +140,9 @@ func copyRegistry(src map[string]EvidenceRule) map[string]EvidenceRule {
 // buildIndexes precomputes filename and suffix maps for faster/more correct
 // matching. It also applies platform-specific normalization (Windows
 // case-insensitivity).
-func buildIndexes(reg map[string]EvidenceRule) {
-	filenameIndex = make(map[string]EvidenceRule)
-	suffixIndex = make(map[string]EvidenceRule)
+func buildIndexes(reg map[string]model.EvidenceRule) {
+	filenameIndex = make(map[string]model.EvidenceRule)
+	suffixIndex = make(map[string]model.EvidenceRule)
 	isWindows := runtime.GOOS == "windows"
 
 	for k, v := range reg {
@@ -177,7 +162,7 @@ func buildIndexes(reg map[string]EvidenceRule) {
 // relative-path suffix. It returns the registry key (as provided), the
 // category, a confidence score adjusted for path context using profile, and
 // whether a match was found.
-func MatchEvidence(name, relPath string, profile HeuristicProfile) (key string, category string, confidence float64, ok bool) {
+func MatchEvidence(name, relPath string, profile model.HeuristicProfile) (key string, category string, confidence float64, ok bool) {
 	isWindows := runtime.GOOS == "windows"
 
 	normName := name

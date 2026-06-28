@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"atlas/internal/collector"
+	"atlas/internal/model"
 )
 
 // writeReports writes a timestamped text report and a JSON snapshot to the
@@ -19,7 +19,7 @@ import (
 // left on disk if the JSON write succeeds but the text write fails or vice
 // versa — this is acceptable because these are diagnostic artifacts, not
 // transactional data.
-func writeReports(result collector.Result, report string) error {
+func writeReports(result model.Result, report string) error {
 	const outputDirectory = "output"
 	if err := os.MkdirAll(outputDirectory, 0755); err != nil {
 		return fmt.Errorf("create output directory: %w", err)

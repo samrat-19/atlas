@@ -1,8 +1,12 @@
 package collector
 
-import "sort"
+import (
+	"sort"
 
-func aggregateRegion(region *RegionNode) {
+	"atlas/internal/model"
+)
+
+func aggregateRegion(region *model.RegionNode) {
 	if region.FileCount == 0 && region.Score == 0 {
 		for _, child := range region.Children {
 			region.FileCount += child.FileCount
@@ -38,7 +42,7 @@ func aggregateRegion(region *RegionNode) {
 	}
 }
 
-func aggregateSubtree(node *RegionNode) {
+func aggregateSubtree(node *model.RegionNode) {
 	for _, child := range node.Children {
 		aggregateSubtree(child)
 	}
@@ -67,7 +71,7 @@ func aggregateSubtree(node *RegionNode) {
 	}
 }
 
-func sortRegionTree(node *RegionNode) {
+func sortRegionTree(node *model.RegionNode) {
 	sort.Slice(node.Children, func(i, j int) bool {
 		if node.Children[i].Score == node.Children[j].Score {
 			if node.Children[i].FileCount == node.Children[j].FileCount {
@@ -85,13 +89,13 @@ func sortRegionTree(node *RegionNode) {
 	}
 }
 
-func copyRegionNode(node *RegionNode) RegionNode {
-	children := make([]*RegionNode, 0, len(node.Children))
+func copyRegionNode(node *model.RegionNode) model.RegionNode {
+	children := make([]*model.RegionNode, 0, len(node.Children))
 	for _, child := range node.Children {
 		value := copyRegionNode(child)
 		children = append(children, &value)
 	}
-	return RegionNode{
+	return model.RegionNode{
 		Path:          node.Path,
 		FileCount:     node.FileCount,
 		EvidenceCount: node.EvidenceCount,
@@ -100,7 +104,7 @@ func copyRegionNode(node *RegionNode) RegionNode {
 	}
 }
 
-func countSubsystems(regions []*RegionNode) int {
+func countSubsystems(regions []*model.RegionNode) int {
 	count := 0
 	for _, region := range regions {
 		count += countNodes(region.Children)
@@ -108,7 +112,7 @@ func countSubsystems(regions []*RegionNode) int {
 	return count
 }
 
-func countNodes(nodes []*RegionNode) int {
+func countNodes(nodes []*model.RegionNode) int {
 	count := len(nodes)
 	for _, node := range nodes {
 		count += countNodes(node.Children)

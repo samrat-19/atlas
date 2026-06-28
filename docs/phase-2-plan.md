@@ -164,6 +164,56 @@ same compression/retention logic already patched once for the negative-score
 bug, so it needs its own deliberate review and a calibration pass — not a
 decision made as a side effect of adding the label.
 
+### Package-boundary refactor — done
+
+Triggered by noticing `patterns.go` and `registry.go` (and a third,
+`prune.go`) had all become homes for static lookup data with no enforced
+boundary between "data" and "logic" — exactly the kind of drift that made
+the D4a file split feel uncomfortable in review. Rather than reorganize
+files within one package again, split into two packages:
+
+- **`internal/model`** — zero-dependency shared vocabulary: `Result` and
+  every summary type, `ModuleCandidate`, `RegionNode`, `Role` (type +
+  constants, not the `classifyRole` logic), `EvidenceRule`,
+  `HeuristicProfile` + `DefaultHeuristics`, and the directory-name pattern
+  data (moved out of `patterns.go`, now exported:
+  `VendoredPathSegments`, `GeneratedPathSegments`, `BuildOutputPathSegments`,
+  `NoiseAdjacentPathSegments`, `PathContainsSegment()`).
+- **`internal/collector`** — every bit of logic, importing `model` but never
+  imported back by it: evidence matching, scoring, compression, hierarchy,
+  the unrecognized-extension diagnostic, and role classification.
+
+Deliberately **two** packages, not one per pipeline stage (model, evidence,
+scoring, classification, hierarchy, diagnostics, orchestration). Traced the
+actual dependencies first rather than guessing: most of those "layers" only
+exist to talk to each other, and ~1950 lines of source split into 6-7
+packages averaging ~250 lines each is more import ceremony than the
+codebase's size justifies. Two packages is the smallest split that actually
+solves the original problem (data with no enforced boundary) without
+manufacturing structure ahead of a real need — package boundaries are a
+one-way door in Go (changing them later means updating every caller's
+import path), so the bias under genuine uncertainty about how the engine
+evolves was to wait for a real seam rather than draw one speculatively.
+
+One real bug found while tracing dependencies for this split, not the other
+way around: `ModuleCandidate.Role` had type `Role`, defined in `role.go` —
+meaning `types.go` (meant to be the foundational, zero-dependency layer)
+already depended on a "higher" file. Invisible inside one package since Go
+doesn't enforce file-level boundaries, but it would have blocked a clean
+package split outright. Fixed by moving `Role`'s definition to `model`.
+
+Also decoupled `classifyRole` from `modules.go`: it used to be called
+*inside* `newModuleCandidate`, coupling scoring to classification for no
+reason neither needs the other's internals. Now `collect.go`'s
+orchestration calls `classifyRole` explicitly after `buildModuleSummary`
+returns, so scoring and classification are independent and only tied
+together by `Collect`'s sequencing — the same pattern decoupling work
+already established between `unrecognized.go` and the scoring pipeline.
+
+Verified zero behavior change: full test suite green, and all three battery
+repos produce byte-identical output to before the refactor — this was a
+structural change only, no logic moved with different meaning attached.
+
 ### D5: Calibration pass — done
 
 Re-run against Selenium, TensorFlow, and VS Code. Per

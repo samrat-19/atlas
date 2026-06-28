@@ -3,36 +3,38 @@ package collector
 import (
 	"io/fs"
 	"path/filepath"
+
+	"atlas/internal/model"
 )
 
-func newTopologySummary() TopologySummary {
-	return TopologySummary{
+func newTopologySummary() model.TopologySummary {
+	return model.TopologySummary{
 		EvidenceCountByCategory: make(map[string]int),
 		EvidenceCountByFilename: make(map[string]int),
 	}
 }
 
-func newClusterSummary() ClusterSummary {
-	return ClusterSummary{Clusters: make(map[string]EvidenceCluster)}
+func newClusterSummary() model.ClusterSummary {
+	return model.ClusterSummary{Clusters: make(map[string]model.EvidenceCluster)}
 }
 
-func newCensusSummary() CensusSummary {
-	return CensusSummary{Directories: make(map[string]DirectoryCensus)}
+func newCensusSummary() model.CensusSummary {
+	return model.CensusSummary{Directories: make(map[string]model.DirectoryCensus)}
 }
 
-func newExtensionSummary() ExtensionSummary {
-	return ExtensionSummary{
+func newExtensionSummary() model.ExtensionSummary {
+	return model.ExtensionSummary{
 		ByExtension: make(map[string]int),
 		ByCluster:   make(map[string]map[string]int),
 	}
 }
 
-func createEvidenceItem(entry fs.DirEntry, absPath, relPath string, profile HeuristicProfile) (EvidenceItem, bool) {
+func createEvidenceItem(entry fs.DirEntry, absPath, relPath string, profile model.HeuristicProfile) (model.EvidenceItem, bool) {
 	key, category, confidence, ok := MatchEvidence(entry.Name(), relPath, profile)
 	if !ok {
-		return EvidenceItem{}, false
+		return model.EvidenceItem{}, false
 	}
-	return EvidenceItem{
+	return model.EvidenceItem{
 		Filename:     key,
 		AbsolutePath: absPath,
 		RelativePath: relPath,
@@ -41,7 +43,7 @@ func createEvidenceItem(entry fs.DirEntry, absPath, relPath string, profile Heur
 	}, true
 }
 
-func (s *TopologySummary) updateWithEvidence(item EvidenceItem) {
+func updateTopologyWithEvidence(s *model.TopologySummary, item model.EvidenceItem) {
 	s.TotalEvidenceItems++
 	s.EvidenceCountByCategory[item.Category]++
 	s.EvidenceCountByFilename[item.Filename]++
@@ -53,11 +55,11 @@ func (s *TopologySummary) updateWithEvidence(item EvidenceItem) {
 	}
 }
 
-func (s *ClusterSummary) updateWithEvidence(item EvidenceItem) {
+func updateClustersWithEvidence(s *model.ClusterSummary, item model.EvidenceItem) {
 	clusterName := topLevelDirectoryForRelativePath(item.RelativePath)
 	cluster, ok := s.Clusters[clusterName]
 	if !ok {
-		cluster = EvidenceCluster{
+		cluster = model.EvidenceCluster{
 			ClusterName:             clusterName,
 			EvidenceCountByCategory: make(map[string]int),
 			EvidenceCountByFilename: make(map[string]int),
@@ -70,21 +72,21 @@ func (s *ClusterSummary) updateWithEvidence(item EvidenceItem) {
 	s.Clusters[clusterName] = cluster
 }
 
-func (s *CensusSummary) updateWithFile(directory string) {
+func updateCensusWithFile(s *model.CensusSummary, directory string) {
 	entry := s.Directories[directory]
 	entry.DirectoryName = directory
 	entry.TotalFiles++
 	s.Directories[directory] = entry
 }
 
-func (s *CensusSummary) updateWithEvidence(directory string) {
+func updateCensusWithEvidence(s *model.CensusSummary, directory string) {
 	entry := s.Directories[directory]
 	entry.DirectoryName = directory
 	entry.EvidenceItemCount++
 	s.Directories[directory] = entry
 }
 
-func (s *ExtensionSummary) updateWithFile(cluster, extension string) {
+func updateExtensionsWithFile(s *model.ExtensionSummary, cluster, extension string) {
 	s.ByExtension[extension]++
 	if _, ok := s.ByCluster[cluster]; !ok {
 		s.ByCluster[cluster] = make(map[string]int)

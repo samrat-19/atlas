@@ -1,6 +1,10 @@
 package collector
 
-import "sort"
+import (
+	"sort"
+
+	"atlas/internal/model"
+)
 
 // buildUnrecognizedSummary finds module candidates that qualified purely by
 // size — no evidence at all (see isLargeDirectory) — and groups them by
@@ -13,7 +17,7 @@ import "sort"
 // (ModuleSummary.Modules), not the retained/compressed list — the point is
 // to find registry gaps across every directory Atlas considered, including
 // ones compression later dropped as redundant.
-func buildUnrecognizedSummary(modules []ModuleCandidate, profile HeuristicProfile) UnrecognizedSummary {
+func buildUnrecognizedSummary(modules []model.ModuleCandidate, profile model.HeuristicProfile) model.UnrecognizedSummary {
 	type clusterAccumulator struct {
 		directoryCount int
 		totalFiles     int
@@ -21,7 +25,7 @@ func buildUnrecognizedSummary(modules []ModuleCandidate, profile HeuristicProfil
 	}
 	accumulators := make(map[string]*clusterAccumulator)
 
-	summary := UnrecognizedSummary{}
+	summary := model.UnrecognizedSummary{}
 	for _, module := range modules {
 		if module.EvidenceCount != 0 {
 			continue // Atlas has at least some explanation for this one.
@@ -43,11 +47,11 @@ func buildUnrecognizedSummary(modules []ModuleCandidate, profile HeuristicProfil
 		}
 	}
 
-	clusters := make([]UnrecognizedExtensionCluster, 0, len(accumulators))
+	clusters := make([]model.UnrecognizedExtensionCluster, 0, len(accumulators))
 	for extension, acc := range accumulators {
 		examplePaths := append([]string(nil), acc.examplePaths...)
 		sort.Strings(examplePaths)
-		clusters = append(clusters, UnrecognizedExtensionCluster{
+		clusters = append(clusters, model.UnrecognizedExtensionCluster{
 			Extension:      extension,
 			DirectoryCount: acc.directoryCount,
 			TotalFiles:     acc.totalFiles,

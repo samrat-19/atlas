@@ -5,7 +5,7 @@ import (
 	"io"
 	"sort"
 
-	"atlas/internal/collector"
+	"atlas/internal/model"
 )
 
 type extensionCount struct {
@@ -14,8 +14,8 @@ type extensionCount struct {
 }
 
 func printTopExtensions(
-	extensions collector.ExtensionSummary,
-	clusters collector.ClusterSummary,
+	extensions model.ExtensionSummary,
+	clusters model.ClusterSummary,
 	writer io.Writer,
 ) {
 	if len(extensions.ByExtension) == 0 {

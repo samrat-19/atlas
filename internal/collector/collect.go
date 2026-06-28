@@ -5,19 +5,21 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+
+	"atlas/internal/model"
 )
 
 // Collect walks the directory tree rooted at root and returns its structural
 // inventory and inferred module hierarchy.
-func Collect(root string) (Result, error) {
-	var res Result
+func Collect(root string) (model.Result, error) {
+	var res model.Result
 
 	// profile is the single source of every tunable threshold and weight
-	// used below. Only DefaultHeuristics exists today (see heuristics.go);
-	// threading it explicitly, rather than reading package constants deep
-	// inside scoring and compression, is what makes a future alternate
-	// profile possible without changing those functions.
-	profile := DefaultHeuristics
+	// used below. Only model.DefaultHeuristics exists today; threading it
+	// explicitly, rather than reading package constants deep inside scoring
+	// and compression, is what makes a future alternate profile possible
+	// without changing those functions.
+	profile := model.DefaultHeuristics
 
 	absRoot, err := filepath.Abs(root)
 	if err != nil {
@@ -25,8 +27,8 @@ func Collect(root string) (Result, error) {
 	}
 	res.Root = absRoot
 
-	var evidence []EvidenceItem
-	var pruned []PrunedPath
+	var evidence []model.EvidenceItem
+	var pruned []model.PrunedPath
 	totalFiles := 0
 	topology := newTopologySummary()
 	clusters := newClusterSummary()
@@ -53,7 +55,7 @@ func Collect(root string) (Result, error) {
 		// root itself (WalkDir visits the root first with relPath == ".").
 		if entry.IsDir() && relPath != "." {
 			if policy, ok := prunePolicy(entry.Name()); ok {
-				pruned = append(pruned, PrunedPath{
+				pruned = append(pruned, model.PrunedPath{
 					RelativePath: filepath.ToSlash(relPath),
 					Policy:       policy,
 				})
@@ -64,10 +66,10 @@ func Collect(root string) (Result, error) {
 		topDir := topLevelDirectoryForRelativePath(relPath)
 		if !entry.IsDir() {
 			totalFiles++
-			census.updateWithFile(topDir)
+			updateCensusWithFile(&census, topDir)
 
 			ext := strings.ToLower(filepath.Ext(entry.Name()))
-			extensions.updateWithFile(topDir, ext)
+			updateExtensionsWithFile(&extensions, topDir, ext)
 			directoryStatsFor(dirStats, relPath).updateWithFile(ext)
 		}
 
@@ -77,9 +79,9 @@ func Collect(root string) (Result, error) {
 		}
 
 		evidence = append(evidence, item)
-		topology.updateWithEvidence(item)
-		clusters.updateWithEvidence(item)
-		census.updateWithEvidence(topDir)
+		updateTopologyWithEvidence(&topology, item)
+		updateClustersWithEvidence(&clusters, item)
+		updateCensusWithEvidence(&census, topDir)
 		directoryStatsFor(dirStats, relPath).updateWithEvidence(item)
 		return nil
 	}
@@ -90,6 +92,17 @@ func Collect(root string) (Result, error) {
 
 	census.TotalDirectories = len(census.Directories)
 	moduleSummary := buildModuleSummary(dirStats, profile)
+
+	// Role classification is independent of scoring — see classifyRole in
+	// role.go. Done here, after buildModuleSummary returns, rather than
+	// inside it, so the scoring package never imports or calls into
+	// classification at all; orchestration is the only thing that ties the
+	// two together.
+	for i := range moduleSummary.Modules {
+		m := &moduleSummary.Modules[i]
+		m.Role = classifyRole(m.Path, m.EvidenceCount, m.EvidenceStrength, profile)
+	}
+
 	compressedModules := compressModules(moduleSummary.Modules, dirStats, totalFiles, profile)
 	unrecognized := buildUnrecognizedSummary(moduleSummary.Modules, profile)
 
@@ -101,7 +114,7 @@ func Collect(root string) (Result, error) {
 		return pruned[i].RelativePath < pruned[j].RelativePath
 	})
 
-	res.SchemaVersion = schemaVersion
+	res.SchemaVersion = model.CurrentSchemaVersion
 	res.TotalFiles = totalFiles
 	res.PrunedPaths = pruned
 	res.Evidence = evidence

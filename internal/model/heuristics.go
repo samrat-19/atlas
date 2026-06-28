@@ -1,12 +1,12 @@
-package collector
+package model
 
-// schemaVersion is embedded in every Result so consumers can detect breaking
-// changes to the JSON shape. The rule:
+// CurrentSchemaVersion is embedded in every Result so consumers can detect
+// breaking changes to the JSON shape. The rule:
 //   - Adding an optional field → no bump needed.
 //   - Removing a field or changing its meaning → increment the number.
 //
 // Phase 1 establishes "1" as the first formally versioned schema.
-const schemaVersion = "1"
+const CurrentSchemaVersion = "1"
 
 // Atlas currently uses a simple three-step heuristic:
 //
@@ -28,31 +28,29 @@ const schemaVersion = "1"
 // Phase 2 D1 added a fourth concern — evidence confidence — that adjusts how
 // strong a match is before any of the three steps above run.
 //
-// Phase 2 D2 (this file) moves every tunable number out of bare package
-// constants and into a single HeuristicProfile value (DefaultHeuristics),
-// grouped by which step reads them. The grouping and the numbers are
-// unchanged from Phase 1 — this only changes where they live, so a future
-// profile can be constructed and passed through scoring and compression
-// without touching the functions that use it. See
-// docs/heuristic-calibration.md for the calibration methodology and the
-// longer-term plan to split scoring into named, explainable dimensions
-// instead of one number.
+// Phase 2 D2 moved every tunable number out of bare package constants and
+// into a single HeuristicProfile value (DefaultHeuristics), grouped by which
+// step reads them. The grouping and the numbers are unchanged from Phase 1
+// — this only changes where they live, so a future profile can be
+// constructed and passed through scoring and compression without touching
+// the functions that use it. See docs/heuristic-calibration.md for the
+// calibration methodology and the longer-term plan to split scoring into
+// named, explainable dimensions instead of one number.
 
 // EvidenceConfidenceConfig answers: "How strong is an evidence match on its
-// own, before any scoring happens?" Read by MatchEvidence (registry.go).
+// own, before any scoring happens?" Read by collector.MatchEvidence.
 type EvidenceConfidenceConfig struct {
 	// NoiseAdjacentConfidenceMultiplier is applied to a rule's intrinsic
 	// confidence when the match is found under a noise-adjacent directory
-	// (test/fixtures/examples/mocks — see noiseAdjacentPathSegments in
-	// registry.go). A package.json under testdata/ is far less likely to
-	// mark a real module boundary than one at a project root, but Atlas
-	// cannot rule it out entirely, so the signal is weakened rather than
-	// discarded.
+	// (test/fixtures/examples/mocks — see NoiseAdjacentPathSegments). A
+	// package.json under testdata/ is far less likely to mark a real module
+	// boundary than one at a project root, but Atlas cannot rule it out
+	// entirely, so the signal is weakened rather than discarded.
 	NoiseAdjacentConfidenceMultiplier float64
 }
 
 // CandidateSelectionConfig answers: "Should Atlas consider this folder at
-// all?" Read by isModuleCandidate and its helpers (modules.go).
+// all?" Read by collector.isModuleCandidate and its helpers.
 type CandidateSelectionConfig struct {
 	// LargeDirectoryFileThreshold: a folder with this many files is worth
 	// considering even if it has no obvious build file. Example: a large
@@ -72,7 +70,7 @@ type CandidateSelectionConfig struct {
 }
 
 // ScoringConfig answers: "How strong does this candidate look, on first
-// pass?" Read by newModuleCandidate and moduleCandidateScore (modules.go).
+// pass?" Read by collector.newModuleCandidate and moduleCandidateScore.
 type ScoringConfig struct {
 	// DominantExtensionLimit: for each candidate folder, remember only this
 	// many common extensions. This gives a small fingerprint like
@@ -86,8 +84,7 @@ type ScoringConfig struct {
 }
 
 // CompressionConfig answers: "When Atlas shortens the candidate list, what
-// should survive?" Read by scoreModules and compressModules
-// (module_scoring.go, module_compression.go).
+// should survive?" Read by collector.scoreModules and compressModules.
 type CompressionConfig struct {
 	// CoveragePercentScale converts "files in this subtree / files in repo"
 	// into a percentage. Example: 250 files out of 1000 becomes 25.
@@ -127,7 +124,7 @@ type CompressionConfig struct {
 // DiagnosticsConfig answers: "How much detail should diagnostic summaries
 // keep?" These numbers don't affect scoring, classification, or retention —
 // they only bound how much data a diagnostic (like UnrecognizedSummary)
-// retains for display. Read by buildUnrecognizedSummary (unrecognized.go).
+// retains for display. Read by collector.buildUnrecognizedSummary.
 type DiagnosticsConfig struct {
 	// ExampleDirectoryLimit caps how many example paths
 	// UnrecognizedExtensionCluster keeps per cluster. A pattern that recurs
@@ -140,21 +137,21 @@ type DiagnosticsConfig struct {
 // RoleClassificationConfig answers: "Once path patterns don't confidently
 // resolve a candidate's structural role, how strong does its own evidence
 // need to be to call it first-party rather than ambiguous?" Read by
-// classifyRole (role.go).
+// collector.classifyRole.
 type RoleClassificationConfig struct {
 	// FirstPartyEvidenceStrengthThreshold: a candidate with evidence at or
 	// above this average confidence, and no vendored/generated/build-output/
 	// test-fixture path match, is classified first-party. Below it, Atlas
 	// has evidence but isn't confident enough in it to commit to a role, so
 	// the candidate is ambiguous instead. With today's evidence registry
-	// (every default rule at full intrinsic confidence — see registry.go)
-	// this threshold mostly separates "has any evidence at all" from "has
-	// none," since the only thing that currently lowers EvidenceStrength
-	// below 1.0 is the same noise-adjacent discount that already routes a
-	// candidate to test-fixture before this check is ever reached. It is
-	// written as a real threshold, not a bare non-zero check, so it stays
-	// meaningful once a future evidence rule has its own lower intrinsic
-	// confidence for a reason other than path context.
+	// (every default rule at full intrinsic confidence) this threshold
+	// mostly separates "has any evidence at all" from "has none," since the
+	// only thing that currently lowers EvidenceStrength below 1.0 is the
+	// same noise-adjacent discount that already routes a candidate to
+	// test-fixture before this check is ever reached. It is written as a
+	// real threshold, not a bare non-zero check, so it stays meaningful
+	// once a future evidence rule has its own lower intrinsic confidence
+	// for a reason other than path context.
 	FirstPartyEvidenceStrengthThreshold float64
 }
 

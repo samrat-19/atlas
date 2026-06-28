@@ -1,6 +1,12 @@
-package collector
-
-// Types used by the collector package.
+// Package model holds Atlas's shared vocabulary: the data shapes every
+// other package reads and writes (Result and its summaries, ModuleCandidate,
+// RegionNode, Role), the tunable HeuristicProfile, and the static
+// directory-name pattern data used to interpret structure. It has no
+// dependency on anything else in this codebase — that is the point. Package
+// collector imports model for these shapes and supplies the logic (walking
+// the filesystem, matching evidence, scoring, classifying); model never
+// imports collector back.
+package model
 
 // Result is returned by Collect and contains the root path and total file count
 // and discovered evidence.
@@ -61,7 +67,7 @@ type PrunedPath struct {
 	RelativePath string
 
 	// Policy is the short label of the rule that caused the skip.
-	// See prunedDirectories in prune.go for the full set of labels.
+	// See prunedDirectories in collector/prune.go for the full set of labels.
 	Policy string
 }
 
@@ -73,8 +79,23 @@ type EvidenceItem struct {
 	Category     string
 
 	// Confidence is the matched rule's signal strength, from 0 to 1, after
-	// any path-context adjustment (see MatchEvidence). It is not yet used by
-	// scoring or compression — Phase 2 D1 only establishes the data.
+	// any path-context adjustment (see collector.MatchEvidence).
+	Confidence float64
+}
+
+// EvidenceRule describes one entry in the evidence registry: the category it
+// implies and how strong a signal it is on its own.
+type EvidenceRule struct {
+	// Category is the evidence classification (e.g. "build system",
+	// "package manager") used throughout topology, cluster, and module
+	// summaries.
+	Category string
+
+	// Confidence is this rule's intrinsic signal strength in isolation, from
+	// 0 (no signal) to 1 (unambiguous). The registry key a rule is stored
+	// under (filename or path suffix) is its stable identity; there is no
+	// separate ID field because nothing today needs to reference a rule
+	// independently of how it is matched.
 	Confidence float64
 }
 
@@ -158,15 +179,16 @@ type HierarchySummary struct {
 // extension fingerprints.
 //
 // Score is the single compression-stage number Atlas has always used for
-// sorting and retention (see module_scoring.go). It is kept for backward
-// compatibility, but it collapses several different ideas — size, evidence,
-// coverage, redundancy — into one value with no way to tell them apart. The
-// five fields below (Phase 2 D3) are the named, explainable breakdown of
-// that same judgment, per docs/heuristics.md's stated direction:
+// sorting and retention (see collector/module_scoring.go). It is kept for
+// backward compatibility, but it collapses several different ideas — size,
+// evidence, coverage, redundancy — into one value with no way to tell them
+// apart. The five fields below (Phase 2 D3) are the named, explainable
+// breakdown of that same judgment, per docs/heuristics.md's stated
+// direction:
 //
 //   - EvidenceStrength: average confidence of this directory's own evidence
 //     (0 if it has none). Confidence is discounted for matches under
-//     noise-adjacent paths — see EvidenceItem.Confidence and registry.go.
+//     noise-adjacent paths — see EvidenceItem.Confidence.
 //   - NoiseProbability: how likely this candidate is incidental noise rather
 //     than a real boundary. Derived from EvidenceStrength where evidence
 //     exists; 0.5 ("no signal either way") when a candidate qualified
@@ -205,7 +227,7 @@ type ModuleCandidate struct {
 	// Role is Atlas's best guess at what kind of thing this candidate is —
 	// first-party, vendored, generated, test-fixture, build-output, or
 	// ambiguous — from path patterns and the evidence signals above. See
-	// classifyRole in role.go and Phase 2 D4 in docs/phase-2-plan.md. This
+	// collector.classifyRole and Phase 2 D4 in docs/phase-2-plan.md. This
 	// is a label only; it does not currently affect Score, retention, or
 	// compression.
 	Role Role
@@ -227,13 +249,13 @@ type CompressedModuleSummary struct {
 }
 
 // UnrecognizedExtensionCluster groups module candidates that qualified
-// purely by size (no evidence at all — see isLargeDirectory) and share a
-// dominant file extension. A cluster with a high DirectoryCount means Atlas
-// repeatedly found a large, unexplained directory with this extension
-// signature across the repository — a concrete, data-driven signal that the
-// evidence registry may be missing a rule for whatever this extension
-// represents, rather than a one-off the existing heuristics already handle
-// reasonably (see docs/heuristics.md's noiseProbability discussion).
+// purely by size (no evidence at all) and share a dominant file extension.
+// A cluster with a high DirectoryCount means Atlas repeatedly found a large,
+// unexplained directory with this extension signature across the
+// repository — a concrete, data-driven signal that the evidence registry
+// may be missing a rule for whatever this extension represents, rather than
+// a one-off the existing heuristics already handle reasonably (see
+// docs/heuristics.md's noiseProbability discussion).
 type UnrecognizedExtensionCluster struct {
 	Extension string
 

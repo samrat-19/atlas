@@ -1,5 +1,7 @@
 package collector
 
+import "atlas/internal/model"
+
 // moduleScore holds every per-candidate result scoreModules computes during
 // compression: the legacy compression score plus the explainable dimensions
 // introduced in Phase 2 D3. ExtensionOverlap and CategoryOverlap are raw
@@ -19,14 +21,13 @@ type moduleScore struct {
 // scoreModules computes the compression-stage score for every candidate,
 // plus how similar each is to its parent (by extension mix and evidence
 // category), which compressModules uses to decide what survives. profile
-// supplies every weight and threshold involved — see CompressionConfig in
-// heuristics.go.
+// supplies every weight and threshold involved — see model.CompressionConfig.
 func scoreModules(
-	modules []ModuleCandidate,
+	modules []model.ModuleCandidate,
 	subtreeFiles []int,
 	parents []int,
 	totalFiles int,
-	profile HeuristicProfile,
+	profile model.HeuristicProfile,
 ) []moduleScore {
 	results := make([]moduleScore, len(modules))
 
@@ -59,7 +60,8 @@ func scoreModules(
 			// Strong, confident evidence and/or a meaningful difference
 			// from the parent both support treating a candidate as a real
 			// boundary rather than redundant noise — see ModuleCandidate's
-			// doc comment in types.go for the full rationale.
+			// doc comment in internal/model/types.go for the full
+			// rationale.
 			BoundaryConfidence: (module.EvidenceStrength + noveltyVsParent) / 2,
 		}
 	}
@@ -81,20 +83,20 @@ func noveltyFromOverlap(extensionOverlap, categoryOverlap float64) float64 {
 	return categoryNovelty
 }
 
-func compressionScore(module ModuleCandidate, subtreeFiles, totalFiles int, profile HeuristicProfile) int {
+func compressionScore(module model.ModuleCandidate, subtreeFiles, totalFiles int, profile model.HeuristicProfile) int {
 	return module.EvidenceCount*profile.Compression.CompressionEvidenceWeight +
 		module.FileCount +
 		repositoryCoveragePercent(subtreeFiles, totalFiles, profile)*profile.Compression.CoverageScoreWeight
 }
 
-func repositoryCoveragePercent(subtreeFiles, totalFiles int, profile HeuristicProfile) int {
+func repositoryCoveragePercent(subtreeFiles, totalFiles int, profile model.HeuristicProfile) int {
 	if totalFiles == 0 {
 		return 0
 	}
 	return subtreeFiles * profile.Compression.CoveragePercentScale / totalFiles
 }
 
-func isHighlySimilarToParent(extensionOverlap, categoryOverlap float64, profile HeuristicProfile) bool {
+func isHighlySimilarToParent(extensionOverlap, categoryOverlap float64, profile model.HeuristicProfile) bool {
 	return extensionOverlap >= profile.Compression.HighOverlapThreshold &&
 		categoryOverlap >= profile.Compression.HighOverlapThreshold
 }
