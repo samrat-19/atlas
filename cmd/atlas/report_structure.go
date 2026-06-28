@@ -77,6 +77,9 @@ func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writ
 		fmt.Fprintf(writer, "  structural prominence: %.2f\n", module.StructuralProminence)
 		fmt.Fprintf(writer, "  novelty vs parent: %.2f\n", module.NoveltyVsParent)
 		fmt.Fprintf(writer, "  noise probability: %.2f\n", module.NoiseProbability)
+		// Structural role label (Phase 2 D4a) — a guess at what kind of
+		// thing this is, not a score; does not affect retention.
+		fmt.Fprintf(writer, "  role: %s\n", module.Role)
 	}
 }
 

@@ -48,7 +48,9 @@ cmd/atlas/main.go
        ├─ module_compression.go       // compressModules() — prunes redundant parent-child candidates
        ├─ hierarchy.go                // buildHierarchy() — RegionNode tree from retained modules
        │    └─ hierarchy_aggregation.go  // aggregateRegion/subtree, sortRegionTree, copyRegionNode
-       └─ unrecognized.go             // buildUnrecognizedSummary() — evidence-less candidates grouped by extension
+       ├─ unrecognized.go             // buildUnrecognizedSummary() — evidence-less candidates grouped by extension
+       └─ role.go                     // classifyRole() — structural role label, reads patterns.go + heuristics.go
+            (patterns.go)             // knowledge layer: directory-name pattern sets shared by registry.go and role.go
   └─ renderReport(result)             // report.go: formats all summaries to a string
        ├─ report_structure.go         // printRepositoryHierarchy, printMajorModules, printUnrecognizedClusters, printTopClusters, printTopDirectories
        ├─ report_extensions.go        // printTopExtensions
@@ -65,6 +67,8 @@ cmd/atlas/main.go
 - **Compressed modules**: `compressModules()` (`module_compression.go`) prunes parent–child pairs using extension Jaccard overlap and category overlap. Children that are highly similar to their parent (`highOverlapThreshold=0.9`) receive a score penalty; final retention is based on relative score and novelty thresholds. `isStrongComparedToParent` clamps a non-positive parent score to zero before applying the ratio — without this, a deeply redundant parent (negative score) makes the bar easier, not harder, to clear.
 - **Hierarchy**: `buildHierarchy()` (`hierarchy.go`) converts retained modules into a `RegionNode` tree (Regions → subsystems → components). Aggregation rolls child file/evidence counts up in `hierarchy_aggregation.go`; the final tree is sorted by score descending. `RegionNode` does not yet carry the five D3 dimensions — aggregating non-additive 0–1 scores across a subtree has no settled answer yet.
 - **Unrecognized clusters**: `buildUnrecognizedSummary()` (`unrecognized.go`) groups module candidates that qualified purely by size (zero evidence) by shared dominant extension. A diagnostic for finding evidence-registry/role gaps from real repository structure — not part of scoring, classification, or retention.
+- **Structural role**: `classifyRole()` (`role.go`, Phase 2 D4a) labels each module candidate `first-party`, `vendored`, `generated`, `test-fixture`, `build-output`, or `ambiguous`, via a fixed, ordered list of directory-name pattern checks (`patterns.go`) followed by an evidence-strength fallback. A label only — it does not currently affect `Score`, retention, or compression (that's the separate, deliberately deferred D4b decision). `RegionNode` does not carry `Role` for the same reason it doesn't carry the D3 dimensions yet.
+- **Knowledge layer**: directory-name pattern sets (`noiseAdjacentPathSegments`, `vendoredPathSegments`, `generatedPathSegments`, `buildOutputPathSegments`) live together in `patterns.go`, separate from the logic that reads them (confidence discounting in `registry.go`, role classification in `role.go`). Each set is deliberately small — patterns get added from cases the `unrecognized.go` diagnostic actually finds in real repositories, not guessed upfront.
 
 ### Package layout
 
@@ -89,6 +93,8 @@ cmd/atlas/main.go
 | `internal/collector/hierarchy.go` | `buildHierarchy()`, parent resolution, node attachment |
 | `internal/collector/hierarchy_aggregation.go` | `aggregateRegion/Subtree()`, `sortRegionTree()`, `copyRegionNode()` |
 | `internal/collector/unrecognized.go` | `buildUnrecognizedSummary()` — groups evidence-less candidates by dominant extension |
+| `internal/collector/patterns.go` | Knowledge layer: `noiseAdjacentPathSegments`, `vendoredPathSegments`, `generatedPathSegments`, `buildOutputPathSegments`, `pathContainsSegment()` |
+| `internal/collector/role.go` | `Role` type, `classifyRole()` — ordered, deterministic structural-role labeling |
 | `internal/collector/collector_test.go` | Unit tests using `t.TempDir()` temp fixtures |
 | `tests/battery/battery_test.go` | Battery tests against real large repos (selenium, tensorflow, vscode); opt-in via `ATLAS_BATTERY=1` |
 

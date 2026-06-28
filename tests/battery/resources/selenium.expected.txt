@@ -401,6 +401,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - rb
   score: 714
   files: 14
@@ -410,6 +411,7 @@ Major Modules:
   structural prominence: 0.10
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium
   score: 680
   files: 70
@@ -419,6 +421,7 @@ Major Modules:
   structural prominence: 0.21
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - py
   score: 669
   files: 19
@@ -428,6 +431,7 @@ Major Modules:
   structural prominence: 0.05
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - rust
   score: 618
   files: 8
@@ -437,6 +441,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\test\org\openqa\selenium
   score: 590
   files: 80
@@ -446,6 +451,7 @@ Major Modules:
   structural prominence: 0.11
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - dotnet
   score: 556
   files: 16
@@ -455,6 +461,7 @@ Major Modules:
   structural prominence: 0.14
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java
   score: 542
   files: 12
@@ -464,6 +471,7 @@ Major Modules:
   structural prominence: 0.33
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - javascript\selenium-webdriver
   score: 449
   files: 19
@@ -473,6 +481,7 @@ Major Modules:
   structural prominence: 0.03
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - javascript\atoms
   score: 440
   files: 20
@@ -482,6 +491,7 @@ Major Modules:
   structural prominence: 0.02
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - javascript\grid-ui
   score: 432
   files: 12
@@ -491,6 +501,7 @@ Major Modules:
   structural prominence: 0.02
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - dotnet\src\webdriver
   score: 421
   files: 131
@@ -500,6 +511,7 @@ Major Modules:
   structural prominence: 0.09
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - common\src\web
   score: 418
   files: 158
@@ -509,6 +521,7 @@ Major Modules:
   structural prominence: 0.06
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - common\remote-build\cc
   score: 406
   files: 6
@@ -518,6 +531,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - javascript
   score: 306
   files: 6
@@ -527,6 +541,7 @@ Major Modules:
   structural prominence: 0.10
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - dotnet\test\webdriver
   score: 286
   files: 66
@@ -536,6 +551,7 @@ Major Modules:
   structural prominence: 0.02
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - java\src\org\openqa\selenium\remote
   score: 281
   files: 61
@@ -545,6 +561,7 @@ Major Modules:
   structural prominence: 0.02
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - common
   score: 277
   files: 7
@@ -554,6 +571,7 @@ Major Modules:
   structural prominence: 0.07
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid
   score: 269
   files: 9
@@ -563,6 +581,7 @@ Major Modules:
   structural prominence: 0.06
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog
   score: 264
   files: 4
@@ -572,6 +591,7 @@ Major Modules:
   structural prominence: 0.06
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\ui
   score: 259
   files: 49
@@ -581,6 +601,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\css
   score: 248
   files: 48
@@ -590,6 +611,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - dotnet\src\webdriver\DevTools
   score: 246
   files: 36
@@ -599,6 +621,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\bidi
   score: 241
   files: 11
@@ -608,6 +631,7 @@ Major Modules:
   structural prominence: 0.03
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\data
   score: 238
   files: 38
@@ -617,6 +641,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\node
   score: 235
   files: 25
@@ -626,6 +651,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - rb\spec\integration\selenium\webdriver
   score: 232
   files: 22
@@ -635,6 +661,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - rb\lib
   score: 232
   files: 2
@@ -644,6 +671,7 @@ Major Modules:
   structural prominence: 0.03
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\devtools
   score: 231
   files: 21
@@ -653,6 +681,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\json
   score: 227
   files: 27
@@ -662,6 +691,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\events
   score: 225
   files: 25
@@ -671,6 +701,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - java\src\org\openqa\selenium\support
   score: 224
   files: 14
@@ -680,6 +711,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - rb\spec
   score: 223
   files: 3
@@ -689,6 +721,7 @@ Major Modules:
   structural prominence: 0.02
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\firefox
   score: 222
   files: 22
@@ -698,6 +731,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\testing
   score: 222
   files: 22
@@ -707,6 +741,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - java\src\org\openqa\selenium\grid\config
   score: 221
   files: 21
@@ -716,6 +751,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\web
   score: 221
   files: 21
@@ -725,6 +761,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - dotnet\private
   score: 220
   files: 20
@@ -734,6 +771,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - rust\tests
   score: 220
   files: 20
@@ -743,6 +781,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.50
+  role: test-fixture
 - java\src\org\openqa\selenium\netty\server
   score: 219
   files: 19
@@ -752,6 +791,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\chromium
   score: 218
   files: 18
@@ -761,6 +801,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\commands
   score: 218
   files: 18
@@ -770,6 +811,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\dom
   score: 218
   files: 18
@@ -779,6 +821,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\cpp\civetweb
   score: 218
   files: 18
@@ -788,6 +831,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: vendored
 - java\src\org\openqa\selenium\docker
   score: 216
   files: 16
@@ -797,6 +841,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - py\private
   score: 216
   files: 16
@@ -806,6 +851,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - scripts
   score: 215
   files: 15
@@ -815,6 +861,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - java\private
   score: 214
   files: 14
@@ -824,6 +871,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\graphql
   score: 213
   files: 13
@@ -833,6 +881,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\safari
   score: 213
   files: 13
@@ -842,6 +891,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - dotnet\test\remote
   score: 211
   files: 11
@@ -851,6 +901,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - java\src\org\openqa\selenium\grid\distributor
   score: 211
   files: 11
@@ -860,6 +911,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\sessionqueue
   score: 211
   files: 11
@@ -869,6 +921,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - rb\spec\integration
   score: 211
   files: 1
@@ -878,6 +931,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - rb\spec\unit
   score: 211
   files: 1
@@ -887,6 +941,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\chrome
   score: 210
   files: 10
@@ -896,6 +951,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - javascript\private
   score: 210
   files: 10
@@ -905,6 +961,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\debug
   score: 210
   files: 10
@@ -914,6 +971,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\html
   score: 210
   files: 10
@@ -923,6 +981,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\dotnet\devtools\src\generator\Templates
   score: 210
   files: 10
@@ -932,6 +991,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - common\private
   score: 209
   files: 9
@@ -941,6 +1001,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\devtools\v146
   score: 209
   files: 9
@@ -950,6 +1011,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\devtools\v147
   score: 209
   files: 9
@@ -959,6 +1021,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\devtools\v148
   score: 209
   files: 9
@@ -968,6 +1031,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\server
   score: 209
   files: 9
@@ -977,6 +1041,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\fx
   score: 209
   files: 9
@@ -986,6 +1051,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\labs\useragent
   score: 209
   files: 9
@@ -995,6 +1061,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: vendored
 - common\images
   score: 208
   files: 8
@@ -1004,6 +1071,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\edge
   score: 208
   files: 8
@@ -1013,6 +1081,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\sessionmap
   score: 208
   files: 8
@@ -1022,6 +1091,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\ie
   score: 208
   files: 8
@@ -1031,6 +1101,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\io
   score: 208
   files: 8
@@ -1040,6 +1111,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - javascript\webdriver
   score: 208
   files: 8
@@ -1049,6 +1121,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\async
   score: 208
   files: 8
@@ -1058,6 +1131,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\math
   score: 208
   files: 8
@@ -1067,6 +1141,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - java\src\org\openqa\selenium\grid\jmx
   score: 207
   files: 7
@@ -1076,6 +1151,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\log
   score: 207
   files: 7
@@ -1085,6 +1161,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\security
   score: 207
   files: 7
@@ -1094,6 +1171,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\test\org\openqa\selenium\grid\web
   score: 207
   files: 7
@@ -1103,6 +1181,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.50
+  role: test-fixture
 - javascript\grid-ui\public
   score: 207
   files: 7
@@ -1112,6 +1191,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - .github
   score: 206
   files: 6
@@ -1121,6 +1201,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - common\devtools
   score: 206
   files: 6
@@ -1130,6 +1211,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\events
   score: 206
   files: 6
@@ -1139,6 +1221,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\router
   score: 206
   files: 6
@@ -1148,6 +1231,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - third_party\bazel
   score: 206
   files: 6
@@ -1157,6 +1241,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\positioning
   score: 206
   files: 6
@@ -1166,6 +1251,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\js\qunit
   score: 206
   files: 6
@@ -1175,6 +1261,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: vendored
 - third_party\js\sizzle
   score: 206
   files: 6
@@ -1184,6 +1271,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: vendored
 - common\extensions
   score: 205
   files: 5
@@ -1193,6 +1281,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\concurrent
   score: 205
   files: 5
@@ -1202,6 +1291,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - rb\spec\integration\selenium\webdriver\chrome
   score: 205
   files: 5
@@ -1211,6 +1301,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - rb\spec\integration\selenium\webdriver\edge
   score: 205
   files: 5
@@ -1220,6 +1311,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - rb\support
   score: 205
   files: 5
@@ -1229,6 +1321,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\a11y\aria
   score: 205
   files: 5
@@ -1238,6 +1331,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\disposable
   score: 205
   files: 5
@@ -1247,6 +1341,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\net
   score: 205
   files: 5
@@ -1256,6 +1351,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\string
   score: 205
   files: 5
@@ -1265,6 +1361,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\structs
   score: 205
   files: 5
@@ -1274,6 +1371,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\useragent
   score: 205
   files: 5
@@ -1283,6 +1381,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - java\src\org\openqa\selenium\cli
   score: 204
   files: 4
@@ -1292,6 +1391,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\grid\session
   score: 204
   files: 4
@@ -1301,6 +1401,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\manager
   score: 204
   files: 4
@@ -1310,6 +1411,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\os
   score: 204
   files: 4
@@ -1319,6 +1421,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\test\org\openqa\selenium\tools\modules
   score: 204
   files: 4
@@ -1328,6 +1431,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.50
+  role: test-fixture
 - javascript\webdriver\atoms
   score: 204
   files: 4
@@ -1337,6 +1441,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - scripts\remote-image
   score: 204
   files: 4
@@ -1346,6 +1451,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\promise
   score: 204
   files: 4
@@ -1355,6 +1461,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\dotnet\devtools\src\generator
   score: 204
   files: 4
@@ -1364,6 +1471,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - third_party\firebug
   score: 204
   files: 4
@@ -1373,6 +1481,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - third_party\jruby
   score: 204
   files: 4
@@ -1382,6 +1491,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: vendored
 - common\devtools\chromium\v146
   score: 203
   files: 3
@@ -1391,6 +1501,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - common\devtools\chromium\v147
   score: 203
   files: 3
@@ -1400,6 +1511,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - common\devtools\chromium\v148
   score: 203
   files: 3
@@ -1409,6 +1521,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - cpp\linux-specific
   score: 203
   files: 3
@@ -1418,6 +1531,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - dotnet\src\support
   score: 203
   files: 3
@@ -1427,6 +1541,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - dotnet\test\support
   score: 203
   files: 3
@@ -1436,6 +1551,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - dotnet\test\testing.webserver
   score: 203
   files: 3
@@ -1445,6 +1561,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - java\src\org\openqa\selenium\grid\component
   score: 203
   files: 3
@@ -1454,6 +1571,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\redis
   score: 203
   files: 3
@@ -1463,6 +1581,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\status
   score: 203
   files: 3
@@ -1472,6 +1591,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - javascript\chrome-driver
   score: 203
   files: 3
@@ -1481,6 +1601,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - javascript\selenium-webdriver\private
   score: 203
   files: 3
@@ -1490,6 +1611,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - rb\lib\selenium\devtools
   score: 203
   files: 3
@@ -1499,6 +1621,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - rust\private
   score: 203
   files: 3
@@ -1508,6 +1631,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\asserts
   score: 203
   files: 3
@@ -1517,6 +1641,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\collections
   score: 203
   files: 3
@@ -1526,6 +1651,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\color
   score: 203
   files: 3
@@ -1535,6 +1661,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\fs
   score: 203
   files: 3
@@ -1544,6 +1671,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\iter
   score: 203
   files: 3
@@ -1553,6 +1681,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\style
   score: 203
   files: 3
@@ -1562,6 +1691,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\uri
   score: 203
   files: 3
@@ -1571,6 +1701,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\dotnet\devtools
   score: 203
   files: 3
@@ -1580,6 +1711,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - third_party\js\selenium
   score: 203
   files: 3
@@ -1589,6 +1721,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - java\src\dev\selenium\tools\javadoc
   score: 202
   files: 2
@@ -1598,6 +1731,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - java\src\dev\selenium\tools\modules
   score: 202
   files: 2
@@ -1607,6 +1741,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - java\test\org\openqa\selenium\grid\sessionqueue\local
   score: 202
   files: 2
@@ -1616,6 +1751,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.50
+  role: test-fixture
 - java\test\org\openqa\selenium\grid\sessionqueue\redis
   score: 202
   files: 2
@@ -1625,6 +1761,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.50
+  role: test-fixture
 - javascript\bidi-support
   score: 202
   files: 2
@@ -1634,6 +1771,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - javascript\cdp-support
   score: 202
   files: 2
@@ -1643,6 +1781,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - javascript\ie-driver
   score: 202
   files: 2
@@ -1652,6 +1791,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - javascript\selenium-webdriver\lib\atoms
   score: 202
   files: 2
@@ -1661,6 +1801,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - third_party\chrome_ext
   score: 202
   files: 2
@@ -1670,6 +1811,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\array
   score: 202
   files: 2
@@ -1679,6 +1821,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\editor
   score: 202
   files: 2
@@ -1688,6 +1831,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\flags
   score: 202
   files: 2
@@ -1697,6 +1841,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\functions
   score: 202
   files: 2
@@ -1706,6 +1851,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\i18n
   score: 202
   files: 2
@@ -1715,6 +1861,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\json
   score: 202
   files: 2
@@ -1724,6 +1871,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\log
   score: 202
   files: 2
@@ -1733,6 +1881,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\memoize
   score: 202
   files: 2
@@ -1742,6 +1891,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\mochikit\async
   score: 202
   files: 2
@@ -1751,6 +1901,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\object
   score: 202
   files: 2
@@ -1760,6 +1911,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\reflect
   score: 202
   files: 2
@@ -1769,6 +1921,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\timer
   score: 202
   files: 2
@@ -1778,6 +1931,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\url
   score: 202
   files: 2
@@ -1787,6 +1941,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\utils
   score: 202
   files: 2
@@ -1796,6 +1951,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\window
   score: 202
   files: 2
@@ -1805,6 +1961,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: vendored
 - common\manager
   score: 201
   files: 1
@@ -1814,6 +1971,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - common\remote-build
   score: 201
   files: 1
@@ -1823,6 +1981,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - cpp\prebuilt
   score: 201
   files: 1
@@ -1832,6 +1991,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - dotnet\src\webdriver\assets
   score: 201
   files: 1
@@ -1841,6 +2001,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - dotnet\src\webdriver\assets\nuget
   score: 201
   files: 1
@@ -1850,6 +2011,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - java\src\org\openqa\selenium\devtools\latest
   score: 201
   files: 1
@@ -1859,6 +2021,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - java\test\org\openqa\selenium\grid\sessionqueue
   score: 201
   files: 1
@@ -1868,6 +2031,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.50
+  role: test-fixture
 - javascript\atoms\fragments
   score: 201
   files: 1
@@ -1877,6 +2041,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - rb\lib\selenium\webdriver\atoms
   score: 201
   files: 1
@@ -1886,6 +2051,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - scripts\dev-image
   score: 201
   files: 1
@@ -1895,6 +2061,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - third_party\closure\goog\css\editor
   score: 201
   files: 1
@@ -1904,6 +2071,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\dom\testdata
   score: 201
   files: 1
@@ -1913,6 +2081,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.50
+  role: vendored
 - third_party\closure\goog\images
   score: 201
   files: 1
@@ -1922,6 +2091,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 - third_party\closure\goog\labs
   score: 201
   files: 1
@@ -1931,5 +2101,6 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: vendored
 
 Unrecognized Extension Clusters: none

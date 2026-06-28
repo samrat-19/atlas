@@ -201,6 +201,14 @@ type ModuleCandidate struct {
 	StructuralProminence float64
 	NoveltyVsParent      float64
 	BoundaryConfidence   float64
+
+	// Role is Atlas's best guess at what kind of thing this candidate is —
+	// first-party, vendored, generated, test-fixture, build-output, or
+	// ambiguous — from path patterns and the evidence signals above. See
+	// classifyRole in role.go and Phase 2 D4 in docs/phase-2-plan.md. This
+	// is a label only; it does not currently affect Score, retention, or
+	// compression.
+	Role Role
 }
 
 // ModuleSummary aggregates discovered module candidates.

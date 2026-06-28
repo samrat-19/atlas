@@ -365,6 +365,7 @@ Major Modules:
   structural prominence: 0.26
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - extensions
   score: 810
   files: 10
@@ -374,6 +375,7 @@ Major Modules:
   structural prominence: 0.40
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - _root
   score: 627
   files: 27
@@ -383,6 +385,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - extensions\git-base
   score: 611
   files: 11
@@ -392,6 +395,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - extensions\html-language-features
   score: 610
   files: 10
@@ -401,6 +405,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - extensions\git
   score: 608
   files: 8
@@ -410,6 +415,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - src\vs\platform\agentHost\node\codex\protocol\generated\v2
   score: 534
   files: 504
@@ -419,6 +425,7 @@ Major Modules:
   structural prominence: 0.03
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: generated
 - extensions\vscode-colorize-tests\test\colorize-fixtures
   score: 508
   files: 108
@@ -428,6 +435,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - build
   score: 454
   files: 34
@@ -437,6 +445,7 @@ Major Modules:
   structural prominence: 0.02
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\vscode-colorize-tests
   score: 425
   files: 5
@@ -446,6 +455,7 @@ Major Modules:
   structural prominence: 0.02
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\terminal-suggest
   score: 421
   files: 11
@@ -455,6 +465,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - build\vite
   score: 415
   files: 15
@@ -464,6 +475,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\markdown-math
   score: 414
   files: 14
@@ -473,6 +485,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\mermaid-markdown-features
   score: 414
   files: 14
@@ -482,6 +495,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\ipynb
   score: 412
   files: 12
@@ -491,6 +505,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\simple-browser
   score: 412
   files: 12
@@ -500,6 +515,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\github-authentication
   score: 411
   files: 11
@@ -509,6 +525,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - test\monaco
   score: 411
   files: 11
@@ -518,6 +535,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.50
+  role: test-fixture
 - extensions\configuration-editing
   score: 409
   files: 9
@@ -527,6 +545,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\extension-editing
   score: 409
   files: 9
@@ -536,6 +555,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\github
   score: 409
   files: 9
@@ -545,6 +565,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\latex
   score: 409
   files: 9
@@ -554,6 +575,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\notebook-renderers
   score: 409
   files: 9
@@ -563,6 +585,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\vscode-test-resolver
   score: 409
   files: 9
@@ -572,6 +595,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\chat-lib
   score: 408
   files: 8
@@ -581,6 +605,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - build\win32
   score: 407
   files: 7
@@ -590,6 +615,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - extensions\debug-auto-launch
   score: 407
   files: 7
@@ -599,6 +625,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\debug-server-ready
   score: 407
   files: 7
@@ -608,6 +635,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\json-language-features\server
   score: 407
   files: 7
@@ -617,6 +645,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\theme-seti
   score: 407
   files: 7
@@ -626,6 +655,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - extensions\tunnel-forwarding
   score: 407
   files: 7
@@ -635,6 +665,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.00
+  role: first-party
 - extensions\vscode-api-tests
   score: 407
   files: 7
@@ -644,6 +675,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - src\vs\sessions\test\e2e
   score: 407
   files: 7
@@ -653,6 +685,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.50
+  role: test-fixture
 - cli
   score: 406
   files: 6
@@ -662,6 +695,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\src\extension\typescriptContext\serverPlugin
   score: 406
   files: 6
@@ -671,6 +705,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - test\automation
   score: 406
   files: 6
@@ -680,6 +715,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.50
+  role: test-fixture
 - test\smoke
   score: 406
   files: 6
@@ -689,6 +725,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.50
+  role: test-fixture
 - extensions\cpp
   score: 405
   files: 5
@@ -698,6 +735,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\css-language-features\server
   score: 405
   files: 5
@@ -707,6 +745,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\html
   score: 405
   files: 5
@@ -716,6 +755,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\html-language-features\server
   score: 405
   files: 5
@@ -725,6 +765,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\json
   score: 405
   files: 5
@@ -734,6 +775,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\less
   score: 405
   files: 5
@@ -743,6 +785,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\objective-c
   score: 405
   files: 5
@@ -752,6 +795,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\php
   score: 405
   files: 5
@@ -761,6 +805,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\razor
   score: 405
   files: 5
@@ -770,6 +815,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\rust
   score: 405
   files: 5
@@ -779,6 +825,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\sql
   score: 405
   files: 5
@@ -788,6 +835,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\typescript-basics
   score: 405
   files: 5
@@ -797,6 +845,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\vscode-colorize-perf-tests
   score: 405
   files: 5
@@ -806,6 +855,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\yaml
   score: 405
   files: 5
@@ -815,6 +865,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - test\componentFixtures\playwright
   score: 405
   files: 5
@@ -824,6 +875,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.50
+  role: test-fixture
 - test\integration\browser
   score: 405
   files: 5
@@ -833,6 +885,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.50
+  role: test-fixture
 - test\mcp
   score: 405
   files: 5
@@ -842,6 +895,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.50
+  role: test-fixture
 - test\sanity
   score: 405
   files: 5
@@ -851,6 +905,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.33
   noise probability: 0.50
+  role: test-fixture
 - .vscode\extensions\vscode-pr-pinger
   score: 404
   files: 4
@@ -860,6 +915,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - .vscode\extensions\vscode-selfhost-test-provider
   score: 404
   files: 4
@@ -869,6 +925,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - build\rspack
   score: 404
   files: 4
@@ -878,6 +935,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - .vscode\extensions\vscode-extras
   score: 403
   files: 3
@@ -887,6 +945,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - .vscode\extensions\vscode-selfhost-import-aid
   score: 403
   files: 3
@@ -896,6 +955,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - remote
   score: 403
   files: 3
@@ -905,6 +965,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - build\agent-sdk\agents\claude
   score: 402
   files: 2
@@ -914,6 +975,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - build\agent-sdk\agents\codex
   score: 402
   files: 2
@@ -923,6 +985,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - build\npm\gyp
   score: 402
   files: 2
@@ -932,6 +995,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - src\vs\workbench\contrib
   score: 370
   files: 0
@@ -941,6 +1005,7 @@ Major Modules:
   structural prominence: 0.17
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - src\vs\platform
   score: 310
   files: 0
@@ -950,6 +1015,7 @@ Major Modules:
   structural prominence: 0.11
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\test
   score: 274
   files: 14
@@ -959,6 +1025,7 @@ Major Modules:
   structural prominence: 0.06
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - .eslint-plugin-local
   score: 252
   files: 52
@@ -968,6 +1035,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\src\extension\prompts\node\panel
   score: 244
   files: 44
@@ -977,6 +1045,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\src\platform
   score: 240
   files: 0
@@ -986,6 +1055,7 @@ Major Modules:
   structural prominence: 0.04
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - scripts
   score: 233
   files: 33
@@ -995,6 +1065,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\.eslintplugin
   score: 215
   files: 15
@@ -1004,6 +1075,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - test
   score: 214
   files: 4
@@ -1013,6 +1085,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 0.50
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\codeMapper
   score: 212
   files: 12
@@ -1022,6 +1095,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.50
+  role: test-fixture
 - src\vs\sessions\contrib
   score: 210
   files: 0
@@ -1031,6 +1105,7 @@ Major Modules:
   structural prominence: 0.01
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - .github
   score: 209
   files: 9
@@ -1040,6 +1115,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - build\monaco
   score: 208
   files: 8
@@ -1049,6 +1125,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\script
   score: 208
   files: 8
@@ -1058,6 +1135,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - .devcontainer
   score: 206
   files: 6
@@ -1067,6 +1145,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - extensions\ini
   score: 206
   files: 6
@@ -1076,6 +1155,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\javascript
   score: 206
   files: 6
@@ -1085,6 +1165,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\perl
   score: 206
   files: 6
@@ -1094,6 +1175,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\xml
   score: 206
   files: 6
@@ -1103,6 +1185,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\bat
   score: 205
   files: 5
@@ -1112,6 +1195,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\clojure
   score: 205
   files: 5
@@ -1121,6 +1205,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\coffeescript
   score: 205
   files: 5
@@ -1130,6 +1215,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\.github
   score: 205
   files: 5
@@ -1139,6 +1225,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 - extensions\csharp
   score: 205
   files: 5
@@ -1148,6 +1235,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\css
   score: 205
   files: 5
@@ -1157,6 +1245,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\dart
   score: 205
   files: 5
@@ -1166,6 +1255,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\diff
   score: 205
   files: 5
@@ -1175,6 +1265,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\docker
   score: 205
   files: 5
@@ -1184,6 +1275,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\dotenv
   score: 205
   files: 5
@@ -1193,6 +1285,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\fsharp
   score: 205
   files: 5
@@ -1202,6 +1295,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\go
   score: 205
   files: 5
@@ -1211,6 +1305,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\groovy
   score: 205
   files: 5
@@ -1220,6 +1315,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\handlebars
   score: 205
   files: 5
@@ -1229,6 +1325,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\hlsl
   score: 205
   files: 5
@@ -1238,6 +1335,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\java
   score: 205
   files: 5
@@ -1247,6 +1345,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\julia
   score: 205
   files: 5
@@ -1256,6 +1355,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\lua
   score: 205
   files: 5
@@ -1265,6 +1365,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\make
   score: 205
   files: 5
@@ -1274,6 +1375,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\markdown-basics
   score: 205
   files: 5
@@ -1283,6 +1385,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\powershell
   score: 205
   files: 5
@@ -1292,6 +1395,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\prompt-basics
   score: 205
   files: 5
@@ -1301,6 +1405,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\pug
   score: 205
   files: 5
@@ -1310,6 +1415,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\python
   score: 205
   files: 5
@@ -1319,6 +1425,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\r
   score: 205
   files: 5
@@ -1328,6 +1435,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\restructuredtext
   score: 205
   files: 5
@@ -1337,6 +1445,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\ruby
   score: 205
   files: 5
@@ -1346,6 +1455,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\scss
   score: 205
   files: 5
@@ -1355,6 +1465,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\shaderlab
   score: 205
   files: 5
@@ -1364,6 +1475,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\shellscript
   score: 205
   files: 5
@@ -1373,6 +1485,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\swift
   score: 205
   files: 5
@@ -1382,6 +1495,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\vb
   score: 205
   files: 5
@@ -1391,6 +1505,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - build\builtin
   score: 204
   files: 4
@@ -1400,6 +1515,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\.vscode\extensions\visualization-runner
   score: 204
   files: 4
@@ -1409,6 +1525,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\test\scenarios\test-tools
   score: 204
   files: 4
@@ -1418,6 +1535,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\log
   score: 204
   files: 4
@@ -1427,6 +1545,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-abyss
   score: 204
   files: 4
@@ -1436,6 +1555,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-kimbie-dark
   score: 204
   files: 4
@@ -1445,6 +1565,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-monokai
   score: 204
   files: 4
@@ -1454,6 +1575,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-monokai-dimmed
   score: 204
   files: 4
@@ -1463,6 +1585,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-quietlight
   score: 204
   files: 4
@@ -1472,6 +1595,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-red
   score: 204
   files: 4
@@ -1481,6 +1605,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-solarized-dark
   score: 204
   files: 4
@@ -1490,6 +1615,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-solarized-light
   score: 204
   files: 4
@@ -1499,6 +1625,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-tomorrow-night-blue
   score: 204
   files: 4
@@ -1508,6 +1635,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\.vscode\extensions\test-extension
   score: 203
   files: 3
@@ -1517,6 +1645,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\copilot\test\simulation\fixtures\explain-project-context
   score: 203
   files: 3
@@ -1526,6 +1655,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj
   score: 202
   files: 2
@@ -1535,6 +1665,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj-with-test-file
   score: 202
   files: 2
@@ -1544,6 +1675,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj-with-test-file-1
   score: 202
   files: 2
@@ -1553,6 +1685,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\simple-ts-proj-with-test-file-2
   score: 202
   files: 2
@@ -1562,6 +1695,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\microsoft-authentication\packageMocks\keytar
   score: 202
   files: 2
@@ -1571,6 +1705,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - extensions\theme-defaults
   score: 202
   files: 2
@@ -1580,6 +1715,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.00
+  role: first-party
 - src\vs\sessions\test\e2e\extensions\sessions-e2e-mock
   score: 202
   files: 2
@@ -1589,6 +1725,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.50
+  role: test-fixture
 - test\smoke\extensions\vscode-smoketest-ext-host
   score: 202
   files: 2
@@ -1598,6 +1735,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.67
   noise probability: 0.50
+  role: test-fixture
 - test\unit\node
   score: 202
   files: 2
@@ -1607,6 +1745,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 0.50
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\generate\issue-6163
   score: 201
   files: 1
@@ -1616,6 +1755,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\multiFileEdit\asciiart
   score: 201
   files: 1
@@ -1625,6 +1765,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\multiFileEdit\fsprovider
   score: 201
   files: 1
@@ -1634,6 +1775,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\multiFile\multiple-questions
   score: 201
   files: 1
@@ -1643,6 +1785,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\java-example-project
   score: 201
   files: 1
@@ -1652,6 +1795,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\java-example-project-with-existing-test-file
   score: 201
   files: 1
@@ -1661,6 +1805,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\py-pyproject-toml
   score: 201
   files: 1
@@ -1670,6 +1815,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\simple-js-proj
   score: 201
   files: 1
@@ -1679,6 +1825,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - extensions\copilot\test\simulation\fixtures\tests\simple-js-proj copy
   score: 201
   files: 1
@@ -1688,6 +1835,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.50
+  role: test-fixture
 - src\vs\sessions\services
   score: 200
   files: 0
@@ -1697,6 +1845,7 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+  role: first-party
 
 Unrecognized Extension Clusters:
 Total unrecognized directories: 1

@@ -227,20 +227,32 @@ alongside the legacy score. See the doc comment on `ModuleCandidate` in
 `internal/collector/types.go` for exactly what each one means and how it's
 computed.
 
+**Status as of Phase 2 D4a:** `ModuleCandidate` now also carries `Role` — a
+label, not a number, computed in `role.go` from a fixed, ordered list of
+directory-name pattern checks (`patterns.go`) plus the `EvidenceStrength`
+fallback above. `third_party` directories are now explicitly labeled
+`vendored` rather than just scored lower; the same goes for `test-fixture`
+(reusing D1's noise-adjacent path signal) and `generated` (added after the
+unrecognized-extension diagnostic — see `unrecognized.go` — found a real,
+unexplained 504-file cluster at a VS Code path literally containing
+"generated"). Candidates with no evidence and no path match are labeled
+`ambiguous` rather than guessed — confirmed against TensorFlow's golden
+API-definition and security-advisory folders, which is exactly what they
+get labeled.
+
+This substantially addresses "first-party probability" from the original
+wishlist below, as a label (`RoleFirstParty`) rather than a separate
+probability number. `Role` is currently informational only — it does not
+affect `Score`, retention, or compression. Whether it should is a separate,
+deliberately deferred decision (Phase 2 D4b — see `docs/phase-2-plan.md`).
+
 Still open — not yet split out:
 
-- first-party probability
 - evidence diversity
 - investigation priority
 
-These three need more than a per-directory confidence number to answer
-honestly (first-party probability in particular is close to the
-structural-role classification work planned for Phase 2 D4 — see
-`docs/phase-2-plan.md`). The known problems above involving `third_party` and
-test fixtures are partially addressed today: `NoiseProbability` is neutral
-(0.5) rather than confidently wrong for an evidence-less large directory, and
-evidence under a test/fixture path now visibly carries a lower
-`EvidenceStrength`. Neither problem is fully resolved — that's D4's job.
+These need more than a per-directory confidence number or a path-pattern
+label to answer honestly, and don't yet have a concrete design.
 
 ## Why Keep These Heuristics?
 

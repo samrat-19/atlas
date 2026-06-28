@@ -70,6 +70,7 @@ func newModuleCandidate(path string, stats *dirStat, profile HeuristicProfile) M
 		EvidenceByFilename: copyCountMap(stats.EvidenceByFilename),
 		EvidenceStrength:   strength,
 		NoiseProbability:   noiseProbability(stats.EvidenceCount, strength),
+		Role:               classifyRole(path, stats.EvidenceCount, strength, profile),
 	}
 }
 

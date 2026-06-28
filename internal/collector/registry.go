@@ -121,40 +121,14 @@ func defaultEvidenceRegistry() map[string]EvidenceRule {
 	}
 }
 
-// noiseAdjacentPathSegments names directory components that conventionally
-// hold test, fixture, example, or mock content rather than first-party
-// project structure. A match found beneath one of these is still recorded as
-// evidence — Atlas cannot rule out that it is genuine — but with reduced
-// confidence. See pathContextMultiplier.
-var noiseAdjacentPathSegments = map[string]struct{}{
-	"test":         {},
-	"tests":        {},
-	"testdata":     {},
-	"fixture":      {},
-	"fixtures":     {},
-	"example":      {},
-	"examples":     {},
-	"sample":       {},
-	"samples":      {},
-	"mock":         {},
-	"mocks":        {},
-	"__mocks__":    {},
-	"__fixtures__": {},
-	"__tests__":    {},
-}
-
 // pathContextMultiplier discounts a rule's intrinsic confidence when the
 // matched evidence sits under a noise-adjacent directory (see
-// noiseAdjacentPathSegments). The final path segment is the matched file or
-// path-suffix itself, not a containing directory, so it is excluded from the
-// check. The discount amount comes from profile rather than a bare constant
-// so a future profile could tune or disable it.
+// noiseAdjacentPathSegments in patterns.go). The discount amount comes from
+// profile rather than a bare constant so a future profile could tune or
+// disable it.
 func pathContextMultiplier(relPath string, profile HeuristicProfile) float64 {
-	segments := strings.Split(filepath.ToSlash(relPath), "/")
-	for _, segment := range segments[:len(segments)-1] {
-		if _, ok := noiseAdjacentPathSegments[strings.ToLower(segment)]; ok {
-			return profile.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
-		}
+	if pathContainsSegment(relPath, noiseAdjacentPathSegments, false) {
+		return profile.EvidenceConfidence.NoiseAdjacentConfidenceMultiplier
 	}
 	return 1.0
 }

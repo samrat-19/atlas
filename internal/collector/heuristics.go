@@ -137,6 +137,27 @@ type DiagnosticsConfig struct {
 	ExampleDirectoryLimit int
 }
 
+// RoleClassificationConfig answers: "Once path patterns don't confidently
+// resolve a candidate's structural role, how strong does its own evidence
+// need to be to call it first-party rather than ambiguous?" Read by
+// classifyRole (role.go).
+type RoleClassificationConfig struct {
+	// FirstPartyEvidenceStrengthThreshold: a candidate with evidence at or
+	// above this average confidence, and no vendored/generated/build-output/
+	// test-fixture path match, is classified first-party. Below it, Atlas
+	// has evidence but isn't confident enough in it to commit to a role, so
+	// the candidate is ambiguous instead. With today's evidence registry
+	// (every default rule at full intrinsic confidence — see registry.go)
+	// this threshold mostly separates "has any evidence at all" from "has
+	// none," since the only thing that currently lowers EvidenceStrength
+	// below 1.0 is the same noise-adjacent discount that already routes a
+	// candidate to test-fixture before this check is ever reached. It is
+	// written as a real threshold, not a bare non-zero check, so it stays
+	// meaningful once a future evidence rule has its own lower intrinsic
+	// confidence for a reason other than path context.
+	FirstPartyEvidenceStrengthThreshold float64
+}
+
 // HeuristicProfile bundles every tunable number Atlas's classification
 // pipeline reads, grouped by the pipeline stage that consumes them. A
 // profile is plain data: constructing a different one and passing it through
@@ -153,6 +174,7 @@ type HeuristicProfile struct {
 	Scoring            ScoringConfig
 	Compression        CompressionConfig
 	Diagnostics        DiagnosticsConfig
+	RoleClassification RoleClassificationConfig
 }
 
 // DefaultHeuristics is the profile Atlas has always used. Its values are
@@ -185,5 +207,8 @@ var DefaultHeuristics = HeuristicProfile{
 	},
 	Diagnostics: DiagnosticsConfig{
 		ExampleDirectoryLimit: 3,
+	},
+	RoleClassification: RoleClassificationConfig{
+		FirstPartyEvidenceStrengthThreshold: 0.75,
 	},
 }

@@ -116,13 +116,53 @@ case, not a guess. It also confirms the existing registry already explains
 the large majority of large directories across three structurally different
 repos — Atlas's blind spots are narrow, not pervasive.
 
-### D4: Structural-role classification
+### D4a: Structural-role labeling — done
 
-Using D1–D3, classify candidate regions into roles: first-party root,
-vendored/third-party, generated, test-fixture, build-output, ambiguous. This
-is where `build`, `dist`, `vendor`, `third_party` finally get resolved
-per-directory instead of the current all-or-nothing prune list — and where
-"ambiguous" becomes a legitimate, explicit output rather than a forced guess.
+Using D1–D3, classify candidate regions into roles: first-party, vendored,
+generated, test-fixture, build-output, ambiguous. This is where `vendor`,
+`third_party`, and generated-code paths finally get resolved per-directory
+instead of the current all-or-nothing prune list — and where "ambiguous"
+becomes a legitimate, explicit output rather than a forced guess.
+
+Landed as `Role` on `ModuleCandidate` (`role.go`), computed by
+`classifyRole()`: a fixed, ordered list of checks — vendored path pattern,
+then generated, then build-output, then test-fixture (reusing D1's
+noise-adjacent segments), then an evidence-strength threshold for
+first-party, then ambiguous as the explicit default. The order is the
+determinism guarantee: a path matching two pattern sets at once always
+resolves to whichever check is listed first, never to map-iteration order —
+proven by `TestClassifyRolePrecedenceIsFixedNotMapOrder`. The pattern data
+itself moved into a new `patterns.go` ("knowledge layer"), consolidating
+what used to be one map scattered in `registry.go` into one documented home
+alongside the new vendored/generated/build-output sets.
+
+`buildOutputPathSegments` deliberately excludes `build`, `bin`, and `out` —
+ambiguous in some ecosystems (the same reason `prune.go` never hard-pruned
+`build`) — keeping only `dist` and `target`. Being wrong about a genuine
+source directory is worse than missing a build-output label.
+
+Verified against real output, not just unit tests: every `vendored` label
+across Selenium and TensorFlow is genuinely under a `third_party`/`vendor`
+path; TensorFlow's 3 `ambiguous` labels are exactly the 3 directories the
+D4 prerequisite diagnostic found (no path pattern, no evidence — an honest
+answer, not a guess); VS Code's one `generated` label is exactly the real
+case that motivated adding the pattern in the first place.
+
+`Role` is a label only — it does not affect `Score`, retention, or
+compression, and is not propagated to `RegionNode` (same deferral reasoning
+as D3's dimensions: no settled answer yet for aggregating a label across a
+subtree). Whether a role like `vendored` or `build-output` should ever
+change retention is **D4b**, a separate, deliberately unmade decision —
+see below.
+
+### D4b: Whether roles affect retention — not started
+
+Open design question, intentionally not decided in D4a: should a
+`vendored`/`build-output`/`generated` label actually exclude a candidate
+from the major-modules list, or stay purely informational? This touches the
+same compression/retention logic already patched once for the negative-score
+bug, so it needs its own deliberate review and a calibration pass — not a
+decision made as a side effect of adding the label.
 
 ### D5: Calibration pass
 

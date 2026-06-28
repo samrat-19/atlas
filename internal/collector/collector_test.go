@@ -700,6 +700,75 @@ func TestScoreModulesComputesNoveltyAndBoundaryConfidence(t *testing.T) {
 // behavior: evidence-less candidates sharing a dominant extension are
 // grouped into one cluster, and candidates with any evidence at all are
 // excluded entirely (Atlas already has something to say about them).
+// TestClassifyRolePathPatterns covers each path-pattern role in isolation —
+// the cases the unrecognized-extension diagnostic and the project's own
+// existing conventions (vendor/, node_modules', test/, etc.) directly
+// motivated.
+func TestClassifyRolePathPatterns(t *testing.T) {
+	cases := []struct {
+		name string
+		path string
+		want Role
+	}{
+		{"vendor directory", "third_party/xla", RoleVendored},
+		{"vendor exact segment", "vendor/lib", RoleVendored},
+		{"generated directory, real VS Code case", "src/vs/platform/agentHost/node/codex/protocol/generated/v2", RoleGenerated},
+		{"build output", "web/dist", RoleBuildOutput},
+		{"test fixture", "internal/testdata/sample", RoleTestFixture},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := classifyRole(tc.path, 0, 0, DefaultHeuristics)
+			if got != tc.want {
+				t.Fatalf("classifyRole(%q) = %q, want %q", tc.path, got, tc.want)
+			}
+		})
+	}
+}
+
+// TestClassifyRoleFirstPartyAndAmbiguous covers the evidence-based fallback
+// once no path pattern matches: strong evidence becomes first-party, no
+// evidence or weak evidence becomes ambiguous rather than a guess.
+func TestClassifyRoleFirstPartyAndAmbiguous(t *testing.T) {
+	cases := []struct {
+		name             string
+		evidenceCount    int
+		evidenceStrength float64
+		want             Role
+	}{
+		{"strong evidence, no pattern match", 1, 1.0, RoleFirstParty},
+		{"at the threshold exactly", 1, DefaultHeuristics.RoleClassification.FirstPartyEvidenceStrengthThreshold, RoleFirstParty},
+		{"no evidence at all", 0, 0, RoleAmbiguous},
+		{"evidence below threshold", 1, 0.5, RoleAmbiguous},
+	}
+	for _, tc := range cases {
+		t.Run(tc.name, func(t *testing.T) {
+			got := classifyRole("src/normal-folder", tc.evidenceCount, tc.evidenceStrength, DefaultHeuristics)
+			if got != tc.want {
+				t.Fatalf("classifyRole(evidenceCount=%d, strength=%v) = %q, want %q",
+					tc.evidenceCount, tc.evidenceStrength, got, tc.want)
+			}
+		})
+	}
+}
+
+// TestClassifyRolePrecedenceIsFixedNotMapOrder proves the determinism
+// property the ordered switch in classifyRole exists for: a path matching
+// two different pattern sets at once always resolves to the same role,
+// every time, regardless of Go's randomized map iteration order — because
+// the checks are an explicit sequence, not a map lookup over candidates.
+func TestClassifyRolePrecedenceIsFixedNotMapOrder(t *testing.T) {
+	// "vendor" and "generated" both appear in this path; vendored is checked
+	// first in classifyRole's switch, so it must always win.
+	path := "third_party/generated/stuff"
+	for i := 0; i < 20; i++ {
+		got := classifyRole(path, 0, 0, DefaultHeuristics)
+		if got != RoleVendored {
+			t.Fatalf("run %d: classifyRole(%q) = %q, want %q every time (fixed precedence)", i, path, got, RoleVendored)
+		}
+	}
+}
+
 func TestBuildUnrecognizedSummaryGroupsByDominantExtension(t *testing.T) {
 	modules := []ModuleCandidate{
 		{Path: "a", FileCount: 300, EvidenceCount: 0, DominantExtensions: []string{".bzl"}},
