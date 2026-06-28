@@ -91,6 +91,7 @@ func Collect(root string) (Result, error) {
 	census.TotalDirectories = len(census.Directories)
 	moduleSummary := buildModuleSummary(dirStats, profile)
 	compressedModules := compressModules(moduleSummary.Modules, dirStats, totalFiles, profile)
+	unrecognized := buildUnrecognizedSummary(moduleSummary.Modules, profile)
 
 	// Sort pruned paths by relative path so the Result is byte-identical
 	// across repeated scans. WalkDir already walks lexically, but making
@@ -111,5 +112,6 @@ func Collect(root string) (Result, error) {
 	res.ModuleSummary = moduleSummary
 	res.CompressedModuleSummary = compressedModules
 	res.HierarchySummary = buildHierarchy(compressedModules.Modules)
+	res.UnrecognizedSummary = unrecognized
 	return res, nil
 }

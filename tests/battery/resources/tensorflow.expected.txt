@@ -9980,3 +9980,15 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+
+Unrecognized Extension Clusters:
+Total unrecognized directories: 3
+Total unrecognized files: 1615
+
+- .pbtxt (2 directories, 1183 files)
+  examples:
+  - tensorflow\tools\api\golden\v1
+  - tensorflow\tools\api\golden\v2
+- .md (1 directories, 432 files)
+  examples:
+  - tensorflow\security\advisory

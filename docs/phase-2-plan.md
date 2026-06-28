@@ -95,6 +95,27 @@ probability, evidence diversity, investigation priority. First-party
 probability in particular overlaps with D4's structural-role classification
 rather than being a separate dimension — better resolved there.
 
+### D4 prerequisite: unrecognized-extension diagnostic — done
+
+Before writing D4's role-classification rules from guessed conventions,
+built a small, additive diagnostic (`UnrecognizedSummary`,
+`buildUnrecognizedSummary()` in `unrecognized.go`) that groups module
+candidates with zero evidence (qualified purely by size) by shared dominant
+extension, and prints them in a new "Unrecognized Extension Clusters" report
+section. Changes no scoring, classification, or retention behavior — purely
+observational, same low-risk shape as D1/D3.
+
+Run against all three battery repos, this found only 5 unrecognized
+directories total: 0 in Selenium, 3 in TensorFlow (`.pbtxt` golden
+API-definition files, a `.md`-heavy security advisory folder), 1 in VS Code
+(`.ts` files at a path literally containing `generated`). None point to a
+missing `EvidenceRegistry` rule (no missing build file or package manager) —
+the gaps are about **role**, not **evidence**, which directly confirms D4's
+plan to add a `generated` path-pattern rule is grounded in an observed real
+case, not a guess. It also confirms the existing registry already explains
+the large majority of large directories across three structurally different
+repos — Atlas's blind spots are narrow, not pervasive.
+
 ### D4: Structural-role classification
 
 Using D1–D3, classify candidate regions into roles: first-party root,

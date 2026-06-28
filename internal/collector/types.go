@@ -45,6 +45,11 @@ type Result struct {
 
 	// HierarchySummary contains a repository hierarchy view built from retained modules.
 	HierarchySummary HierarchySummary
+
+	// UnrecognizedSummary surfaces large, evidence-less module candidates
+	// grouped by shared extension — a diagnostic for finding gaps in the
+	// evidence registry, not part of scoring or retention.
+	UnrecognizedSummary UnrecognizedSummary
 }
 
 // PrunedPath records a directory that was skipped during traversal.
@@ -211,4 +216,57 @@ type CompressedModuleSummary struct {
 	RetainedCandidates int
 	CompressionRatio   float64 // retained/total
 	Modules            []ModuleCandidate
+}
+
+// UnrecognizedExtensionCluster groups module candidates that qualified
+// purely by size (no evidence at all — see isLargeDirectory) and share a
+// dominant file extension. A cluster with a high DirectoryCount means Atlas
+// repeatedly found a large, unexplained directory with this extension
+// signature across the repository — a concrete, data-driven signal that the
+// evidence registry may be missing a rule for whatever this extension
+// represents, rather than a one-off the existing heuristics already handle
+// reasonably (see docs/heuristics.md's noiseProbability discussion).
+type UnrecognizedExtensionCluster struct {
+	Extension string
+
+	// DirectoryCount is how many evidence-less large directories had this
+	// extension among their dominant extensions. This is the primary
+	// ranking signal: a pattern that recurs across many directories is a
+	// stronger registry-gap signal than one large directory with many files.
+	DirectoryCount int
+
+	// TotalFiles is the sum of FileCount across those directories. This is a
+	// coarse weight, not an exact per-extension file count — a directory's
+	// FileCount includes every file in it, not just files of this specific
+	// extension (DominantExtensions only records which extensions are
+	// common, not how many files have each one).
+	TotalFiles int
+
+	// ExamplePaths lists a few of the matching directories, capped at
+	// HeuristicProfile.Diagnostics.ExampleDirectoryLimit, so a human
+	// reviewing this output has somewhere concrete to look. Sorted
+	// alphabetically for readability.
+	ExamplePaths []string
+}
+
+// UnrecognizedSummary reports module candidates Atlas could say nothing
+// about beyond "this is large" — no evidence, no category, no filename it
+// recognizes. This does not change any scoring or retention decision; it is
+// a diagnostic for finding gaps in the evidence registry by looking at what
+// large, unexplained directories actually have in common across a real
+// repository, instead of guessing what patterns might be missing.
+type UnrecognizedSummary struct {
+	// TotalUnrecognizedDirectories is the count of module candidates with
+	// zero evidence (qualified purely by size).
+	TotalUnrecognizedDirectories int
+
+	// TotalUnrecognizedFiles is the sum of FileCount across those
+	// directories.
+	TotalUnrecognizedFiles int
+
+	// Clusters groups those directories by shared dominant extension, sorted
+	// by DirectoryCount descending (the strongest "this keeps recurring"
+	// signal first), then TotalFiles descending, then Extension ascending
+	// for a full, deterministic tie-break.
+	Clusters []UnrecognizedExtensionCluster
 }

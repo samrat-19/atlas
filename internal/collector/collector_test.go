@@ -696,6 +696,102 @@ func TestScoreModulesComputesNoveltyAndBoundaryConfidence(t *testing.T) {
 	}
 }
 
+// TestBuildUnrecognizedSummaryGroupsByDominantExtension verifies the core
+// behavior: evidence-less candidates sharing a dominant extension are
+// grouped into one cluster, and candidates with any evidence at all are
+// excluded entirely (Atlas already has something to say about them).
+func TestBuildUnrecognizedSummaryGroupsByDominantExtension(t *testing.T) {
+	modules := []ModuleCandidate{
+		{Path: "a", FileCount: 300, EvidenceCount: 0, DominantExtensions: []string{".bzl"}},
+		{Path: "b", FileCount: 200, EvidenceCount: 0, DominantExtensions: []string{".bzl"}},
+		{Path: "c", FileCount: 500, EvidenceCount: 1, DominantExtensions: []string{".bzl"}}, // has evidence, excluded
+	}
+
+	summary := buildUnrecognizedSummary(modules, DefaultHeuristics)
+
+	if summary.TotalUnrecognizedDirectories != 2 {
+		t.Fatalf("TotalUnrecognizedDirectories = %d, want 2", summary.TotalUnrecognizedDirectories)
+	}
+	if summary.TotalUnrecognizedFiles != 500 {
+		t.Fatalf("TotalUnrecognizedFiles = %d, want 500 (300+200, excluding the evidenced candidate)", summary.TotalUnrecognizedFiles)
+	}
+	if len(summary.Clusters) != 1 {
+		t.Fatalf("expected 1 cluster, got %d: %#v", len(summary.Clusters), summary.Clusters)
+	}
+	cluster := summary.Clusters[0]
+	if cluster.Extension != ".bzl" || cluster.DirectoryCount != 2 || cluster.TotalFiles != 500 {
+		t.Fatalf("unexpected cluster: %#v", cluster)
+	}
+}
+
+// TestBuildUnrecognizedSummarySortOrder verifies clusters sort by
+// DirectoryCount descending, then TotalFiles descending, then Extension
+// ascending as a full deterministic tie-break.
+func TestBuildUnrecognizedSummarySortOrder(t *testing.T) {
+	modules := []ModuleCandidate{
+		{Path: "a", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".rare"}},
+		{Path: "b1", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".common"}},
+		{Path: "b2", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".common"}},
+		{Path: "c1", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".tied-a"}},
+		{Path: "c2", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".tied-a"}},
+		{Path: "d1", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".tied-b"}},
+		{Path: "d2", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".tied-b"}},
+	}
+
+	summary := buildUnrecognizedSummary(modules, DefaultHeuristics)
+
+	var order []string
+	for _, c := range summary.Clusters {
+		order = append(order, c.Extension)
+	}
+	want := []string{".common", ".tied-a", ".tied-b", ".rare"}
+	for i := range want {
+		if i >= len(order) || order[i] != want[i] {
+			t.Fatalf("cluster order = %v, want %v", order, want)
+		}
+	}
+}
+
+// TestBuildUnrecognizedSummaryCapsExamplePaths verifies ExamplePaths respects
+// DiagnosticsConfig.ExampleDirectoryLimit and is sorted alphabetically.
+func TestBuildUnrecognizedSummaryCapsExamplePaths(t *testing.T) {
+	modules := []ModuleCandidate{
+		{Path: "z", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
+		{Path: "y", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
+		{Path: "a", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
+		{Path: "m", FileCount: 100, EvidenceCount: 0, DominantExtensions: []string{".x"}},
+	}
+
+	limited := DefaultHeuristics
+	limited.Diagnostics.ExampleDirectoryLimit = 2
+
+	summary := buildUnrecognizedSummary(modules, limited)
+	if len(summary.Clusters) != 1 {
+		t.Fatalf("expected 1 cluster, got %d", len(summary.Clusters))
+	}
+	// Input order is z, y, a, m; the cap of 2 keeps only the first 2
+	// encountered (z, y), then ExamplePaths is sorted alphabetically -> y, z.
+	got := summary.Clusters[0].ExamplePaths
+	want := []string{"y", "z"}
+	if len(got) != len(want) || got[0] != want[0] || got[1] != want[1] {
+		t.Fatalf("ExamplePaths = %v, want %v", got, want)
+	}
+}
+
+// TestBuildUnrecognizedSummaryEmptyWhenAllHaveEvidence confirms a repo with
+// no blind spots produces an empty, zero-valued summary rather than
+// nil-vs-empty ambiguity.
+func TestBuildUnrecognizedSummaryEmptyWhenAllHaveEvidence(t *testing.T) {
+	modules := []ModuleCandidate{
+		{Path: "a", FileCount: 100, EvidenceCount: 1, DominantExtensions: []string{".go"}},
+	}
+
+	summary := buildUnrecognizedSummary(modules, DefaultHeuristics)
+	if summary.TotalUnrecognizedDirectories != 0 || summary.TotalUnrecognizedFiles != 0 || len(summary.Clusters) != 0 {
+		t.Fatalf("expected an empty summary, got %#v", summary)
+	}
+}
+
 func TestDominantExtensionsUsesExtensionTieBreaker(t *testing.T) {
 	extensions := dominantExtensions(map[string]int{
 		".z": 1,

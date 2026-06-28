@@ -46,10 +46,11 @@ cmd/atlas/main.go
        ├─ modules.go                  // buildModuleSummary() — candidate selection + scoring
        ├─ module_scoring.go           // scoreModules() — compression scoring with overlap penalties
        ├─ module_compression.go       // compressModules() — prunes redundant parent-child candidates
-       └─ hierarchy.go                // buildHierarchy() — RegionNode tree from retained modules
-            └─ hierarchy_aggregation.go  // aggregateRegion/subtree, sortRegionTree, copyRegionNode
+       ├─ hierarchy.go                // buildHierarchy() — RegionNode tree from retained modules
+       │    └─ hierarchy_aggregation.go  // aggregateRegion/subtree, sortRegionTree, copyRegionNode
+       └─ unrecognized.go             // buildUnrecognizedSummary() — evidence-less candidates grouped by extension
   └─ renderReport(result)             // report.go: formats all summaries to a string
-       ├─ report_structure.go         // printRepositoryHierarchy, printMajorModules, printTopClusters, printTopDirectories
+       ├─ report_structure.go         // printRepositoryHierarchy, printMajorModules, printUnrecognizedClusters, printTopClusters, printTopDirectories
        ├─ report_extensions.go        // printTopExtensions
        └─ report_limits.go            // display constants (topExtensionLimit, topClusterLimit, etc.)
   └─ writeReports(result, report)     // output.go: writes text + JSON to output/
@@ -57,12 +58,13 @@ cmd/atlas/main.go
 
 ### Key concepts
 
-- **Evidence**: Files matching `EvidenceRegistry`, a `map[string]EvidenceRule` (build files, package managers, CI/CD configs, containers/IaC). Each match produces an `EvidenceItem` with a category and a confidence (0–1) — confidence starts at the rule's intrinsic value and is discounted when the match sits under a noise-adjacent directory (`test`, `fixtures`, `examples`, `mocks`, etc. — see `pathContextMultiplier` in `registry.go`). Confidence is not yet consumed by scoring (Phase 2 in progress).
+- **Evidence**: Files matching `EvidenceRegistry`, a `map[string]EvidenceRule` (build files, package managers, CI/CD configs, containers/IaC). Each match produces an `EvidenceItem` with a category and a confidence (0–1) — confidence starts at the rule's intrinsic value and is discounted when the match sits under a noise-adjacent directory (`test`, `fixtures`, `examples`, `mocks`, etc. — see `pathContextMultiplier` in `registry.go`).
 - **Cluster**: Top-level directory under root; all evidence and file counts are rolled up to this level for the `ClusterSummary`.
-- **dirStat**: Internal per-directory accumulator (`directory_stats.go`). Tracks `FileCount`, `EvidenceCount`, extension counts, and evidence breakdowns per category/filename. Used downstream for module candidate construction.
-- **Module candidate**: A directory with evidence, sufficient file density, or large file count. Selected in `modules.go`; qualified by constants in `heuristics.go`. Scored by `EvidenceCount*100 + FileCount`.
-- **Compressed modules**: `compressModules()` (`module_compression.go`) prunes parent–child pairs using extension Jaccard overlap and category overlap. Children that are highly similar to their parent (`highOverlapThreshold=0.9`) receive a score penalty; final retention is based on relative score and novelty thresholds.
-- **Hierarchy**: `buildHierarchy()` (`hierarchy.go`) converts retained modules into a `RegionNode` tree (Regions → subsystems → components). Aggregation rolls child file/evidence counts up in `hierarchy_aggregation.go`; the final tree is sorted by score descending.
+- **dirStat**: Internal per-directory accumulator (`directory_stats.go`). Tracks `FileCount`, `EvidenceCount`, `EvidenceConfidenceSum`, extension counts, and evidence breakdowns per category/filename. Used downstream for module candidate construction.
+- **Module candidate**: A directory with evidence, sufficient file density, or large file count. Selected in `modules.go`; qualified by constants in `heuristics.go`. Carries a legacy `Score` (`EvidenceCount*100 + FileCount`, kept for backward-compatible sorting) plus five named, explainable 0–1 dimensions introduced in Phase 2 D3 — `EvidenceStrength`, `NoiseProbability`, `StructuralProminence`, `NoveltyVsParent`, `BoundaryConfidence` — computed from the evidence confidence above and from parent/subtree context. See the doc comment on `ModuleCandidate` in `types.go`.
+- **Compressed modules**: `compressModules()` (`module_compression.go`) prunes parent–child pairs using extension Jaccard overlap and category overlap. Children that are highly similar to their parent (`highOverlapThreshold=0.9`) receive a score penalty; final retention is based on relative score and novelty thresholds. `isStrongComparedToParent` clamps a non-positive parent score to zero before applying the ratio — without this, a deeply redundant parent (negative score) makes the bar easier, not harder, to clear.
+- **Hierarchy**: `buildHierarchy()` (`hierarchy.go`) converts retained modules into a `RegionNode` tree (Regions → subsystems → components). Aggregation rolls child file/evidence counts up in `hierarchy_aggregation.go`; the final tree is sorted by score descending. `RegionNode` does not yet carry the five D3 dimensions — aggregating non-additive 0–1 scores across a subtree has no settled answer yet.
+- **Unrecognized clusters**: `buildUnrecognizedSummary()` (`unrecognized.go`) groups module candidates that qualified purely by size (zero evidence) by shared dominant extension. A diagnostic for finding evidence-registry/role gaps from real repository structure — not part of scoring, classification, or retention.
 
 ### Package layout
 
@@ -86,6 +88,7 @@ cmd/atlas/main.go
 | `internal/collector/heuristics.go` | All tuning constants with explanatory comments |
 | `internal/collector/hierarchy.go` | `buildHierarchy()`, parent resolution, node attachment |
 | `internal/collector/hierarchy_aggregation.go` | `aggregateRegion/Subtree()`, `sortRegionTree()`, `copyRegionNode()` |
+| `internal/collector/unrecognized.go` | `buildUnrecognizedSummary()` — groups evidence-less candidates by dominant extension |
 | `internal/collector/collector_test.go` | Unit tests using `t.TempDir()` temp fixtures |
 | `tests/battery/battery_test.go` | Battery tests against real large repos (selenium, tensorflow, vscode); opt-in via `ATLAS_BATTERY=1` |
 

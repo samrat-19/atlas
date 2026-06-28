@@ -80,6 +80,41 @@ func printMajorModules(summary collector.CompressedModuleSummary, writer io.Writ
 	}
 }
 
+// printUnrecognizedClusters renders UnrecognizedSummary: module candidates
+// Atlas found purely by size, with no evidence to explain them, grouped by
+// shared dominant extension. This is a diagnostic for spotting evidence
+// registry gaps from real repository structure, not a scoring or retention
+// signal — see UnrecognizedSummary's doc comment in
+// internal/collector/types.go.
+func printUnrecognizedClusters(summary collector.UnrecognizedSummary, writer io.Writer) {
+	if len(summary.Clusters) == 0 {
+		fmt.Fprintln(writer, "Unrecognized Extension Clusters: none")
+		return
+	}
+
+	fmt.Fprintln(writer, "Unrecognized Extension Clusters:")
+	fmt.Fprintf(writer, "Total unrecognized directories: %d\n", summary.TotalUnrecognizedDirectories)
+	fmt.Fprintf(writer, "Total unrecognized files: %d\n", summary.TotalUnrecognizedFiles)
+	fmt.Fprintln(writer)
+
+	for i, cluster := range summary.Clusters {
+		if i >= topUnrecognizedClusterLimit {
+			break
+		}
+		label := cluster.Extension
+		if label == "" {
+			label = "(no extension)"
+		}
+		fmt.Fprintf(writer, "- %s (%d directories, %d files)\n", label, cluster.DirectoryCount, cluster.TotalFiles)
+		if len(cluster.ExamplePaths) > 0 {
+			fmt.Fprintln(writer, "  examples:")
+			for _, path := range cluster.ExamplePaths {
+				fmt.Fprintf(writer, "  - %s\n", path)
+			}
+		}
+	}
+}
+
 func printTopDirectories(summary collector.CensusSummary, writer io.Writer) {
 	if len(summary.Directories) == 0 {
 		fmt.Fprintln(writer, "Top Directories: none")

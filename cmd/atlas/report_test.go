@@ -61,6 +61,42 @@ func TestWriteReportsFailsWhenOutputDirIsFile(t *testing.T) {
 	}
 }
 
+func TestPrintUnrecognizedClustersShowsNoneWhenEmpty(t *testing.T) {
+	var out strings.Builder
+	printUnrecognizedClusters(collector.UnrecognizedSummary{}, &out)
+
+	want := "Unrecognized Extension Clusters: none\n"
+	if out.String() != want {
+		t.Fatalf("unexpected output:\n%s\nwant:\n%s", out.String(), want)
+	}
+}
+
+func TestPrintUnrecognizedClustersShowsClusterDetails(t *testing.T) {
+	summary := collector.UnrecognizedSummary{
+		TotalUnrecognizedDirectories: 3,
+		TotalUnrecognizedFiles:       900,
+		Clusters: []collector.UnrecognizedExtensionCluster{
+			{Extension: ".bzl", DirectoryCount: 2, TotalFiles: 600, ExamplePaths: []string{"a/b", "c/d"}},
+		},
+	}
+
+	var out strings.Builder
+	printUnrecognizedClusters(summary, &out)
+	text := out.String()
+
+	for _, want := range []string{
+		"Total unrecognized directories: 3",
+		"Total unrecognized files: 900",
+		"- .bzl (2 directories, 600 files)",
+		"  - a/b",
+		"  - c/d",
+	} {
+		if !strings.Contains(text, want) {
+			t.Fatalf("output missing %q:\n%s", want, text)
+		}
+	}
+}
+
 func TestPrintMajorModulesSortsWithoutMutatingSummary(t *testing.T) {
 	summary := collector.CompressedModuleSummary{
 		TotalCandidates:    3,

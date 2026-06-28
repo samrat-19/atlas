@@ -1697,3 +1697,11 @@ Major Modules:
   structural prominence: 0.00
   novelty vs parent: 1.00
   noise probability: 0.00
+
+Unrecognized Extension Clusters:
+Total unrecognized directories: 1
+Total unrecognized files: 504
+
+- .ts (1 directories, 504 files)
+  examples:
+  - src\vs\platform\agentHost\node\codex\protocol\generated\v2

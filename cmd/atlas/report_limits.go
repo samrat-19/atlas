@@ -16,4 +16,9 @@ const (
 	// Show this many evidence clusters in the text report. This only affects
 	// display, not analysis.
 	topClusterLimit = 10
+
+	// Show this many unrecognized-extension clusters in the text report.
+	// This only affects display; UnrecognizedSummary itself (JSON output)
+	// keeps every cluster found.
+	topUnrecognizedClusterLimit = 10
 )

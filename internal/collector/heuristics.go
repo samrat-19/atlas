@@ -124,6 +124,19 @@ type CompressionConfig struct {
 	NoveltyRetentionDelta float64
 }
 
+// DiagnosticsConfig answers: "How much detail should diagnostic summaries
+// keep?" These numbers don't affect scoring, classification, or retention —
+// they only bound how much data a diagnostic (like UnrecognizedSummary)
+// retains for display. Read by buildUnrecognizedSummary (unrecognized.go).
+type DiagnosticsConfig struct {
+	// ExampleDirectoryLimit caps how many example paths
+	// UnrecognizedExtensionCluster keeps per cluster. A pattern that recurs
+	// across thousands of directories only needs a few examples for a human
+	// to go look at — keeping all of them would bloat the JSON output for
+	// no benefit.
+	ExampleDirectoryLimit int
+}
+
 // HeuristicProfile bundles every tunable number Atlas's classification
 // pipeline reads, grouped by the pipeline stage that consumes them. A
 // profile is plain data: constructing a different one and passing it through
@@ -139,6 +152,7 @@ type HeuristicProfile struct {
 	CandidateSelection CandidateSelectionConfig
 	Scoring            ScoringConfig
 	Compression        CompressionConfig
+	Diagnostics        DiagnosticsConfig
 }
 
 // DefaultHeuristics is the profile Atlas has always used. Its values are
@@ -168,5 +182,8 @@ var DefaultHeuristics = HeuristicProfile{
 		RedundantChildPenalty:     500,
 		ChildScoreRetentionRatio:  0.6,
 		NoveltyRetentionDelta:     0.2,
+	},
+	Diagnostics: DiagnosticsConfig{
+		ExampleDirectoryLimit: 3,
 	},
 }

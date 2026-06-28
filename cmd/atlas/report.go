@@ -50,6 +50,9 @@ func printEvidenceSummary(result collector.Result, writer io.Writer) {
 
 	fmt.Fprintln(writer)
 	printMajorModules(result.CompressedModuleSummary, writer)
+
+	fmt.Fprintln(writer)
+	printUnrecognizedClusters(result.UnrecognizedSummary, writer)
 }
 
 func printEvidenceFound(evidence []collector.EvidenceItem, writer io.Writer) {
